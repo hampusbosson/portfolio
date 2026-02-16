@@ -1,14 +1,30 @@
-import { OrbitControls, Stars } from "@react-three/drei";
+import { CameraControls, OrbitControls, Stars } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import Blackhole from "./models/Blackhole";
-import { Suspense } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import Ship from "./models/Ship";
 import Overlay from "./overlay/Overlay";
+import * as THREE from "three";
 
 export default function Experience() {
+  const [activeScreen, setActiveScreen] = useState("start");
+  const shipRef = useRef<THREE.Object3D>(null);
+  const cameraControlsRef = useRef<CameraControls>(null);
+
+  useEffect(() => {
+    if (activeScreen === "projects" && cameraControlsRef.current) {
+      cameraControlsRef.current.setPosition(0.7, 0, 1, true); // Move the camera to a new position (x, y, z) with animation
+    }
+    if (activeScreen === "start" && cameraControlsRef.current) {
+      cameraControlsRef.current.setPosition(7, -1.3, 8, true); // Move the camera back to the original position with animation
+    }
+
+  }, [activeScreen]);
+
   return (
     <>
-      <Overlay />
+      <CameraControls ref={cameraControlsRef} enabled={false}/>
+      <Overlay setActiveScreen={setActiveScreen} />
       <Perf position="bottom-right" />
       <Stars
         radius={20}
@@ -21,12 +37,12 @@ export default function Experience() {
       />
       <directionalLight position={[1, 2, 3]} intensity={4.5} />
       <ambientLight intensity={1.5} />
-      <OrbitControls makeDefault />
+      {/* <OrbitControls makeDefault /> */}
       <Suspense>
         <Blackhole />
       </Suspense>
       <Suspense>
-        <Ship />
+        <Ship shipRef={shipRef} activeScreen={activeScreen} />
       </Suspense>
     </>
   );

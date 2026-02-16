@@ -1,20 +1,15 @@
 import { Html } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { useState } from "react";
 
-export default function Overlay() {
-  const [projectsActive, setProjectsActive] = useState(false);
+interface OverlayProps {
+  setActiveScreen: (screen: string) => void;
+}
 
+export default function Overlay({ setActiveScreen }: OverlayProps) {
   // useFrame(() => {
   //   if (projectsActive) {
 
   //   }
   // })
-
-  const handleProjectsClick = () => {
-    setProjectsActive(!projectsActive);
-  }
-
   return (
     <>
       <Html fullscreen>
@@ -24,11 +19,18 @@ export default function Overlay() {
             <p className="hud-subtitle">Software Developer</p>
           </div>
           <nav className="hud-nav" aria-label="Main navigation">
-            <button onClick={handleProjectsClick} className="hud-button" type="button">
+            <button onClick={() => setActiveScreen("start")} className="hud-button" type="button">
+              Start
+            </button>
+            <button
+              onClick={() => setActiveScreen("projects")}
+              className="hud-button"
+              type="button"
+            >
               Projects
             </button>
             <button className="hud-button" type="button">
-              About
+              About Me
             </button>
             <button className="hud-button" type="button">
               Ask Me a Question
