@@ -1,10 +1,15 @@
 import { OrbitControls, Stars } from "@react-three/drei";
 import { Perf } from "r3f-perf";
+import Blackhole from "./models/Blackhole";
+import { Suspense } from "react";
+import Ship from "./models/Ship";
+import Overlay from "./overlay/Overlay";
 
 export default function Experience() {
   return (
     <>
-      <Perf position="top-left" showGraph deepAnalyze />
+      <Overlay />
+      <Perf position="bottom-right" />
       <Stars
         radius={20}
         depth={30}
@@ -17,10 +22,12 @@ export default function Experience() {
       <directionalLight position={[1, 2, 3]} intensity={4.5} />
       <ambientLight intensity={1.5} />
       <OrbitControls makeDefault />
-      <mesh>
-        <boxGeometry />
-        <meshStandardMaterial color="white" />
-      </mesh>
+      <Suspense>
+        <Blackhole />
+      </Suspense>
+      <Suspense>
+        <Ship />
+      </Suspense>
     </>
   );
 }
