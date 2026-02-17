@@ -1,111 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
 
-html,
-body,
-#root
-{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: black;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-.hud {
-  position: absolute;
-  top: clamp(12px, 2vw, 24px);
-  left: clamp(12px, 2vw, 24px);
-}
-
-.hud-layer {
-  position: absolute;
-  inset: 0;
-  color: #ffffff;
-  font-family: "Space Grotesk", sans-serif;
-  pointer-events: none;
-}
-
-.hud-title {
-  margin: 0;
-  font-size: clamp(1rem, 3vw, 2rem);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  line-height: 1.1;
-  text-transform: none;
-}
-
-.hud-subtitle {
-  margin: clamp(4px, 0.8vw, 10px) 0 0;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: clamp(0.76rem, 1.15vw, 0.96rem);
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.hud-nav {
-  position: absolute;
-  top: clamp(12px, 2vw, 24px);
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: clamp(8px, 1.2vw, 18px);
-  align-items: center;
-  pointer-events: auto;
-}
-
-.hud-button {
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.92);
-  border-radius: 999px;
-  font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(0.68rem, 0.95vw, 0.88rem);
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  padding: clamp(8px, 1vw, 12px) clamp(12px, 1.7vw, 22px);
-  text-transform: uppercase;
-  backdrop-filter: blur(4px);
-  cursor: pointer;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    background-color 180ms ease,
-    color 180ms ease;
-}
-
-.hud-button:hover {
-  transform: translateY(-1px) scale(1.01);
-  border-color: rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-}
-
-.hud-button:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.95);
-  outline-offset: 3px;
-}
-
-@media (max-width: 768px) {
-  .hud-nav {
-    top: auto;
-    bottom: clamp(14px, 4vw, 24px);
-    width: min(92vw, 440px);
-    flex-wrap: wrap;
-    justify-content: center;
+@layer base {
+  html,
+  body,
+  #root {
+    @apply fixed inset-0 h-full w-full bg-black;
   }
 
-  .hud-button {
-    flex: 1 1 auto;
+  body {
+    @apply m-0 min-h-screen min-w-[320px];
   }
 }

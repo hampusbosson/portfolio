@@ -24,7 +24,7 @@ export default function Ship({ shipRef, activeScreen }: ShipProps) {
       return;
     }
 
-    const isSnapMode = activeScreen === "project" || activeScreen === "projects";
+    const isSnapMode = activeScreen === "projects";
 
     if (!isSnapMode) {
       wasSnapModeRef.current = false;

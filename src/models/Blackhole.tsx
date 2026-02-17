@@ -9,7 +9,7 @@ export default function Blackhole() {
   useEffect(() => {
     const action = animations.actions["Take 001"];
     if (action) { 
-      action.timeScale = 0.5; // Adjust the speed of the animation 
+      action.timeScale = 0.3; // Adjust the speed of the animation 
       action.play();
     }
   }, [animations]);
