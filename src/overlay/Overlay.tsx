@@ -12,8 +12,12 @@ export default function Overlay({ setActiveScreen }: OverlayProps) {
   // })
   return (
     <>
-      <Html fullscreen>
-        <div className="pointer-events-none absolute inset-0 font-['Space_Grotesk'] text-white">
+      <Html
+        fullscreen
+        zIndexRange={[120, 100]}
+        style={{ pointerEvents: "none", zIndex: 2000 }}
+      >
+        <div className="pointer-events-none absolute inset-0 z-50 font-['Space_Grotesk'] text-white">
           <div className="absolute top-[clamp(12px,2vw,24px)] left-[clamp(12px,2vw,24px)]">
             <h1 className="m-0 text-[clamp(1rem,3vw,2rem)] leading-[1.1] font-bold tracking-[0.02em]">
               Hampus Bosson
@@ -23,7 +27,7 @@ export default function Overlay({ setActiveScreen }: OverlayProps) {
             </p>
           </div>
           <nav
-            className="pointer-events-auto absolute top-[clamp(12px,2vw,24px)] left-1/2 flex -translate-x-1/2 items-center gap-[clamp(8px,1.2vw,18px)] max-md:top-auto max-md:bottom-[clamp(14px,4vw,24px)] max-md:w-[min(92vw,440px)] max-md:flex-wrap max-md:justify-center"
+            className="pointer-events-auto absolute top-[clamp(12px,2vw,24px)] left-1/2 z-90 flex -translate-x-1/2 items-center gap-[clamp(8px,1.2vw,18px)] max-md:top-auto max-md:bottom-[clamp(14px,4vw,24px)] max-md:w-[min(92vw,440px)] max-md:flex-wrap max-md:justify-center"
             aria-label="Main navigation"
           >
             <button

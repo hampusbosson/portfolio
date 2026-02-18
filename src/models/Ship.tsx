@@ -1,16 +1,22 @@
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 interface ShipProps {
   shipRef: React.RefObject<THREE.Object3D | null>;
   activeScreen: string;
+  shipStepCommand: { id: number; direction: 1 | -1 } | null;
 }
 
-export default function Ship({ shipRef, activeScreen }: ShipProps) {
+export default function Ship({
+  shipRef,
+  activeScreen,
+  shipStepCommand,
+}: ShipProps) {
   const snapTargetRef = useRef<number | null>(null);
   const wasSnapModeRef = useRef(false);
+  const lastCommandIdRef = useRef<number>(-1);
 
   // 12 equal orientations around a circle => 30deg per module.
   const SNAP_STEP = Math.PI / 6;
@@ -18,6 +24,35 @@ export default function Ship({ shipRef, activeScreen }: ShipProps) {
   const SNAP_OFFSET = 0;
   const SNAP_EPSILON = 0.001;
   const SNAP_SMOOTHNESS = 10;
+
+  useEffect(() => {
+    if (!shipStepCommand) {
+      return;
+    }
+    if (activeScreen !== "projects") {
+      return;
+    }
+    if (lastCommandIdRef.current === shipStepCommand.id) {
+      return;
+    }
+
+    lastCommandIdRef.current = shipStepCommand.id;
+
+    const currentTarget =
+      snapTargetRef.current ??
+      (shipRef.current
+        ? Math.round((shipRef.current.rotation.z - SNAP_OFFSET) / SNAP_STEP) *
+            SNAP_STEP +
+          SNAP_OFFSET
+        : null);
+
+    if (currentTarget === null) {
+      return;
+    }
+
+    snapTargetRef.current = currentTarget + shipStepCommand.direction * SNAP_STEP;
+    wasSnapModeRef.current = true;
+  }, [activeScreen, shipRef, shipStepCommand]);
 
   useFrame((_, delta) => {
     if (!shipRef.current) {
@@ -63,7 +98,7 @@ export default function Ship({ shipRef, activeScreen }: ShipProps) {
   const model = useGLTF("/ship-lowres/scene.gltf");
 
   return (
-    <group ref={shipRef} position={[0.6, 0, 0]} rotation={[0, 0.5, 0]}>
+    <group ref={shipRef} position={[0.8, 0, 0]} rotation={[0, 0.5, 0]}>
       <primitive
         object={model.scene}
         scale={0.01}

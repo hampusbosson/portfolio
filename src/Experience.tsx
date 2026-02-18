@@ -3,23 +3,20 @@ import { Perf } from "r3f-perf";
 import Blackhole from "./models/Blackhole";
 import { Suspense, useEffect, useRef, useState } from "react";
 import Ship from "./models/Ship";
-import Overlay from "./overlay/Overlay";
 import * as THREE from "three";
-import Projects from "./screens/Projects";
+import Projects from "./screens/projects/Projects";
 
-export default function Experience() {
-  const [activeScreen, setActiveScreen] = useState("start");
-  const [showProjects, setShowProjects] = useState(false);
+interface ExperienceProps {
+  activeScreen: string;
+}
+
+export default function Experience({ activeScreen }: ExperienceProps) {
+  const [shipStepCommand, setShipStepCommand] = useState<{
+    id: number;
+    direction: 1 | -1;
+  } | null>(null);
   const shipRef = useRef<THREE.Object3D>(null);
   const cameraControlsRef = useRef<CameraControls>(null);
-
-
-  const handleSetActiveScreen = (screen: string) => {
-    if (activeScreen !== "projects") {
-      setShowProjects(false);
-    }
-    setActiveScreen(screen);
-  };
 
   useEffect(() => {
     if (activeScreen === "projects" && cameraControlsRef.current) {
@@ -31,24 +28,21 @@ export default function Experience() {
   }, [activeScreen]);
 
 
-  useEffect(() => {
-    if (activeScreen !== "projects") {
-      return;
-    }
+  const handleShipStep = (direction: 1 | -1) => {
+    setShipStepCommand((prev) => ({
+      id: (prev?.id ?? 0) + 1,
+      direction,
+    }));
+  };
 
-    const timer = window.setTimeout(() => {
-      setShowProjects(true);
-    }, 1200);
 
-    return () => {
-      window.clearTimeout(timer);
-    };
-  }, [activeScreen]);
 
   return (
     <>
-      <CameraControls ref={cameraControlsRef} enabled={false} />
-      <Overlay setActiveScreen={handleSetActiveScreen} />
+      <CameraControls
+        ref={cameraControlsRef}
+        enabled={activeScreen !== "projects"}
+      />
       <Perf position="bottom-right" />
       <Stars
         radius={20}
@@ -60,15 +54,21 @@ export default function Experience() {
         speed={1.5}
       />
       <directionalLight position={[5, 0, 3]} intensity={2} />
-      <ambientLight intensity={1.5} />
+      <ambientLight intensity={0.2} />
       {/* <OrbitControls makeDefault /> */}
       <Suspense>
         <Blackhole />
       </Suspense>
       <Suspense>
-        <Ship shipRef={shipRef} activeScreen={activeScreen} />
+        <Ship
+          shipRef={shipRef}
+          activeScreen={activeScreen}
+          shipStepCommand={shipStepCommand}
+        />
       </Suspense>
-      {activeScreen === "projects" && showProjects && <Projects />}
+      {activeScreen === "projects" && (
+        <Projects onShipStep={handleShipStep} />
+      )}
     </>
   );
 }

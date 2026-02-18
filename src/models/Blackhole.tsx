@@ -4,7 +4,6 @@ import { useEffect } from "react";
 export default function Blackhole() {
   const model = useGLTF("/blackhole/scene.gltf");
   const animations = useAnimations(model.animations, model.scene);
-  console.log(animations);
 
   useEffect(() => {
     const action = animations.actions["Take 001"];
