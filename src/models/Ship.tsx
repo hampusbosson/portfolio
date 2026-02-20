@@ -52,7 +52,7 @@ export default function Ship({
 
     snapTargetRef.current = currentTarget + shipStepCommand.direction * SNAP_STEP;
     wasSnapModeRef.current = true;
-  }, [activeScreen, shipRef, shipStepCommand]);
+  }, [activeScreen, shipRef, shipStepCommand, SNAP_STEP]);
 
   useFrame((_, delta) => {
     if (!shipRef.current) {
@@ -98,10 +98,10 @@ export default function Ship({
   const model = useGLTF("/ship-lowres/scene.gltf");
 
   return (
-    <group ref={shipRef} position={[0.8, 0, 0]} rotation={[0, 0.5, 0]}>
+    <group ref={shipRef} position={[-3, 0, 0.5]} rotation={[0, 0.5, 0]}>
       <primitive
         object={model.scene}
-        scale={0.01}
+        scale={0.015}
         rotation={[0, Math.PI / 2, 0]}
       />
     </group>

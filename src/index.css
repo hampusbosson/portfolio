@@ -1,6 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
+@theme {
+  /* Tweak these in one place for global text branding */
+  --color-brand-primary: #c39449;
+  --color-brand-secondary: #e9f8ff;
+  --color-brand-muted: #a3cad6;
+}
+
 @layer base {
   html,
   body,
@@ -12,4 +19,3 @@
     @apply m-0 min-h-screen min-w-[320px];
   }
 }
-

@@ -7,8 +7,8 @@ export default function Blackhole() {
 
   useEffect(() => {
     const action = animations.actions["Take 001"];
-    if (action) { 
-      action.timeScale = 0.3; // Adjust the speed of the animation 
+    if (action) {
+      action.timeScale = 0.3; // Adjust the speed of the animation
       action.play();
     }
   }, [animations]);
@@ -17,8 +17,8 @@ export default function Blackhole() {
     <>
       <primitive
         object={model.scene}
-        rotation={[0.15, 0, 0]}
-        position={[-8, -0.7, 0]}
+        rotation={[0.25, 0, 0]}
+        position={[10, 5, 0]}
         scale={5}
       />
     </>
