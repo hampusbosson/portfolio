@@ -13,5 +13,5 @@ void main()
     // csm_Roughness = 1.0 - csm_Metalness;
 
     // Shinny tip
-    csm_Roughness = 1.0 - colorMix;
+    csm_Roughness = 0.1 + 0.05 * colorMix;
 }

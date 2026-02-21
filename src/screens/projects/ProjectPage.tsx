@@ -8,11 +8,14 @@ export default function ProjectPage() {
 
   return (
     <>
-      <color attach="background" args={["#191920"]} />
-      <fog attach="fog" args={["#191920", 0, 25]} />
-      <ScrollControls pages={projects.length} damping={0.2}>
-        <Scene currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
-      </ScrollControls>
+      <group position={[5, 0, 0]}>
+        <ScrollControls pages={projects.length} damping={0.2}>
+          <Scene
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+          />
+        </ScrollControls>
+      </group>
     </>
   );
 }

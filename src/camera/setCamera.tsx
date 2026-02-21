@@ -11,10 +11,10 @@ function SetCamera({ activeScreen }: SetCameraProps) {
 
   useEffect(() => {
     if (activeScreen === "start" && cameraControlsRef.current) {
-      cameraControlsRef.current.moveTo(0, 10, 3, true);
+      cameraControlsRef.current.moveTo(0, 5, 3, true);
     }
     if (activeScreen === "projects" && cameraControlsRef.current) {
-      cameraControlsRef.current.moveTo(0, 0.2, 0, true);
+      cameraControlsRef.current.moveTo(5, 0.2, 0, true);
     }
   }, [activeScreen]);
 

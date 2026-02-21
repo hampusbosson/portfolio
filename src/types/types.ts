@@ -6,6 +6,8 @@ export interface Project {
   githubLink: string;
 }
 
+export type Position = [number, number, number];
+
 export type Page = "start" | "projects";
 
 export type imageTexture =
@@ -13,3 +15,21 @@ export type imageTexture =
   | HTMLCanvasElement
   | ImageBitmap
   | undefined;
+
+export type BubbleVariant = {
+  timeOffset: number;
+  posFreq: number;
+  timeFreq: number;
+  strength: number;
+  warpPosFreq: number;
+  warpTimeFreq: number;
+  warpStrength: number;
+};
+
+export type Bubble = {
+  id: string;
+  radius: number;
+  detail: number;
+  position: [number, number, number];
+  variant: BubbleVariant;
+};

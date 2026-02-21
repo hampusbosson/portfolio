@@ -12,11 +12,13 @@ interface ExperienceProps {
 export default function Experience({ activePage }: ExperienceProps) {
   return (
     <>
+      <color attach="background" args={["#191920"]} />
+      <fog attach="fog" args={["#191920", 0, 25]} />
       <SetCamera activeScreen={activePage} />
       <Perf position="bottom-right" />
       <StartPage />
       <ProjectPage />
-      <Environment preset="city"/>
+      <Environment preset="city" />
     </>
   );
 }
