@@ -25,6 +25,8 @@
     "react-dom": "^19.2.0",
     "tailwindcss": "^4.1.18",
     "three": "^0.182.0",
+    "three-custom-shader-material": "^6.4.0",
+    "vite-plugin-glsl": "^1.5.5",
     "vite-plugin-restart": "^2.0.0"
   },
   "devDependencies": {

@@ -1,24 +1,24 @@
-import { Image, Text } from "@react-three/drei";
+import { Image, Text, useTexture } from "@react-three/drei";
 import { useEffect, useMemo } from "react";
-import { MeshStandardMaterial, Texture } from "three";
+import { MeshStandardMaterial } from "three";
+import { projects } from "../../content/projects";
 
 const FRAME_BORDER = 0.03;
 const FRAME_DEPTH = 0.01;
 const BASE_OPEN_W = 2.48;
 
-export default function ProjectScreen({
-  imageTexture,
-}: {
-  imageTexture: Texture;
-}) {
-  const image = imageTexture.image as
-    | HTMLImageElement
-    | HTMLCanvasElement
-    | ImageBitmap
-    | undefined;
+interface ProjectScreenProps {
+  activeIndex: number;
+}
 
-  const imgW = image?.width ?? 1;
-  const imgH = image?.height ?? 1;
+export default function ProjectScreen({ activeIndex }: ProjectScreenProps) {
+  const title = projects[activeIndex].title;
+  //const description = projects[activeIndex].description;
+  const imageString = projects[activeIndex].image;
+  const imageTexture = useTexture(imageString);
+
+  const imgW = imageTexture?.width ?? 1;
+  const imgH = imageTexture?.height ?? 1;
 
   const { openW, openH, frameW, frameH } = useMemo(() => {
     const imgAspect = imgW / imgH;
@@ -49,9 +49,9 @@ export default function ProjectScreen({
 
   return (
     <group position={[0, 0.75, 0]}>
-        <Text position={[-1, 0.4, 0.2]} color={"red"} scale={0.4}>
-            hello 
-        </Text>
+      <Text position={[-0.7, 0, 0.2]} color={"red"} scale={0.2} fontWeight={"bold"}>
+        {title}
+      </Text>
 
       {/* Inset image (slightly behind frame front) */}
       <Image

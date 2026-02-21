@@ -1,6 +1,4 @@
-import { useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
-import * as THREE from "three";
 import { CameraControls } from "@react-three/drei";
 
 interface SetCameraProps {
@@ -20,7 +18,7 @@ function SetCamera({ activeScreen }: SetCameraProps) {
     }
   }, [activeScreen]);
 
-  return <CameraControls ref={cameraControlsRef} />;
+  return <CameraControls ref={cameraControlsRef} enabled={false} />;
 }
 
 export default SetCamera;
