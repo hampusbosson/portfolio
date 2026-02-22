@@ -3,10 +3,9 @@ import Bubbles from "./bubbles/Bubbles";
 
 export default function StartPage() {
 
-
   return (
     <>
-      <group position={[-10, 2.5, 0]}>
+      <group position={[0, 2.5, 0]}>
         <Info />
         <Bubbles />
       </group>

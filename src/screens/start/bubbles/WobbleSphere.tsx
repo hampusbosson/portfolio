@@ -82,7 +82,7 @@ export function WobbleSphere({
       color: "#ffffff",
 
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.8,
       transmission: 0,
       ior: 1, // very close to air (1.0) → soft bubble look
       thickness: 0, // thin surfa
@@ -199,6 +199,8 @@ export function WobbleSphere({
         if (!popping) {
           setPopping(true);
           meshRef.current.userData.popT = 0;
+
+          document.body.style.cursor = "default"
 
           //play bubble-pop sound
           popSound.currentTime = 0;
