@@ -2,7 +2,7 @@ import { DragControls } from "@react-three/drei";
 import React, { useRef } from "react";
 import { WobbleSphere } from "./WobbleSphere";
 import * as THREE from "three";
-import type { BubbleVariant } from "../../types/types";
+import type { BubbleVariant } from "../../../types/types";
 
 interface DraggableBubbeProps {
   setPoppedCounter: React.Dispatch<React.SetStateAction<number>>;

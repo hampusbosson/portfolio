@@ -43,7 +43,7 @@ export default function Scene({ currentIndex, setCurrentIndex }: SceneProps) {
             depthScale={0.8}
             minDepthThreshold={0.4}
             maxDepthThreshold={1.2}
-            color="#1a1a1f" // slightly lighter dark
+            color="#ffffff" // slightly lighter dark
             metalness={0.9} // strong reflectivity
           />
         </mesh>

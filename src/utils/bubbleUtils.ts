@@ -1,10 +1,10 @@
-import type { Position } from "../types/types";
+import type { Position, Bubble, BubbleVariant } from "../types/types";
 
 function randomRange(min: number, max: number) {
   return Math.random() * (max - min) + min;
 }
 
-export function generateNonOverlappingPosition(
+function generateNonOverlappingPosition(
   existing: { position: Position; radius: number }[],
   newRadius: number,
   bounds: {
@@ -44,6 +44,42 @@ export function generateNonOverlappingPosition(
     randomRange(bounds.y[0], bounds.y[1]),
     bounds.z,
   ];
+}
+
+
+// function for adding randomness to the bubbles
+function makeVariant(): BubbleVariant {
+  const r = () => Math.random();
+  return {
+    timeOffset: r() * 100,
+    posFreq: 0.8,
+    timeFreq: 0.1 + r() * 0.1,
+    strength: 0.1 + r() * 0.1,
+    warpPosFreq: 0.1 + r() * 0.1,
+    warpTimeFreq: r() * 0.2,
+    warpStrength: r() * 0.2,
+  };
+}
+
+// spawn a new bubble under screen function
+export function spawnBubble(existing: Bubble[]): Bubble {
+  const id = crypto.randomUUID();
+  const radius = 0.3 + Math.random() * 0.4;
+
+  // guarantee bubbles dont end up on top of eachother
+  const position = generateNonOverlappingPosition(existing, radius, {
+    x: [-1, 3],
+    y: [-1, 1],
+    z: 1,
+  });
+
+  return {
+    id,
+    radius,
+    detail: 9,
+    position,
+    variant: makeVariant(),
+  };
 }
 
 

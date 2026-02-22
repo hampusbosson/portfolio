@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import CustomShaderMaterial from "three-custom-shader-material/vanilla";
 import { mergeVertices } from "three/addons/utils/BufferGeometryUtils.js";
-import type { BubbleVariant } from "../../types/types";
+import type { BubbleVariant } from "../../../types/types";
 
 import wobbleVertexShader from "./shaders/wobble/vertex.glsl";
 import wobbleFragmentShader from "./shaders/wobble/fragment.glsl";

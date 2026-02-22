@@ -12,10 +12,10 @@
   html,
   body,
   #root {
-    @apply fixed inset-0 h-full w-full bg-black;
+    @apply fixed inset-0 h-full w-full overflow-hidden bg-black;
   }
 
   body {
-    @apply m-0 min-h-screen min-w-[320px];
+    @apply m-0 min-h-screen min-w-[320px] overscroll-none;
   }
 }
