@@ -1,4 +1,4 @@
-import { Float, MeshReflectorMaterial, useScroll } from "@react-three/drei";
+import { MeshReflectorMaterial, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import ProjectScreen from "./ProjectDisplay";
 import type React from "react";
@@ -25,26 +25,25 @@ export default function Scene({ currentIndex, setCurrentIndex }: SceneProps) {
   return (
     <>
       <group position={[0, -0.5, 0]}>
-        <Float floatIntensity={0.1} floatingRange={[0.1, 0.1]} rotationIntensity={0.1}>
+        <group position={[0, 0, 6]}>
           <ProjectScreen activeIndex={currentIndex} />
-        </Float>
-
-        <Minimap currentIndex={currentIndex} />
-
+          <Minimap currentIndex={currentIndex} />
+        </group>
         {/* floor */}
         <mesh rotation={[-Math.PI / 2, 0, 0]}>
           <planeGeometry args={[80, 50]} />
           <MeshReflectorMaterial
+            envMapIntensity={0}
             blur={[20, 10]} // much lower blur
             resolution={1024}
             mixBlur={0.4}
             mixStrength={40}
-            roughness={0.25}
+            roughness={0.35}
             depthScale={0.8}
             minDepthThreshold={0.4}
             maxDepthThreshold={1.2}
-            color="#ffffff" // slightly lighter dark
-            metalness={0.9} // strong reflectivity
+            color="#1a1a1f" // slightly lighter dark
+            metalness={0}
           />
         </mesh>
       </group>

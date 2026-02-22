@@ -8,7 +8,7 @@ export default function ProjectPage() {
 
   return (
     <>
-      <group position={[5, 0, 0]}>
+      <group position={[0, -2, 0]}>
         <ScrollControls pages={projects.length} damping={0.2}>
           <Scene
             currentIndex={currentIndex}
