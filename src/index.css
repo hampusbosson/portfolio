@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -6,6 +6,7 @@
   --color-brand-primary: #c39449;
   --color-brand-secondary: #e9f8ff;
   --color-brand-muted: #a3cad6;
+  --font-info: "Sora", "Space Grotesk", "Inter", sans-serif;
 }
 
 @layer base {
