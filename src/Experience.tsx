@@ -19,8 +19,8 @@ export default function Experience({
 }: ExperienceProps) {
   return (
     <>
-      <color attach="background" args={["#15151b"]} />
-      <fog attach="fog" args={["#15151b", 10, 25]} />
+      <color attach="background" args={["#191920"]} />
+      <fog attach="fog" args={["#191920", 7, 15]} />
       <SetCamera activeScreen={activePage} />
       <Perf position="bottom-right" />
       <StartPage />
