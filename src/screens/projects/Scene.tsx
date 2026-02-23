@@ -1,33 +1,17 @@
-import { MeshReflectorMaterial, useScroll } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import ProjectScreen from "./ProjectDisplay";
-import type React from "react";
-import { projects } from "../../content/projects";
-import Minimap from "./Minimap";
+import { MeshReflectorMaterial } from "@react-three/drei";
+import ProjectScreen from "./ProjectScreen";
 
 interface SceneProps {
   currentIndex: number;
-  setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function Scene({ currentIndex, setCurrentIndex }: SceneProps) {
-  const scroll = useScroll();
-
-  useFrame(() => {
-    const raw = scroll.offset; // 0 → 1
-    const index = Math.round(raw * (projects.length - 1));
-
-    if (index !== currentIndex) {
-      setCurrentIndex(index);
-    }
-  });
+export default function Scene({ currentIndex }: SceneProps) {
 
   return (
     <>
       <group position={[0, -0.5, 0]}>
         <group position={[0, 0, 6]}>
-          <ProjectScreen activeIndex={currentIndex} />
-          <Minimap currentIndex={currentIndex} />
+          <ProjectScreen activeIndex={currentIndex} /> 
         </group>
         {/* floor */}
         <mesh rotation={[-Math.PI / 2, 0, 0]}>

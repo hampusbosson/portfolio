@@ -3,9 +3,11 @@ import Experience from "./Experience.tsx";
 import SceneOverlay from "./overlay/sceneOverlay.tsx";
 import { useState } from "react";
 import type { Page } from "./types/types.ts";
+import MinimapOverlay from "./screens/projects/Minimap.tsx";
 
 export default function App() {
   const [activePage, setActivePage] = useState<Page>("start");
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
     <div className="relative h-screen w-screen">
@@ -20,10 +22,20 @@ export default function App() {
           position: [0, 0, 5],
         }}
       >
-        <Experience activePage={activePage}/>
+        <Experience
+          activePage={activePage}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
+        />
       </Canvas>
+      <SceneOverlay activePage={activePage} setActivePage={setActivePage} />
 
-      <SceneOverlay setActivePage={setActivePage}/>
+      {activePage === "projects" && (
+        <MinimapOverlay
+          currentIndex={currentIndex}
+          onSelect={setCurrentIndex}
+        />
+      )}
     </div>
   );
 }

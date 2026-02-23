@@ -4,12 +4,19 @@ import SetCamera from "./camera/setCamera";
 import type { Page } from "./types/types";
 import { Environment } from "@react-three/drei";
 import StartPage from "./screens/start/StartPage";
+import type React from "react";
 
 interface ExperienceProps {
   activePage: Page;
+  currentIndex: number;
+  setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function Experience({ activePage }: ExperienceProps) {
+export default function Experience({
+  activePage,
+  currentIndex,
+  setCurrentIndex,
+}: ExperienceProps) {
   return (
     <>
       <color attach="background" args={["#15151b"]} />
@@ -17,7 +24,11 @@ export default function Experience({ activePage }: ExperienceProps) {
       <SetCamera activeScreen={activePage} />
       <Perf position="bottom-right" />
       <StartPage />
-      <ProjectPage />
+      <ProjectPage
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
+        isActive={activePage === "projects"}
+      />
       <Environment preset="city" background={false} />
     </>
   );

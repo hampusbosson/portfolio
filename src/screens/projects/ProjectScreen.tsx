@@ -1,6 +1,6 @@
 import { Image, Text, useTexture } from "@react-three/drei";
 import { useEffect, useMemo } from "react";
-import { MeshStandardMaterial } from "three";
+import { MeshStandardMaterial, SRGBColorSpace } from "three";
 import { projects } from "../../content/projects";
 
 const FRAME_BORDER = 0.03;
@@ -11,11 +11,22 @@ interface ProjectScreenProps {
   activeIndex: number;
 }
 
+// preload image textures
+const PROJECT_IMAGE_URLS = projects.map((project) => project.image);
+PROJECT_IMAGE_URLS.forEach((url) => useTexture.preload(url));
+
 export default function ProjectScreen({ activeIndex }: ProjectScreenProps) {
-  const title = projects[activeIndex].title;
-  //const description = projects[activeIndex].description;
-  const imageString = projects[activeIndex].image;
-  const imageTexture = useTexture(imageString);
+  const safeIndex = Math.min(Math.max(activeIndex, 0), projects.length - 1);
+  const title = projects[safeIndex].title;
+  const imageTextures = useTexture(PROJECT_IMAGE_URLS);
+  const imageTexture = imageTextures[safeIndex];
+
+  useEffect(() => {
+    for (const texture of imageTextures) {
+      texture.colorSpace = SRGBColorSpace;
+      texture.needsUpdate = true;
+    }
+  }, [imageTextures]);
 
   const imgW = imageTexture?.width ?? 1;
   const imgH = imageTexture?.height ?? 1;
@@ -53,15 +64,16 @@ export default function ProjectScreen({ activeIndex }: ProjectScreenProps) {
         {title}
       </Text>
 
-      {/* Inset image (slightly behind frame front) */}
+      {/* Inset image */}
       <Image
         raycast={() => null}
+        toneMapped={false}
         texture={imageTexture}
         position={[0, 0, 0]}
         scale={[openW, openH]}
       />
 
-      {/* Frame bars (slim bezel) */}
+      {/* Frame bars */}
       <mesh position={[0, (frameH - FRAME_BORDER) / 2, FRAME_DEPTH * 0.5]}>
         <boxGeometry args={[frameW, FRAME_BORDER, FRAME_DEPTH]} />
         <primitive object={frameMaterial} attach="material" />
