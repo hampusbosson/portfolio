@@ -4,6 +4,7 @@ import SceneOverlay from "./overlay/sceneOverlay.tsx";
 import { useState } from "react";
 import type { Page } from "./types/types.ts";
 import MinimapOverlay from "./screens/projects/Minimap.tsx";
+import ControlsOverlay from "./screens/projects/ControlsOverlay.tsx";
 
 export default function App() {
   const [activePage, setActivePage] = useState<Page>("start");
@@ -31,10 +32,13 @@ export default function App() {
       <SceneOverlay activePage={activePage} setActivePage={setActivePage} />
 
       {activePage === "projects" && (
-        <MinimapOverlay
-          currentIndex={currentIndex}
-          onSelect={setCurrentIndex}
-        />
+        <>
+          <ControlsOverlay />
+          <MinimapOverlay
+            currentIndex={currentIndex}
+            onSelect={setCurrentIndex}
+          />
+        </>
       )}
     </div>
   );
