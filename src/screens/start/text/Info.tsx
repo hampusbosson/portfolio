@@ -38,7 +38,7 @@ function Info() {
         I build high-performance, interactive web systems.
       </Text>
 
-      <Html transform position={[-3.2, -0.27, 0.02]} scale={0.3}>
+      <Html transform position={[-2.83, -0.27, 1]} scale={0.25}>
         <div className="flex items-center gap-2">
           <a
             href="https://github.com/hampusbosson"

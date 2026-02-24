@@ -15,11 +15,9 @@ export default function MinimapOverlay({
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    const timeout = window.setTimeout(() => setIsVisible(true), 450);
+    const timeout = window.setTimeout(() => setIsVisible(true), 650);
     return () => window.clearTimeout(timeout);
   }, []);
-
-  if (!isVisible) return null;
 
   const SLOT_H = 35;
   const GAP = 12;
@@ -31,8 +29,10 @@ export default function MinimapOverlay({
   return (
     <div className="pointer-events-none fixed inset-0 z-50">
       <div
-        className={`pointer-events-auto fixed left-1/2 bottom-8 -translate-x-1/2 transition-all duration-500 ease-out ${
-          isVisible ? "opacity-100" : "opacity-0"
+        className={`fixed left-1/2 bottom-8 -translate-x-1/2 transition-all duration-500 ease-out ${
+          isVisible
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none translate-y-2 opacity-0"
         }`}
       >
         <div className="rounded-2xl border border-white/20 bg-white/05 px-3 py-2.5 shadow-[0_14px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl">
