@@ -92,7 +92,7 @@ export function WobbleSphere({
     });
   }, [uniforms]);
 
-  // cleanup geometry and material when popping
+  //cleanup geometry and material when popping
   useEffect(() => {
     return () => {
       geometry.dispose();

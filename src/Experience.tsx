@@ -23,7 +23,7 @@ export default function Experience({
       <fog attach="fog" args={["#191920", 7, 15]} />
       <SetCamera activeScreen={activePage} />
       <Perf position="bottom-right" />
-      <StartPage />
+      <StartPage isActive={activePage === "start"} />
       <ProjectPage
         currentIndex={currentIndex}
         setCurrentIndex={setCurrentIndex}

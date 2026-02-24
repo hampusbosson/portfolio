@@ -4,7 +4,6 @@ import { spawnBubble } from "../../../utils/bubbleUtils";
 import { useState } from "react";
 import DraggableBubble from ".././bubbles/DraggableBubbe";
 
-
 function Bubbles() {
   const [bubbles, setBubbles] = useState<Bubble[]>(() => {
     const initial: Bubble[] = [];
@@ -18,6 +17,8 @@ function Bubbles() {
   });
 
   const [poppedCounter, setPoppedCounter] = useState<number>(0);
+
+  console.log(poppedCounter); //implement real counter later
 
   // spawn new bubble when one is popped
   const handlePopped = (id: string) => {
