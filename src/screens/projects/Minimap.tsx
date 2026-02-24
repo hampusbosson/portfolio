@@ -15,7 +15,7 @@ export default function MinimapOverlay({
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    const timeout = window.setTimeout(() => setIsVisible(true), 650); // 1s delay
+    const timeout = window.setTimeout(() => setIsVisible(true), 450);
     return () => window.clearTimeout(timeout);
   }, []);
 
@@ -25,17 +25,17 @@ export default function MinimapOverlay({
   const GAP = 12;
 
   const INACTIVE_W = 12;
-  const HOVER_W = 125; // smaller than active
+  const HOVER_W = 110; // smaller than active
   const ACTIVE_W = 125;
 
   return (
     <div className="pointer-events-none fixed inset-0 z-50">
       <div
         className={`pointer-events-auto fixed left-1/2 bottom-8 -translate-x-1/2 transition-all duration-500 ease-out ${
-          isVisible ? "translate-y-0" : "translate-y-2"
+          isVisible ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="rounded-2xl border border-white/20 bg-white/10 px-3 py-2.5 shadow-[0_14px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+        <div className="rounded-2xl border border-white/20 bg-white/05 px-3 py-2.5 shadow-[0_14px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl">
           <motion.div
             className="flex items-center"
             style={{ gap: GAP }}
@@ -60,9 +60,9 @@ export default function MinimapOverlay({
                     "rounded-xl border transition-all duration-50",
                     "flex items-center justify-start overflow-hidden",
                     active
-                      ? "border-white/60 bg-white text-black shadow-[0_0_18px_rgba(255,255,255,0.35)]"
+                      ? "border-white/60 bg-white text-black "
                       : hovered
-                        ? "border-white/40 bg-white/60 text-black"
+                        ? "border-white/40 bg-white/60 text-black cursor-pointer"
                         : "border-white/15 bg-white/15 text-white",
                   ].join(" ")}
                   style={{ height: SLOT_H }}

@@ -1,7 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import Scene from "./Scene";
 import type React from "react";
 import { projects } from "../../content/projects";
+import { KeyboardControls, type KeyboardControlsEntry } from "@react-three/drei";
+import KeyboardIndexController from "./KeyboardIndexController";
 
 interface ProjectPageProps {
   currentIndex: number;
@@ -14,7 +16,6 @@ export default function ProjectPage({
   setCurrentIndex,
   isActive,
 }: ProjectPageProps) {
-
   /**
    * SCROLL CONTROLS FOR PROJECT SCREEN
    */
@@ -39,7 +40,9 @@ export default function ProjectPage({
       wheelDelta.current = 0;
       isCoolingDown.current = true;
 
-      setCurrentIndex((prev) => Math.min(maxIndex, Math.max(0, prev + direction)));
+      setCurrentIndex((prev) =>
+        Math.min(maxIndex, Math.max(0, prev + direction)),
+      );
 
       window.setTimeout(() => {
         isCoolingDown.current = false;
@@ -52,12 +55,27 @@ export default function ProjectPage({
     };
   }, [isActive, setCurrentIndex]);
 
+  /**
+   * KEYBOARD CONTROLS MAP FOR PROJECTSCREEN
+   */
+  const keyMap = useMemo<KeyboardControlsEntry[]>(
+    () => [
+      { name: "left", keys: ["ArrowLeft", "KeyA"] },
+      { name: "right", keys: ["ArrowRight", "KeyD"] },
+    ],
+    [],
+  );
+
   return (
     <>
       <group position={[0, -2, 0]}>
-          <Scene
-            currentIndex={currentIndex}
+        <KeyboardControls map={keyMap}>
+          <KeyboardIndexController
+            isActive={isActive}
+            setCurrentIndex={setCurrentIndex}
           />
+          <Scene currentIndex={currentIndex} />
+        </KeyboardControls>
       </group>
     </>
   );
