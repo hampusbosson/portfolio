@@ -11,7 +11,7 @@ function SceneOverlay({ activePage, setActivePage }: SceneOverlayProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const timeout = window.setTimeout(() => setIsVisible(true), 1500);
+    const timeout = window.setTimeout(() => setIsVisible(true), 1200);
     return () => window.clearTimeout(timeout);
   }, []);
 
