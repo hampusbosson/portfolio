@@ -11,11 +11,15 @@ function SetCamera({ activeScreen }: SetCameraProps) {
 
   useEffect(() => {
     if (activeScreen === "start" && cameraControlsRef.current) {
-      cameraControlsRef.current.moveTo(0, 2.5, 3, true);
+      cameraControlsRef.current.setLookAt(0, 2.5, 8, 0, 2.5, 0, true);
     }
     if (activeScreen === "projects" && cameraControlsRef.current) {
-      cameraControlsRef.current.moveTo(0, -1.75, 5.5, true);
-    }
+      cameraControlsRef.current.setLookAt(0, -1.75, 10.5, 0, -1.75, 0, true);
+    } 
+    if (activeScreen === "about" && cameraControlsRef.current) {
+      cameraControlsRef.current.setLookAt(9, 1.5, 9, 9, 1.5, 0, true);
+    } 
+
   }, [activeScreen]);
 
   return <CameraControls ref={cameraControlsRef} enabled={false} />;

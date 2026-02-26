@@ -9,7 +9,7 @@ export interface Project {
 
 export type Position = [number, number, number];
 
-export type Page = "start" | "projects";
+export type Page = "start" | "projects" | "about";
 
 export type imageTexture =
   | HTMLImageElement
