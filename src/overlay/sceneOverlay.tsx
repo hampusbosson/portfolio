@@ -22,7 +22,7 @@ function SceneOverlay({ activePage, setActivePage }: SceneOverlayProps) {
           isVisible ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
         }`}
       >
-        <div className="flex items-center gap-2 rounded-4xl border border-white/25 bg-white/05 p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+        <div className="flex items-center gap-2 rounded-4xl border border-white/25 bg-white/05 p-1.5 shadow-[0_8px_16px_rgba(0,0,0,0.35)] backdrop-blur-md">
           <button
             onClick={() => setActivePage("start")}
             className={`rounded-4xl px-4 py-2 text-sm font-medium tracking-wide transition-all duration-200 ${
@@ -32,12 +32,6 @@ function SceneOverlay({ activePage, setActivePage }: SceneOverlayProps) {
             }`}
           >
             Start
-          </button>
-          <button
-            className="rounded-4xl px-4 py-2 text-sm font-medium tracking-wide text-white/70 transition-all duration-200 hover:bg-white/10 hover:text-white"
-            type="button"
-          >
-            About Me
           </button>
           <button
             onClick={() => setActivePage("projects")}
@@ -50,10 +44,11 @@ function SceneOverlay({ activePage, setActivePage }: SceneOverlayProps) {
             Projects
           </button>
           <button
+            onClick={() => setActivePage("about")}
             className="rounded-4xl px-4 py-2 text-sm font-medium tracking-wide text-white/70 transition-all duration-200 hover:bg-white/10 hover:text-white"
             type="button"
           >
-            Chat With Me
+            About
           </button>
         </div>
       </nav>
