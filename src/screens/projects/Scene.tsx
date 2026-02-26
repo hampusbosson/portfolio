@@ -6,9 +6,10 @@ import { useRef } from "react";
 
 interface SceneProps {
   currentIndex: number;
+  onOpenProjectInfo: () => void;
 }
 
-export default function Scene({ currentIndex }: SceneProps) {
+export default function Scene({ currentIndex, onOpenProjectInfo }: SceneProps) {
   const screenRef = useRef<THREE.Group>(null!);
   const { pointer } = useThree();
 
@@ -47,7 +48,10 @@ export default function Scene({ currentIndex }: SceneProps) {
       <group position={[0, -0.5, 0]}>
         {/* screen */}
         <group position={[0, 0, 5]} ref={screenRef}>
-          <ProjectScreen activeIndex={currentIndex} />
+          <ProjectScreen
+            activeIndex={currentIndex}
+            onOpenProjectInfo={onOpenProjectInfo}
+          />
         </group>
         {/* floor */}
         <mesh rotation={[-Math.PI / 2, 0, 0]}>

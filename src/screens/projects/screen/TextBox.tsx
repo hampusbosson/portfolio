@@ -8,9 +8,11 @@ const SWAP_DELAY_MS = 280;
 function TextBox({
   title,
   activeIndex,
+  onInfoClick,
 }: {
   title: string;
   activeIndex: number;
+  onInfoClick: () => void;
 }) {
   const groupRef = useRef<THREE.Group>(null!);
   const titleMatRef = useRef<THREE.MeshBasicMaterial>(null!);
@@ -118,7 +120,7 @@ function TextBox({
 
       <Text
         ref={infoRef}
-        onClick={() => {}}
+        onClick={onInfoClick}
         onPointerOver={() => {
           infoHovered.current = true;
           document.body.style.cursor = "pointer";

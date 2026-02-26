@@ -1,6 +1,6 @@
 import { useTexture } from "@react-three/drei";
 import { useEffect, useMemo } from "react";
-import { MeshStandardMaterial } from "three";
+import { MeshStandardMaterial, SRGBColorSpace } from "three";
 import { projects } from "../../../content/projects";
 import TextBox from "./TextBox";
 import ProjectImageTransition from "../imageTransition/ProjectImageTransition";
@@ -12,17 +12,29 @@ const BASE_OPEN_W = 2.48;
 
 interface ProjectScreenProps {
   activeIndex: number;
+  onOpenProjectInfo: () => void;
 }
 // preload image textures
 const PROJECT_IMAGE_URLS = projects.map((project) => project.image);
 PROJECT_IMAGE_URLS.forEach((url) => useTexture.preload(url));
 
-export default function ProjectScreen({ activeIndex }: ProjectScreenProps) {
+export default function ProjectScreen({
+  activeIndex,
+  onOpenProjectInfo,
+}: ProjectScreenProps) {
   const safeIndex = Math.min(Math.max(activeIndex, 0), projects.length - 1);
   const title = projects[safeIndex].title;
 
   const imageTextures = useTexture(PROJECT_IMAGE_URLS);
   const imageTexture = imageTextures[safeIndex];
+
+  // Ensure image textures are treated as sRGB color textures.
+  useEffect(() => {
+    for (const texture of imageTextures) {
+      texture.colorSpace = SRGBColorSpace;
+      texture.needsUpdate = true;
+    }
+  }, [imageTextures]);
 
   const imgW = imageTexture?.width ?? 1;
   const imgH = imageTexture?.height ?? 1;
@@ -57,7 +69,11 @@ export default function ProjectScreen({ activeIndex }: ProjectScreenProps) {
 
   return (
     <group position={[0, 0.75, 0]}>
-      <TextBox title={title} activeIndex={safeIndex}/>
+      <TextBox
+        title={title}
+        activeIndex={safeIndex}
+        onInfoClick={onOpenProjectInfo}
+      />
 
       {/* Inset image */}
       <ProjectImageTransition

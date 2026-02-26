@@ -2,19 +2,24 @@ import { useEffect, useMemo, useRef } from "react";
 import Scene from "./Scene";
 import type React from "react";
 import { projects } from "../../content/projects";
-import { KeyboardControls, type KeyboardControlsEntry } from "@react-three/drei";
+import {
+  KeyboardControls,
+  type KeyboardControlsEntry,
+} from "@react-three/drei";
 import KeyboardIndexController from "./KeyboardIndexController";
 
 interface ProjectPageProps {
   currentIndex: number;
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
   isActive: boolean;
+  onOpenProjectInfo: () => void;
 }
 
 export default function ProjectPage({
   currentIndex,
   setCurrentIndex,
   isActive,
+  onOpenProjectInfo,
 }: ProjectPageProps) {
   /**
    * SCROLL CONTROLS FOR PROJECT SCREEN
@@ -60,8 +65,8 @@ export default function ProjectPage({
    */
   const keyMap = useMemo<KeyboardControlsEntry[]>(
     () => [
-      { name: "left", keys: ["ArrowLeft", "KeyA"] },
-      { name: "right", keys: ["ArrowRight", "KeyD"] },
+      { name: "left", keys: ["ArrowLeft", "KeyA", "ArrowDown"] },
+      { name: "right", keys: ["ArrowRight", "KeyD", "ArrowUp"] },
     ],
     [],
   );
@@ -74,7 +79,7 @@ export default function ProjectPage({
             isActive={isActive}
             setCurrentIndex={setCurrentIndex}
           />
-          <Scene currentIndex={currentIndex} />
+          <Scene currentIndex={currentIndex} onOpenProjectInfo={onOpenProjectInfo} />
         </KeyboardControls>
       </group>
     </>
