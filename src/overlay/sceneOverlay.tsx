@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import type { Page } from "../types/types";
+import { sfx } from "../audio/sfx";
 
 interface SceneOverlayProps {
   activePage: Page;
@@ -25,6 +26,11 @@ function SceneOverlay({ activePage, setActivePage }: SceneOverlayProps) {
         <div className="flex items-center gap-2 rounded-4xl border border-white/25 bg-white/05 p-1.5 shadow-[0_8px_16px_rgba(0,0,0,0.35)] backdrop-blur-md">
           <button
             onClick={() => setActivePage("start")}
+            onPointerEnter={() => {
+              if (activePage !== "start") {
+                sfx.play("hover");
+              }
+            }}
             className={`rounded-4xl px-4 py-2 text-sm font-medium tracking-wide transition-all duration-200 ${
               activePage === "start"
                 ? "bg-white text-black shadow-sm"
@@ -35,6 +41,11 @@ function SceneOverlay({ activePage, setActivePage }: SceneOverlayProps) {
           </button>
           <button
             onClick={() => setActivePage("projects")}
+            onPointerEnter={() => {
+              if (activePage !== "projects") {
+                sfx.play("hover");
+              }
+            }}
             className={`rounded-4xl px-4 py-2 text-sm font-medium tracking-wide transition-all duration-200 ${
               activePage === "projects"
                 ? "bg-white text-black shadow-sm"
@@ -45,6 +56,11 @@ function SceneOverlay({ activePage, setActivePage }: SceneOverlayProps) {
           </button>
           <button
             onClick={() => setActivePage("about")}
+            onPointerEnter={() => {
+              if (activePage !== "about") {
+                sfx.play("hover");
+              }
+            }}
             className="rounded-4xl px-4 py-2 text-sm font-medium tracking-wide text-white/70 transition-all duration-200 hover:bg-white/10 hover:text-white"
             type="button"
           >
