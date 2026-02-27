@@ -1,4 +1,5 @@
 import { Html, Text } from "@react-three/drei";
+import { sfx } from "../../../audio/sfx";
 
 const INFO_FONT_URL =
   "https://cdn.jsdelivr.net/npm/@fontsource/sora@5.1.1/files/sora-latin-600-normal.woff";
@@ -11,7 +12,6 @@ function Info() {
         position={[-3.8, 0.7, 0]}
         scale={0.42}
         anchorX="left"
-        color="white"
       >
         Hampus Bosson
       </Text>
@@ -35,6 +35,11 @@ function Info() {
         color="white"
         fillOpacity={0.75}
       >
+        {/* <meshStandardMaterial
+          color="white"
+          emissive="white"
+          emissiveIntensity={2}
+        /> */}
         I build high-performance, interactive web systems.
       </Text>
 
@@ -45,6 +50,7 @@ function Info() {
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub"
+            onPointerEnter={() => sfx.play("hover")}
             className="group flex items-center gap-1.5 rounded-md border border-white/15 bg-white/5 px-2 py-1 text-[10px] font-medium tracking-wide text-white/80 backdrop-blur-md transition-all duration-200 hover:border-white/35 hover:bg-white/12 hover:text-white"
           >
             <svg
@@ -62,6 +68,7 @@ function Info() {
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn"
+            onPointerEnter={() => sfx.play("hover")}
             className="group flex items-center gap-1.5 rounded-md border border-white/15 bg-white/5 px-2 py-1 text-[10px] font-medium tracking-wide text-white/80 backdrop-blur-md transition-all duration-200 hover:border-white/35 hover:bg-white/12 hover:text-white"
           >
             <svg

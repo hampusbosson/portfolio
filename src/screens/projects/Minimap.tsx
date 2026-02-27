@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { projects } from "../../content/projects";
 import { motion } from "framer-motion";
+import { sfx } from "../../audio/sfx";
 
 interface MinimapProps {
   currentIndex: number;
@@ -54,7 +55,10 @@ export default function MinimapOverlay({
                   key={i}
                   type="button"
                   onClick={() => onSelect?.(i)}
-                  onHoverStart={() => setHoveredIndex(i)}
+                  onHoverStart={() => {
+                    if (!active) sfx.play("hover");
+                    setHoveredIndex(i);
+                  }}
                   onHoverEnd={() => setHoveredIndex(null)}
                   className={[
                     "rounded-xl border transition-all duration-50",

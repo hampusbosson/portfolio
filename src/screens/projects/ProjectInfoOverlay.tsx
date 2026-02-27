@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { projects } from "../../content/projects";
+import { sfx } from "../../audio/sfx";
 
 interface ProjectInfoOverlayProps {
   currentIndex: number;
@@ -112,6 +113,7 @@ export default function ProjectInfoOverlay({
           <button
             type="button"
             onClick={handleClose}
+            onPointerEnter={() => sfx.play("hover")}
             className="rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-xs font-medium text-white/92 transition-colors hover:bg-white/18"
           >
             Close
@@ -203,6 +205,7 @@ export default function ProjectInfoOverlay({
               href={project.githubLink}
               target="_blank"
               rel="noreferrer"
+              onPointerEnter={() => sfx.play("hover")}
               className="rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm font-medium text-white/92 transition-colors hover:bg-white/18"
             >
               Open GitHub

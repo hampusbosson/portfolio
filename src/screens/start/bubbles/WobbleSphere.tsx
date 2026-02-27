@@ -4,6 +4,7 @@ import * as THREE from "three";
 import CustomShaderMaterial from "three-custom-shader-material/vanilla";
 import { mergeVertices } from "three/addons/utils/BufferGeometryUtils.js";
 import type { BubbleVariant } from "../../../types/types";
+import { sfx } from "../../../audio/sfx";
 
 import wobbleVertexShader from "./shaders/wobble/vertex.glsl";
 import wobbleFragmentShader from "./shaders/wobble/fragment.glsl";
@@ -34,16 +35,6 @@ export function WobbleSphere({
   const entrance = useRef(0);
   const started = useRef(false);
   const notified = useRef(false);
-
-  /**
-   * bubble-pop sound
-   */
-  const popSound = useMemo(() => {
-    const audio = new Audio("/sound/bubble-pop.mp3");
-    audio.volume = 1;
-    audio.load();
-    return audio;
-  }, []);
 
   // Uniforms (stable references)
   const uniforms = useMemo(
@@ -99,13 +90,6 @@ export function WobbleSphere({
       material.dispose();
     };
   }, [geometry, material]);
-
-  // prevent memory leak from sound
-  useEffect(() => {
-    return () => {
-      popSound.pause();
-    };
-  }, [popSound]);
 
   useFrame((state, delta) => {
     uniforms.uTime.value = state.clock.getElapsedTime() + variant.timeOffset;
@@ -200,16 +184,11 @@ export function WobbleSphere({
           setPopping(true);
           meshRef.current.userData.popT = 0;
 
-          document.body.style.cursor = "default"
+          document.body.style.cursor = "default";
 
-          //play bubble-pop sound
-          popSound.currentTime = 0;
-          // random pitch each pop
-          popSound.playbackRate = 0.9 + Math.random() * 0.3;
-          // randomize volume
-          popSound.volume = 0.8 + Math.random() * 0.2;
-          popSound.play().catch((err) => {
-            console.log("Audio play blocked:", err);
+          sfx.play("pop", {
+            playbackRate: 0.9 + Math.random() * 0.3,
+            volume: 0.8 + Math.random() * 0.2,
           });
         }
       }}

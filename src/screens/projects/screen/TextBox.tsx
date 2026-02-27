@@ -2,6 +2,7 @@ import { Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { sfx } from "../../../audio/sfx";
 
 const SWAP_DELAY_MS = 280;
 
@@ -122,6 +123,7 @@ function TextBox({
         ref={infoRef}
         onClick={onInfoClick}
         onPointerOver={() => {
+          if (!infoHovered.current) sfx.play("hover");
           infoHovered.current = true;
           document.body.style.cursor = "pointer";
         }}
@@ -144,6 +146,7 @@ function TextBox({
         ref={githubRef}
         onClick={() => {}}
         onPointerOver={() => {
+          if (!githubHovered.current) sfx.play("hover");
           githubHovered.current = true;
           document.body.style.cursor = "pointer";
         }}
