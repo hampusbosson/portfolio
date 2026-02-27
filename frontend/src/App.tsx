@@ -8,30 +8,33 @@ import ControlsOverlay from "./screens/projects/ControlsOverlay.tsx";
 import { Perf } from "r3f-perf";
 import ProjectInfoOverlay from "./screens/projects/ProjectInfoOverlay.tsx";
 import { sfx } from "./audio/sfx.ts";
-import AssistantOrbOverlay from "./overlay/AssistantOrbOverlay.tsx";
+import AssistantOrbOverlay from "./overlay/chat/AssistantOrbOverlay.tsx";
+import ChatOverlay from "./overlay/chat/ChatOverlay.tsx";
 
 export default function App() {
   const [activePage, setActivePage] = useState<Page>("start");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isProjectInfoOpen, setIsProjectInfoOpen] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
-  useEffect(() => {
-    sfx.init();
+  /** INIT SOUND */
+  // useEffect(() => {
+  //   sfx.init();
 
-    const unlock = () => {
-      sfx.unlock();
-      window.removeEventListener("pointerdown", unlock);
-      window.removeEventListener("keydown", unlock);
-    };
+  //   const unlock = () => {
+  //     sfx.unlock();
+  //     window.removeEventListener("pointerdown", unlock);
+  //     window.removeEventListener("keydown", unlock);
+  //   };
 
-    window.addEventListener("pointerdown", unlock, { once: true });
-    window.addEventListener("keydown", unlock, { once: true });
+  //   window.addEventListener("pointerdown", unlock, { once: true });
+  //   window.addEventListener("keydown", unlock, { once: true });
 
-    return () => {
-      window.removeEventListener("pointerdown", unlock);
-      window.removeEventListener("keydown", unlock);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("pointerdown", unlock);
+  //     window.removeEventListener("keydown", unlock);
+  //   };
+  // }, []);
 
   return (
     <div className="relative h-screen w-screen">
@@ -51,11 +54,13 @@ export default function App() {
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
           onOpenProjectInfo={() => setIsProjectInfoOpen(true)}
+          isProjectInfoOpen={isProjectInfoOpen}
         />
-        <Perf position="hidden" />
+        <Perf position="top-right" />
       </Canvas>
       <SceneOverlay activePage={activePage} setActivePage={setActivePage} />
-      <AssistantOrbOverlay />
+      <AssistantOrbOverlay onOpenChat={() => setIsChatOpen(true)} />
+      <ChatOverlay isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
       {activePage === "projects" && (
         <>
           <ControlsOverlay />

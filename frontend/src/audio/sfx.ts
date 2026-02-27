@@ -8,7 +8,7 @@ type SfxConfig = {
 
 const CONFIG: Record<SfxName, SfxConfig> = {
   pop: { url: "/sound/bubble-pop.mp3", poolSize: 6, volume: 1 },
-  hover: { url: "/sound/hover-button.mp3", poolSize: 8, volume: 0.45 },
+  hover: { url: "/sound/hover-button.mp3", poolSize: 8, volume: 0.15 },
 };
 
 class Sfx {

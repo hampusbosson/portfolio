@@ -3,7 +3,7 @@ import type { Project } from "../types/types";
 export const projects: Project[] = [
   {
     id: "proxy-inspector",
-    image: "/proxy-server.jpg",
+    image: "/images/proxy-server.jpg",
     title: "Proxy Inspector",
     shortTitle: "Proxy Server",
     description:
@@ -12,7 +12,7 @@ export const projects: Project[] = [
   },
   {
     id: "sneaker-store",
-    image: "/sneaker-store.jpg",
+    image: "/images/sneaker-store.jpg",
     title: "Sneaker Store",
     shortTitle: "Store",
     description: "Mock e-commerce UI built with React and Tailwind.",
@@ -20,7 +20,7 @@ export const projects: Project[] = [
   },
   {
     id: "proxy-inspector-2",
-    image: "/proxy-server.jpg",
+    image: "/images/proxy-server.jpg",
     title: "Proxy Inspector",
     shortTitle: "Proxy Server",
     description:
@@ -29,7 +29,7 @@ export const projects: Project[] = [
   },
   {
     id: "sneaker-store-2",
-    image: "/sneaker-store.jpg",
+    image: "/images/sneaker-store.jpg",
     title: "Sneaker Store",
     shortTitle: "Store",
     description: "Mock e-commerce UI built with React and Tailwind.",

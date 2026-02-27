@@ -21,7 +21,7 @@ interface WobbleSphereProps {
 
 export function WobbleSphere({
   radius = 2.5,
-  detail = 10,
+  detail,
   position,
   variant,
   shouldPop,

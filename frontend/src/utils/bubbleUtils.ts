@@ -64,19 +64,19 @@ function makeVariant(): BubbleVariant {
 // spawn a new bubble under screen function
 export function spawnBubble(existing: Bubble[]): Bubble {
   const id = crypto.randomUUID();
-  const radius = 0.3 + Math.random() * 0.4;
+  const radius = 0.3 + Math.random() * 0.3;
 
   // guarantee bubbles dont end up on top of eachother
   const position = generateNonOverlappingPosition(existing, radius, {
-    x: [-1, 3],
-    y: [-1, 1],
+    x: [-0.5, 3],
+    y: [-0.5, 0.8],
     z: 1,
   });
 
   return {
     id,
     radius,
-    detail: 9,
+    detail: 8,
     position,
     variant: makeVariant(),
   };

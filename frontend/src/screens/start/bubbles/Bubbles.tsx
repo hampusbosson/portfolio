@@ -2,7 +2,7 @@ import { Float } from "@react-three/drei";
 import type { Bubble } from "../../../types/types";
 import { spawnBubble } from "../../../utils/bubbleUtils";
 import { useState } from "react";
-import DraggableBubble from ".././bubbles/DraggableBubbe";
+import DraggableBubble from "./DraggableBubbe";
 
 function Bubbles() {
   const [bubbles, setBubbles] = useState<Bubble[]>(() => {

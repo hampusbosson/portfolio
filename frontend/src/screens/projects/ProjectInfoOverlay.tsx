@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import { projects } from "../../content/projects";
 import { sfx } from "../../audio/sfx";
 
@@ -60,24 +59,8 @@ export default function ProjectInfoOverlay({
   currentIndex,
   onClose,
 }: ProjectInfoOverlayProps) {
-  const FADE_MS = 260;
-  const [isVisible, setIsVisible] = useState(false);
-  const closeTimeout = useRef<number | null>(null);
-
-  useEffect(() => {
-    const raf = window.requestAnimationFrame(() => setIsVisible(true));
-    return () => {
-      window.cancelAnimationFrame(raf);
-      if (closeTimeout.current) window.clearTimeout(closeTimeout.current);
-    };
-  }, []);
-
   const handleClose = () => {
-    setIsVisible(false);
-    if (closeTimeout.current) window.clearTimeout(closeTimeout.current);
-    closeTimeout.current = window.setTimeout(() => {
-      onClose();
-    }, FADE_MS);
+    onClose();
   };
 
   const safeIndex = Math.min(Math.max(currentIndex, 0), projects.length - 1);
@@ -85,20 +68,14 @@ export default function ProjectInfoOverlay({
   const details: CaseStudy = { ...DEFAULT_CASE_STUDY, ...CASE_STUDY_BY_ID[project.id] };
 
   return (
-    <div
-      className={`pointer-events-none fixed inset-0 z-[70] flex items-center justify-center px-5 transition-all duration-300 ease-out ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
-    >
+    <div className="pointer-events-none fixed inset-0 z-[70] flex items-center justify-center px-5">
       <div
-        className="pointer-events-auto absolute inset-0 bg-black/56 backdrop-blur-[2px]"
+        className="pointer-events-auto absolute inset-0 bg-black/70"
         onClick={handleClose}
       />
 
       <section
-        className={`pointer-events-auto relative z-10 flex h-[min(86vh,940px)] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-white/14 bg-slate-800/42 text-white shadow-[0_16px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-all duration-300 ease-out ${
-          isVisible ? "translate-y-0 scale-100" : "translate-y-2 scale-[0.99]"
-        }`}
+        className="pointer-events-auto relative z-10 flex h-[min(86vh,940px)] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-white/14 bg-slate-900/80 text-white shadow-[0_16px_40px_rgba(0,0,0,0.35)]"
       >
         <header className="flex items-start justify-between border-b border-white/8 px-6 py-5">
           <div>

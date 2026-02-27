@@ -13,6 +13,7 @@ interface ProjectPageProps {
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
   isActive: boolean;
   onOpenProjectInfo: () => void;
+  isProjectInfoOpen: boolean;
 }
 
 export default function ProjectPage({
@@ -20,6 +21,7 @@ export default function ProjectPage({
   setCurrentIndex,
   isActive,
   onOpenProjectInfo,
+  isProjectInfoOpen,
 }: ProjectPageProps) {
   /**
    * SCROLL CONTROLS FOR PROJECT SCREEN
@@ -28,7 +30,7 @@ export default function ProjectPage({
   const isCoolingDown = useRef(false);
 
   useEffect(() => {
-    if (!isActive) return;
+    if (!isActive || isProjectInfoOpen) return;
 
     const STEP_THRESHOLD = 80;
     const STEP_COOLDOWN_MS = 220;
@@ -58,7 +60,7 @@ export default function ProjectPage({
     return () => {
       window.removeEventListener("wheel", onWheel);
     };
-  }, [isActive, setCurrentIndex]);
+  }, [isActive, isProjectInfoOpen, setCurrentIndex]);
 
   /**
    * KEYBOARD CONTROLS MAP FOR PROJECTSCREEN
@@ -77,9 +79,14 @@ export default function ProjectPage({
         <KeyboardControls map={keyMap}>
           <KeyboardIndexController
             isActive={isActive}
+            isBlocked={isProjectInfoOpen}
             setCurrentIndex={setCurrentIndex}
           />
-          <Scene currentIndex={currentIndex} onOpenProjectInfo={onOpenProjectInfo} />
+          <Scene
+            currentIndex={currentIndex}
+            onOpenProjectInfo={onOpenProjectInfo}
+            isPaused={isProjectInfoOpen}
+          />
         </KeyboardControls>
       </group>
     </>

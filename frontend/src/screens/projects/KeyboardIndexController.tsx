@@ -8,17 +8,19 @@ type ProjectControls = "left" | "right";
 
 type KeyboardIndexControllerProps = {
   isActive: boolean;
+  isBlocked: boolean;
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export default function KeyboardIndexController({
   isActive,
+  isBlocked,
   setCurrentIndex,
 }: KeyboardIndexControllerProps) {
   const [subscribe] = useKeyboardControls<ProjectControls>();
 
   useEffect(() => {
-    if (!isActive) return;
+    if (!isActive || isBlocked) return;
     const maxIndex = projects.length - 1;
 
     const unsubLeft = subscribe(
@@ -41,7 +43,7 @@ export default function KeyboardIndexController({
       unsubLeft();
       unsubRight();
     };
-  }, [isActive, setCurrentIndex, subscribe]);
+  }, [isActive, isBlocked, setCurrentIndex, subscribe]);
 
   return null;
 }

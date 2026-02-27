@@ -5,13 +5,14 @@ import { Environment } from "@react-three/drei";
 import StartPage from "./screens/start/StartPage";
 import AboutMePage from "./screens/about-me/AboutMePage";
 import type React from "react";
-import { EffectComposer, Noise, Vignette } from "@react-three/postprocessing";
+import { EffectComposer, Vignette } from "@react-three/postprocessing";
 
 interface ExperienceProps {
   activePage: Page;
   currentIndex: number;
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
   onOpenProjectInfo: () => void;
+  isProjectInfoOpen: boolean;
 }
 
 export default function Experience({
@@ -19,16 +20,16 @@ export default function Experience({
   currentIndex,
   setCurrentIndex,
   onOpenProjectInfo,
+  isProjectInfoOpen,
 }: ExperienceProps) {
   return (
     <>
       <EffectComposer>
         <Vignette offset={0.32} darkness={0.5} eskil={false} />
-        <Noise opacity={0.012} premultiply />
       </EffectComposer>
       <color attach="background" args={["#191920"]} />
       <fog attach="fog" args={["#191920", 7, 15]} />
-      <SetCamera activeScreen={activePage} /> 
+      <SetCamera activeScreen={activePage} />
       <StartPage isActive={activePage === "start"} />
       <AboutMePage isActive={activePage === "about"} />
       <ProjectPage
@@ -36,6 +37,7 @@ export default function Experience({
         setCurrentIndex={setCurrentIndex}
         isActive={activePage === "projects"}
         onOpenProjectInfo={onOpenProjectInfo}
+        isProjectInfoOpen={isProjectInfoOpen}
       />
       <Environment preset="city" background={false} />
     </>
