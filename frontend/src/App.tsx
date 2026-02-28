@@ -56,7 +56,7 @@ export default function App() {
           onOpenProjectInfo={() => setIsProjectInfoOpen(true)}
           isProjectInfoOpen={isProjectInfoOpen}
         />
-        <Perf position="top-right" />
+        <Perf position="hidden" />
       </Canvas>
       <SceneOverlay activePage={activePage} setActivePage={setActivePage} />
       <AssistantOrbOverlay onOpenChat={() => setIsChatOpen(true)} />

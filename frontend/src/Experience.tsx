@@ -39,7 +39,11 @@ export default function Experience({
         onOpenProjectInfo={onOpenProjectInfo}
         isProjectInfoOpen={isProjectInfoOpen}
       />
-      <Environment preset="city" background={false} />
+      <Environment
+        preset={"city"}
+        background={false}
+        environmentIntensity={0.5}
+      />
     </>
   );
 }

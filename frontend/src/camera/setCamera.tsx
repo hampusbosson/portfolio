@@ -14,7 +14,7 @@ function SetCamera({ activeScreen }: SetCameraProps) {
       cameraControlsRef.current.setLookAt(0, 2.5, 8, 0, 2.5, 0, true);
     }
     if (activeScreen === "projects" && cameraControlsRef.current) {
-      cameraControlsRef.current.setLookAt(0, -1.75, 10.5, 0, -1.75, 0, true);
+      cameraControlsRef.current.setLookAt(0, -1.2, 10.5, 0, -2.2, 0, true);
     } 
     if (activeScreen === "about" && cameraControlsRef.current) {
       cameraControlsRef.current.setLookAt(9, 1.5, 9, 9, 1.5, 0, true);

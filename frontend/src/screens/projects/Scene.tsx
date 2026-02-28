@@ -1,8 +1,8 @@
-import { MeshReflectorMaterial } from "@react-three/drei";
 import ProjectScreen from "./screen/ProjectScreen";
 import * as THREE from "three";
 import { useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
+import ProjectFloor from "./ProjectFloor";
 
 interface SceneProps {
   currentIndex: number;
@@ -59,29 +59,7 @@ export default function Scene({
           />
         </group>
         {/* floor */}
-        {isPaused ? (
-          <mesh rotation={[-Math.PI / 2, 0, 0]}>
-            <planeGeometry args={[80, 50]} />
-            <meshStandardMaterial color="#050505" roughness={1} metalness={0.1} />
-          </mesh>
-        ) : (
-          <mesh rotation={[-Math.PI / 2, 0, 0]}>
-            <planeGeometry args={[80, 50]} />
-            <MeshReflectorMaterial
-              envMapIntensity={0}
-              blur={[50, 50]}
-              resolution={1024}
-              mixBlur={0.2}
-              mixStrength={80}
-              roughness={1}
-              depthScale={1.5}
-              minDepthThreshold={0.1}
-              maxDepthThreshold={1.4}
-              color="#050505"
-              metalness={0.5}
-            />
-          </mesh>
-        )}
+        <ProjectFloor isPaused={isPaused} />
       </group>
     </>
   );
