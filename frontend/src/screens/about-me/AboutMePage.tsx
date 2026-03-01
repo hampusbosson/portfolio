@@ -1,10 +1,12 @@
 import { Html } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
-import { useMemo } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import { useMemo, useRef } from "react";
+import AboutContactForm from "./AboutContactForm";
+import * as THREE from "three";
 
 export default function AboutMePage({ isActive }: { isActive?: boolean }) {
-  if (!isActive) return null;
-  const { size } = useThree();
+  const { size, pointer } = useThree();
+  const motionRef = useRef<THREE.Group>(null!);
 
   const layout = useMemo(() => {
     const isMobile = size.width < 768;
@@ -40,35 +42,72 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
     };
   }, [size.width]);
 
+  /**
+   * ROTATE SCREEN SLIGHTLY ON MOUSE MOVEMENT
+   */
+  // useFrame((_, delta) => {
+  //   if (!isActive) return;
+  //   if (!motionRef.current) return;
+
+  //   const targetRotX = pointer.y * -0.05; // tilt up/down
+  //   const targetRotY = pointer.x * 0.05; // tilt left/right
+
+  //   // Smooth damping
+  //   motionRef.current.rotation.x = THREE.MathUtils.lerp(
+  //     motionRef.current.rotation.x,
+  //     targetRotX,
+  //     2 * delta,
+  //   );
+
+  //   motionRef.current.rotation.y = THREE.MathUtils.lerp(
+  //     motionRef.current.rotation.y,
+  //     targetRotY,
+  //     2 * delta,
+  //   );
+
+  //   // move inner panel slightly without changing root world position
+  //   motionRef.current.position.x = THREE.MathUtils.lerp(
+  //     motionRef.current.position.x,
+  //     pointer.x * 0.08,
+  //     3 * delta,
+  //   );
+  // });
+
   return (
-    <group position={layout.position} scale={layout.scale} rotation={[-0.1, 0, 0]}>
+    <group
+      position={layout.position}
+      scale={layout.scale}
+      rotation={[-0.1, 0, 0]}
+      visible={!!isActive}
+    >
+      <group ref={motionRef}>
       <group position={[0, 0, 0]}>
-      <mesh position={[0, 0, -0.02]}>
-        <planeGeometry args={[layout.frameOuterW, layout.frameOuterH]} />
-        <meshPhysicalMaterial
-          color="#080a0f"
-          roughness={0.78}
-          metalness={0.16}
-        />
-      </mesh>
+        <mesh position={[0, 0, -0.02]}>
+          <planeGeometry args={[layout.frameOuterW, layout.frameOuterH]} />
+          <meshPhysicalMaterial
+            color="#080a0f"
+            roughness={0.78}
+            metalness={0.16}
+          />
+        </mesh>
 
-      <mesh position={[0, 0, -0.01]}>
-        <planeGeometry args={[layout.frameInnerW, layout.frameInnerH]} />
-        <meshPhysicalMaterial
-          color="#10131a"
-          transparent
-          opacity={0.78}
-          roughness={0.62}
-          metalness={0}
-          clearcoat={0.35}
-          clearcoatRoughness={0.4}
-        />
-      </mesh>
+        <mesh position={[0, 0, -0.01]}>
+          <planeGeometry args={[layout.frameInnerW, layout.frameInnerH]} />
+          <meshPhysicalMaterial
+            color="#10131a"
+            transparent
+            opacity={0.78}
+            roughness={0.62}
+            metalness={0}
+            clearcoat={0.35}
+            clearcoatRoughness={0.4}
+          />
+        </mesh>
 
-      <mesh position={[0, 0, 0.002]}>
-        <planeGeometry args={[layout.frameGlowW, layout.frameGlowH]} />
-        <meshBasicMaterial color="#d7e5ff" transparent opacity={0.12} />
-      </mesh>
+        <mesh position={[0, 0, 0.002]}>
+          <planeGeometry args={[layout.frameGlowW, layout.frameGlowH]} />
+          <meshBasicMaterial color="#d7e5ff" transparent opacity={0.12} />
+        </mesh>
       </group>
 
       <Html
@@ -105,28 +144,32 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
               <div>
                 <h2 className="text-[16px] font-medium text-white">Profile</h2>
                 <p className="mt-3 text-[16px] leading-8 text-white/82">
-                  I design and build interactive web products where visual quality
-                  and technical reliability have equal priority. My work sits at
-                  the intersection of polished UI, real-time graphics, and
-                  performance-aware engineering.
+                  I design and build interactive web products where visual
+                  quality and technical reliability have equal priority. My work
+                  sits at the intersection of polished UI, real-time graphics,
+                  and performance-aware engineering.
                 </p>
                 <p className="mt-3 text-[16px] leading-8 text-white/78">
                   I prefer clear architecture, deliberate motion, and interfaces
-                  that feel intentional. The goal is not only to make things look
-                  good, but to make them fast, robust, and maintainable.
+                  that feel intentional. The goal is not only to make things
+                  look good, but to make them fast, robust, and maintainable.
                 </p>
               </div>
 
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-[16px] font-medium text-white">Core Stack</h2>
+                  <h2 className="text-[16px] font-medium text-white">
+                    Core Stack
+                  </h2>
                   <p className="mt-3 text-[15px] leading-7 text-white/78">
                     React, TypeScript, React Three Fiber, Drei, TailwindCSS,
                     GSAP, Vite
                   </p>
                 </div>
                 <div>
-                  <h2 className="text-[16px] font-medium text-white">Principles</h2>
+                  <h2 className="text-[16px] font-medium text-white">
+                    Principles
+                  </h2>
                   <p className="mt-3 text-[15px] leading-7 text-white/78">
                     Performance first, clean structure, strong product thinking.
                   </p>
@@ -135,12 +178,16 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
             </section>
 
             <section className="mt-8 border-t border-white/10 pt-7">
-              <h2 className="text-[16px] font-medium text-white">Current Focus</h2>
+              <h2 className="text-[16px] font-medium text-white">
+                Current Focus
+              </h2>
               <p className="mt-3 text-[16px] leading-8 text-white/80">
-                Building a portfolio platform with immersive 3D interaction, clear
-                storytelling, and production-ready engineering standards.
+                Building a portfolio platform with immersive 3D interaction,
+                clear storytelling, and production-ready engineering standards.
               </p>
             </section>
+
+            <AboutContactForm />
 
             <footer className="mt-8 flex items-center gap-2 border-t border-white/10 pt-7">
               <a
@@ -163,6 +210,7 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
           </div>
         </div>
       </Html>
+      </group>
     </group>
   );
 }
