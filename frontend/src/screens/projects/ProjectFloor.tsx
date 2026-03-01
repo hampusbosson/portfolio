@@ -6,7 +6,7 @@ interface ProjectFloorProps {
   isPaused: boolean;
 }
 
-const TILE_X = 8;
+const TILE_X = 10;
 const TILE_Y = 5;
 
 export default function ProjectFloor({ isPaused }: ProjectFloorProps) {
@@ -29,14 +29,13 @@ export default function ProjectFloor({ isPaused }: ProjectFloorProps) {
     <group>
       {/* Rocky base */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-        <planeGeometry args={[40, 20]}/>
-        <meshPhysicalMaterial
+        <planeGeometry args={[30, 20]}/>
+        <meshStandardMaterial
           map={baseColorMap}
           normalMap={normalMap}
           roughness={0.8}
           metalness={1}
           envMapIntensity={0}
-          clearcoat={0}
           color="#000000"
         />
       </mesh>

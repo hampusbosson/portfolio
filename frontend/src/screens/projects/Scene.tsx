@@ -24,8 +24,8 @@ export default function Scene({
   useFrame((_, delta) => {
     if (!screenRef.current) return;
 
-    const targetRotX = pointer.y * -0.1; // tilt up/down
-    const targetRotY = pointer.x * 0.1; // tilt left/right
+    const targetRotX = pointer.y * -0.05; // tilt up/down
+    const targetRotY = pointer.x * 0.05; // tilt left/right
 
     // Smooth damping
     screenRef.current.rotation.x = THREE.MathUtils.lerp(

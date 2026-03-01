@@ -68,41 +68,43 @@ export default function ProjectInfoOverlay({
   const details: CaseStudy = { ...DEFAULT_CASE_STUDY, ...CASE_STUDY_BY_ID[project.id] };
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[70] flex items-center justify-center px-5">
+    <div className="pointer-events-none fixed inset-0 z-[70] flex items-center justify-center p-4">
       <div
-        className="pointer-events-auto absolute inset-0 bg-black/70"
+        className="pointer-events-auto absolute inset-0 bg-black/62 backdrop-blur-md"
         onClick={handleClose}
       />
 
       <section
-        className="pointer-events-auto relative z-10 flex h-[min(86vh,940px)] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-white/14 bg-slate-900/80 text-white shadow-[0_16px_40px_rgba(0,0,0,0.35)]"
+        className="pointer-events-auto relative z-10 flex h-full w-full max-w-6xl flex-col px-6 pb-10 pt-8 text-white md:px-12 md:pb-14 md:pt-10"
+        onWheelCapture={(event) => event.stopPropagation()}
       >
-        <header className="flex items-start justify-between border-b border-white/8 px-6 py-5">
-          <div>
-            <p className="text-brand-primary text-[10px] font-medium tracking-[0.16em] uppercase">
-              Case Study
-            </p>
-            <h2 className="mt-2 text-[30px] font-semibold leading-tight">{project.title}</h2>
-            <p className="mt-1 text-[14px] text-white/76">
-              {details.role} • {details.timeline}
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={handleClose}
-            onPointerEnter={() => sfx.play("hover")}
-            className="rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-xs font-medium text-white/92 transition-colors hover:bg-white/18"
-          >
-            Close
-          </button>
-        </header>
+        <div className="pointer-events-none absolute inset-x-[8%] bottom-[22%] h-[40vh] rounded-full bg-[radial-gradient(circle_at_center,rgba(128,146,255,0.16)_0%,rgba(205,120,244,0.12)_38%,rgba(16,18,24,0)_72%)] blur-3xl" />
 
         <div
-          onWheelCapture={(event) => event.stopPropagation()}
-          className="min-h-0 flex-1 overflow-y-auto px-6 py-6 pb-12 [scrollbar-color:rgba(255,255,255,0.24)_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:w-2.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-[3px] [&::-webkit-scrollbar-thumb]:border-transparent [&::-webkit-scrollbar-thumb]:bg-white/24 [&::-webkit-scrollbar-thumb:hover]:bg-white/38"
+          className="relative mt-2 min-h-0 flex-1 overflow-y-auto rounded-3xl border border-white/12 bg-white/[0.04] p-6 shadow-[0_16px_40px_rgba(0,0,0,0.28)] backdrop-blur-xl [scrollbar-color:rgba(255,255,255,0.24)_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:w-2.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-[3px] [&::-webkit-scrollbar-thumb]:border-transparent [&::-webkit-scrollbar-thumb]:bg-white/24 [&::-webkit-scrollbar-thumb:hover]:bg-white/38 md:p-8"
         >
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-brand-primary text-[10px] font-medium tracking-[0.16em] uppercase">
+                Case Study
+              </p>
+              <h2 className="mt-2 text-[32px] font-semibold leading-tight">{project.title}</h2>
+              <p className="mt-1 text-[14px] text-white/72">
+                {details.role} • {details.timeline}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={handleClose}
+              onPointerEnter={() => sfx.play("hover")}
+              className="rounded-full border border-white/18 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white/86 transition-colors hover:bg-white/[0.1]"
+            >
+              Close
+            </button>
+          </div>
+
           <section>
-            <h3 className="text-white text-base font-medium">Overview</h3>
+            <h3 className="mt-7 text-base font-medium text-white">Overview</h3>
             <p className="mt-2 text-base leading-8 text-white/86">
               {project.description}
             </p>
@@ -114,7 +116,7 @@ export default function ProjectInfoOverlay({
           <section className="mt-8">
             <h3 className="text-base font-medium text-white">Demo</h3>
             <div className="mt-3 grid items-start gap-4 md:grid-cols-[1.25fr_1fr]">
-              <div className="overflow-hidden rounded-xl border border-white/10 bg-black/25">
+              <div className="overflow-hidden rounded-xl border border-white/12 bg-black/35">
                 <video
                   controls
                   muted
@@ -177,13 +179,13 @@ export default function ProjectInfoOverlay({
             </div>
           </section>
 
-          <footer className="mt-8 flex items-center gap-2 border-t border-white/8 pt-5">
+          <footer className="mt-8 flex items-center gap-2 border-t border-white/10 pt-5">
             <a
               href={project.githubLink}
               target="_blank"
               rel="noreferrer"
               onPointerEnter={() => sfx.play("hover")}
-              className="rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm font-medium text-white/92 transition-colors hover:bg-white/18"
+              className="rounded-lg border border-white/20 bg-white/8 px-3 py-2 text-sm font-medium text-white/92 transition-colors hover:bg-white/16"
             >
               Open GitHub
             </a>
