@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum MessageRole {
+  system
+  user
+  assistant
+}
+
+model Chat {
+  id            String    @id @default(uuid()) @db.Uuid
+  ownerId       String
+  title         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  lastMessageAt DateTime?
+  messages      Message[]
+
+  @@index([ownerId])
+  @@index([ownerId, updatedAt(sort: Desc)])
+}
+
+model Message {
+  id         String      @id @default(uuid()) @db.Uuid
+  chatId     String      @db.Uuid
+  role       MessageRole
+  content    String      @db.Text
+  model      String?
+  tokenCount Int?
+  createdAt  DateTime    @default(now())
+  chat       Chat        @relation(fields: [chatId], references: [id], onDelete: Cascade)
+
+  @@index([chatId, createdAt(sort: Asc)])
+}
