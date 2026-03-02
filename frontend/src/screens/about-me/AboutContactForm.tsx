@@ -57,7 +57,7 @@ export default function AboutContactForm() {
               setForm((prev) => ({ ...prev, name: event.target.value }))
             }
             placeholder="Name"
-            className="h-11 rounded-xl border border-white/14 bg-white/[0.04] px-3 text-[15px] text-white outline-none transition-colors placeholder:text-white/34 focus:border-white/28"
+            className="h-11 rounded-xl border border-white/16 bg-[#0f1622]/80 px-3 text-[15px] text-white outline-none transition-colors placeholder:text-white/34 focus:border-white/34"
           />
           <input
             value={form.email}
@@ -65,7 +65,7 @@ export default function AboutContactForm() {
               setForm((prev) => ({ ...prev, email: event.target.value }))
             }
             placeholder="Email"
-            className="h-11 rounded-xl border border-white/14 bg-white/[0.04] px-3 text-[15px] text-white outline-none transition-colors placeholder:text-white/34 focus:border-white/28"
+            className="h-11 rounded-xl border border-white/16 bg-[#0f1622]/80 px-3 text-[15px] text-white outline-none transition-colors placeholder:text-white/34 focus:border-white/34"
           />
         </div>
 
@@ -76,7 +76,7 @@ export default function AboutContactForm() {
           }
           placeholder="Message"
           rows={5}
-          className="w-full resize-y rounded-xl border border-white/14 bg-white/[0.04] px-3 py-2.5 text-[15px] text-white outline-none transition-colors placeholder:text-white/34 focus:border-white/28"
+          className="w-full resize-y rounded-xl border border-white/16 bg-[#0f1622]/80 px-3 py-2.5 text-[15px] text-white outline-none transition-colors placeholder:text-white/34 focus:border-white/34"
         />
 
         <div className="flex items-center justify-between gap-3">
