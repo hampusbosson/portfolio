@@ -9,6 +9,35 @@
   --font-info: "Sora", "Space Grotesk", "Inter", sans-serif;
 }
 
+@layer utilities {
+  @keyframes about-headshot-wiggle {
+    0% {
+      transform: rotate(3deg);
+    }
+    25% {
+      transform: rotate(6deg);
+    }
+    50% {
+      transform: rotate(1deg);
+    }
+    75% {
+      transform: rotate(4.5deg);
+    }
+    100% {
+      transform: rotate(3deg);
+    }
+  }
+
+  .about-headshot-card {
+    transform: rotate(3deg);
+    transform-origin: 50% 65%;
+  }
+
+  .about-headshot-card:hover {
+    animation: about-headshot-wiggle 460ms ease-in-out 1;
+  }
+}
+
 @layer base {
   html,
   body,

@@ -2,6 +2,7 @@ import { Html } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import AboutContactForm from "./AboutContactForm";
+import AboutHeadshot from "./AboutHeadshot";
 import * as THREE from "three";
 
 export default function AboutMePage({ isActive }: { isActive?: boolean }) {
@@ -106,7 +107,7 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
 
           <mesh position={[0, 0, 0.002]}>
             <planeGeometry args={[layout.frameGlowW, layout.frameGlowH]} />
-            <meshBasicMaterial color="black" transparent opacity={0.12} />
+            <meshBasicMaterial color="#111722" transparent opacity={1} />
           </mesh>
         </group>
 
@@ -120,7 +121,7 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
             pointerEvents: "auto",
           }}
         >
-        <div className="h-full w-full overflow-hidden border border-white/14 text-white shadow-[0_24px_64px_rgba(0,0,0,0.4)]">
+        <div className="h-full w-full overflow-hidden border border-white/14 text-brand-secondary shadow-[0_24px_64px_rgba(0,0,0,0.4)]">
             <div className="h-full w-full overflow-y-auto px-6 md:px-10 [scrollbar-color:rgba(255,255,255,0.22)_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/22">
               <div className="sticky top-0 z-0 -mx-6 -mt-6 md:-mx-10 md:-mt-9">
                 <div className="relative h-[320px] overflow-hidden md:h-[360px]">
@@ -136,31 +137,25 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
               <div className="relative z-10">
                 <header className="relative z-20 -mt-[320px] h-[320px] md:-mt-[360px] md:h-[360px]">
                   <div className="absolute bottom-0 left-6 max-w-[55%] translate-y-1/2 md:left-9">
-                    <p className="text-[44px] leading-[0.96] font-light tracking-tight text-white md:text-[62px]">
-                      Hello,
+                    <p className="text-[44px] leading-[0.96] font-light tracking-tight md:text-[62px]">
+                      <span className="text-brand-primary">Hello,</span>
                       <br />
-                      I&apos;m Hampus.
+                      <span className="text-brand-secondary">I&apos;m Hampus.</span>
                     </p>
                   </div>
 
-                  <div className="absolute right-6 bottom-0 w-[112px] translate-y-1/2 rounded-2xl border border-white/20 bg-black/20 p-1.5 shadow-[0_24px_38px_rgba(0,0,0,0.45)] backdrop-blur-sm md:right-9 md:w-[200px] md:rounded-3xl md:p-2">
-                    <img
-                      src="/images/headshot.webp"
-                      alt="Hampus portrait"
-                      className="h-full w-full rounded-xl object-cover md:rounded-2xl"
-                    />
-                  </div>
+                  <AboutHeadshot />
                 </header>
 
-                <div className="pointer-events-none relative z-10 -mx-6 -mt-8 h-8 bg-gradient-to-b from-transparent via-[#0c1018]/28 to-[#111722]/92 backdrop-blur-[4px] md:-mx-10 md:-mt-10 md:h-10" />
+                <div className="pointer-events-none relative z-10 -mx-6 -mt-8 h-12 bg-gradient-to-b from-transparent via-[#0c1018]/28 to-[#111722] backdrop-blur-[4px] md:-mx-10 md:-mt-10 md:h-12" />
 
-                <div className="relative z-10 -mt-px -mx-6 bg-[#111722]/92 px-6 pt-28 md:-mx-10 md:px-10 md:pt-40">
+                <div className="relative z-10 -mt-px -mx-6 bg-[#111722] px-6 pt-28 md:-mx-10 md:px-10 md:pt-40">
                 <div className="mx-auto w-full max-w-[980px]">
                 <section className="mt-0 border-b border-white/10 pb-8">
-                  <p className="text-[34px] leading-tight font-light tracking-tight text-white/92 md:text-[54px]">
+                  <p className="text-[34px] leading-tight font-light tracking-tight text-brand-secondary md:text-[54px]">
                     Frontend Developer focused on performant 3D web experiences.
                   </p>
-                  <p className="mt-5 text-[19px] leading-9 text-white/68 md:max-w-[90%]">
+                  <p className="mt-5 text-[19px] leading-9 text-brand-muted md:max-w-[90%]">
                     I&apos;m a software engineer specializing in web development
                     infrastructure. My passion is improving developer experience
                     by creating tools and products that streamline real-world
@@ -170,16 +165,16 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
 
                 <section className="mt-8 grid gap-8 md:grid-cols-[1.35fr_1fr]">
                   <div>
-                    <h2 className="text-[16px] font-medium text-white">
+                    <h2 className="text-[16px] font-medium text-brand-primary">
                       Profile
                     </h2>
-                    <p className="mt-3 text-[16px] leading-8 text-white/82">
+                    <p className="mt-3 text-[16px] leading-8 text-brand-muted">
                       I design and build interactive web products where visual
                       quality and technical reliability have equal priority. My
                       work sits at the intersection of polished UI, real-time
                       graphics, and performance-aware engineering.
                     </p>
-                    <p className="mt-3 text-[16px] leading-8 text-white/78">
+                    <p className="mt-3 text-[16px] leading-8 text-brand-muted">
                       I prefer clear architecture, deliberate motion, and
                       interfaces that feel intentional. The goal is not only to
                       make things look good, but to make them fast, robust, and
@@ -189,19 +184,19 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
 
                   <div className="space-y-6">
                     <div>
-                      <h2 className="text-[16px] font-medium text-white">
+                      <h2 className="text-[16px] font-medium text-brand-primary">
                         Core Stack
                       </h2>
-                      <p className="mt-3 text-[15px] leading-7 text-white/78">
+                      <p className="mt-3 text-[15px] leading-7 text-brand-muted">
                         React, TypeScript, React Three Fiber, Drei, TailwindCSS,
                         GSAP, Vite
                       </p>
                     </div>
                     <div>
-                      <h2 className="text-[16px] font-medium text-white">
+                      <h2 className="text-[16px] font-medium text-brand-primary">
                         Principles
                       </h2>
-                      <p className="mt-3 text-[15px] leading-7 text-white/78">
+                      <p className="mt-3 text-[15px] leading-7 text-brand-muted">
                         Performance first, clean structure, strong product
                         thinking.
                       </p>
@@ -210,10 +205,10 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
                 </section>
 
                 <section className="mt-8 border-t border-white/10 pt-7">
-                  <h2 className="text-[16px] font-medium text-white">
+                  <h2 className="text-[16px] font-medium text-brand-primary">
                     Current Focus
                   </h2>
-                  <p className="mt-3 text-[16px] leading-8 text-white/80">
+                  <p className="mt-3 text-[16px] leading-8 text-brand-muted">
                     Building a portfolio platform with immersive 3D interaction,
                     clear storytelling, and production-ready engineering
                     standards.
@@ -227,7 +222,7 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
                     href="https://github.com"
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-lg border border-white/20 bg-white/[0.06] px-3 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/[0.12]"
+                    className="rounded-lg border border-white/20 bg-white/[0.06] px-3 py-2 text-sm font-medium text-brand-secondary transition-colors hover:bg-white/[0.12]"
                   >
                     GitHub
                   </a>
@@ -235,7 +230,7 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
                     href="https://www.linkedin.com"
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-lg border border-white/20 bg-white/[0.06] px-3 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/[0.12]"
+                    className="rounded-lg border border-white/20 bg-white/[0.06] px-3 py-2 text-sm font-medium text-brand-secondary transition-colors hover:bg-white/[0.12]"
                   >
                     LinkedIn
                   </a>
