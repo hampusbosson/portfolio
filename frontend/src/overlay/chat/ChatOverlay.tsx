@@ -47,12 +47,14 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
   const replyTimeout = useRef<number | null>(null);
   const listRef = useRef<HTMLDivElement | null>(null);
 
+  // Trigger entry visibility once mounted/opened.
   useEffect(() => {
     if (!isOpen) return;
     const raf = window.requestAnimationFrame(() => setIsVisible(true));
     return () => window.cancelAnimationFrame(raf);
   }, [isOpen]);
 
+  // Cleanup pending close/reply timers on unmount.
   useEffect(() => {
     return () => {
       if (closeTimeout.current) window.clearTimeout(closeTimeout.current);
@@ -60,6 +62,7 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
     };
   }, []);
 
+  // Keep the latest messages in view as content changes.
   useEffect(() => {
     if (!isOpen) return;
     const listEl = listRef.current;
@@ -104,39 +107,37 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
 
   return (
     <div
-      className={`pointer-events-none fixed inset-0 z-[80] flex items-center justify-center p-4 transition-opacity duration-0 ${
+      className={`pointer-events-none fixed inset-0 z-[140] flex items-center justify-center p-4 transition-opacity duration-0 ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
     >
       <div
-        className="pointer-events-auto absolute inset-0 bg-black/58 backdrop-blur-md"
+        className="pointer-events-auto absolute inset-0 bg-black/65 backdrop-blur-md"
         onClick={handleClose}
       />
 
       <section
-        className={`pointer-events-auto relative z-10 flex h-full w-full max-w-6xl flex-col px-6 pb-10 pt-8 md:px-12 md:pb-14 md:pt-12 transition-all duration-200 ${
-          isVisible ? "translate-y-0" : "translate-y-1"
+        className={`pointer-events-auto relative z-10 flex h-full w-full max-w-6xl flex-col px-6 pb-6 pt-2 md:px-12 md:pb-6 md:pt-2 transition-all duration-200 ${
+          isVisible ? "translate-y-0" : "translate-y-2"
         }`}
         onWheelCapture={(event) => event.stopPropagation()}
       >
-        <div className="pointer-events-none absolute inset-x-[10%] bottom-[18%] h-[44vh] rounded-full bg-[radial-gradient(circle_at_center,rgba(239,146,255,0.2)_0%,rgba(135,157,255,0.14)_35%,rgba(20,22,30,0)_72%)] blur-3xl" />
 
-        <div className="relative flex items-start justify-end">
+        <div className="relative mt-2 flex items-start justify-between gap-4">
+          <div className="flex gap-4">
+            <h2 className="text-3xl font-medium tracking-tight text-white md:text-4xl">
+              Ask me anything
+            </h2>
+            <p className="mt-3 text-2xl leading-none text-white/90">✦</p>
+          </div>
           <button
             type="button"
             onClick={handleClose}
             onPointerEnter={() => sfx.play("hover")}
-            className="rounded-full border border-white/16 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white/84 transition-colors hover:bg-white/[0.1]"
+            className="rounded-full border border-white/16 bg-white/[0.04] mt-2 px-3 py-1.5 text-xs font-medium text-white/84 transition-colors hover:bg-white/[0.1] hover:cursor-pointer"
           >
             Close
           </button>
-        </div>
-
-        <div className="relative mt-2 flex flex-col items-center text-center md:mt-2">
-          <p className="text-2xl leading-none text-white/90">✦</p>
-          <h2 className="mt-5 text-3xl font-medium tracking-tight text-white md:text-4xl">
-            Ask me anything
-          </h2>
         </div>
 
         <div className="relative mt-8 min-h-0 flex-1">
@@ -149,7 +150,7 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
                 Start by clicking a suggestion or typing your own question.
               </div>
             ) : (
-              <div className="mx-auto flex max-w-3xl flex-col gap-3 pb-4">
+              <div className="mx-auto flex max-w-4xl flex-col gap-3 pb-4">
                 {messages.map((message) => (
                   <div
                     key={message.id}
@@ -174,7 +175,7 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
 
         <div className="relative mt-4">
           <p className="mb-3 text-sm font-medium text-white/60">
-            Suggestions on what to ask AI
+            Suggestions on what to ask me
           </p>
           <div className="grid gap-2.5 md:grid-cols-3">
             {SUGGESTIONS.slice(0, 3).map((suggestion) => (
@@ -183,7 +184,7 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
                 type="button"
                 onPointerEnter={() => sfx.play("hover")}
                 onClick={() => submitMessage(suggestion)}
-                className="rounded-xl border border-white/18 bg-white/[0.04] px-4 py-3 text-left text-[15px] leading-snug text-white/88 transition-colors hover:bg-white/[0.1]"
+                className="rounded-3xl border border-white/18 bg-white/[0.04] px-4 py-3 text-left text-[13px] leading-snug text-white/88 transition-colors hover:bg-white/[0.1]"
               >
                 {suggestion}
               </button>
@@ -209,7 +210,7 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
               type="submit"
               onPointerEnter={() => sfx.play("hover")}
               disabled={isReplying}
-              className="rounded-xl border border-brand-primary/40 bg-brand-primary/16 px-3.5 py-2 text-sm font-medium text-brand-secondary transition-colors hover:bg-brand-primary/24"
+              className="rounded-xl border border-brand-primary/40 bg-brand-primary/16 px-3.5 py-2 text-sm font-medium text-brand-secondary transition-colors hover:bg-brand-primary/24 hover:cursor-pointer"
             >
               {isReplying ? "..." : "Send"}
             </button>

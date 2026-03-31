@@ -30,7 +30,7 @@ export default function AssistantOrbOverlay({ onOpenChat }: AssistantOrbOverlayP
   }, []);
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-45">
+    <div className="pointer-events-none fixed inset-0 z-[130]">
       <div className="pointer-events-auto fixed bottom-3 right-3 md:bottom-5 md:right-5">
         <button
           type="button"

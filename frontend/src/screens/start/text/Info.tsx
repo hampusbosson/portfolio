@@ -43,7 +43,7 @@ function Info() {
         I build high-performance, interactive web systems.
       </Text>
 
-      <Html transform position={[-2.83, -0.27, 1]} scale={0.25}>
+      <Html transform position={[-2.83, -0.27, 1]} scale={0.25} zIndexRange={[20, 0]}>
         <div className="flex items-center gap-2">
           <a
             href="https://github.com/hampusbosson"

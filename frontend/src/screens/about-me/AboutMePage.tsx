@@ -50,26 +50,24 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
   //   if (!isActive) return;
   //   if (!motionRef.current) return;
 
-  //   const targetRotX = pointer.y * -0.05; // tilt up/down
-  //   const targetRotY = pointer.x * 0.05; // tilt left/right
+  //   const targetRotX = pointer.y * -0.05;
+  //   const targetRotY = pointer.x * 0.05;
 
-  //   // Smooth damping
   //   motionRef.current.rotation.x = THREE.MathUtils.lerp(
   //     motionRef.current.rotation.x,
   //     targetRotX,
-  //     2 * delta,
+  //     4 * delta,
   //   );
 
   //   motionRef.current.rotation.y = THREE.MathUtils.lerp(
   //     motionRef.current.rotation.y,
   //     targetRotY,
-  //     2 * delta,
+  //     4 * delta,
   //   );
 
-  //   // move inner panel slightly without changing root world position
   //   motionRef.current.position.x = THREE.MathUtils.lerp(
   //     motionRef.current.position.x,
-  //     pointer.x * 0.08,
+  //     pointer.x * 0.1,
   //     3 * delta,
   //   );
   // });
@@ -115,6 +113,7 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
           transform
           position={[0, 0, 0.03]}
           distanceFactor={layout.distanceFactor}
+          zIndexRange={[20, 0]}
           style={{
             width: `${layout.htmlWidth}px`,
             height: `${layout.htmlHeight}px`,
