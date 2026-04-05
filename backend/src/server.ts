@@ -3,7 +3,7 @@ import { createApp } from "./app.js";
 
 dotenv.config();
 
-const port = Number(process.env.PORT || 8080);
+const port = Number(process.env.PORT);
 const frontendOrigin = process.env.FRONTEND_ORIGIN || "*";
 const app = createApp({ frontendOrigin });
 

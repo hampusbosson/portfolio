@@ -1,0 +1,35 @@
+[
+  {
+    "id": "lvmh-project",
+    "title": "Project Collaboration with LVMH",
+    "type": "academic_project",
+    "summary": "Worked in a multinational team to deliver market analysis and strategic insights.",
+    "responsibilities": [
+      "conducted market research",
+      "analyzed business data",
+      "presented findings to stakeholders"
+    ],
+    "skillsDemonstrated": [
+      "presentation",
+      "analysis",
+      "teamwork",
+      "communication"
+    ]
+  },
+  {
+    "id": "investment-team",
+    "title": "Groningen Investment Team",
+    "type": "student_organization",
+    "summary": "Participated in investment research and analysis as part of a student-led team.",
+    "responsibilities": [
+      "analyzed companies and markets",
+      "worked on investment cases",
+      "collaborated with team members"
+    ],
+    "skillsDemonstrated": [
+      "financial analysis",
+      "critical thinking",
+      "teamwork"
+    ]
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "id": "what-kind-of-dev",
+    "question": "What kind of developer is Hampus?",
+    "answer": "Hampus is a full-stack developer with a strong focus on backend systems and technically complex projects, often involving real-time features or interactive interfaces."
+  },
+  {
+    "id": "what-projects",
+    "question": "What projects has Hampus built?",
+    "answer": "Hampus has built projects such as a collaborative 3D editor and a custom HTTP proxy server, focusing on backend complexity and real-time systems."
+  },
+  {
+    "id": "tech-stack",
+    "question": "What technologies does Hampus use?",
+    "answer": "Hampus primarily works with TypeScript, React, Node.js, PostgreSQL, and Java, along with tools like Three.js for 3D web development."
+  }
+]

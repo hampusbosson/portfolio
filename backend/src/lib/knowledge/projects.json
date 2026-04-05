@@ -1,0 +1,68 @@
+[
+  {
+    "id": "collab-3d-editor",
+    "name": "Collaborative 3D Editor",
+    "oneLiner": "A real-time collaborative 3D scene editor built for the web.",
+    "description": "A backend-heavy project focused on real-time synchronization of 3D scenes between multiple users. The system handles shared state, concurrent updates, and persistent storage of scene data.",
+    "tech": [
+      "TypeScript",
+      "React",
+      "Three.js",
+      "Node.js",
+      "PostgreSQL",
+      "WebSockets"
+    ],
+    "tags": [
+      "3d",
+      "realtime",
+      "collaboration",
+      "backend"
+    ],
+    "features": [
+      "multi-user scene editing",
+      "real-time object synchronization",
+      "scene persistence",
+      "basic 3D object manipulation"
+    ],
+    "problemsSolved": [
+      "handling concurrent updates in real-time",
+      "maintaining consistent shared state",
+      "designing scalable websocket communication"
+    ],
+    "status": "in_progress",
+    "links": {
+      "repo": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "proxy-server",
+    "name": "HTTP Proxy Inspector",
+    "oneLiner": "A custom-built HTTP proxy server in Java.",
+    "description": "A low-level networking project implementing an HTTP/1.1 proxy server from scratch. Focused on understanding protocols, request parsing, and concurrent connections.",
+    "tech": [
+      "Java",
+      "TCP",
+      "Multithreading"
+    ],
+    "tags": [
+      "backend",
+      "networking",
+      "java"
+    ],
+    "features": [
+      "HTTP request parsing",
+      "multi-threaded client handling",
+      "basic request inspection and logging"
+    ],
+    "problemsSolved": [
+      "handling raw socket connections",
+      "parsing HTTP protocol manually",
+      "managing concurrency safely"
+    ],
+    "status": "done",
+    "links": {
+      "repo": ""
+    }
+  }
+]

@@ -1,34 +1,29 @@
 import type { Request, Response, NextFunction } from "express";
-import type { ChatRequestBody } from "../types/chat.js";
+import { ZodError } from "zod";
+import { chatRequestSchema } from "../schemas/chat.js";
 
 export function validateChatRequest(
-  req: Request<unknown, unknown, ChatRequestBody>,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) {
-  const { message, context } = req.body || {};
+  try {
+    const parsed = chatRequestSchema.parse(req.body);
 
-  if (typeof message !== "string" || !message.trim()) {
+    req.body = parsed;
+    return next();
+  } catch (error) {
+    if (error instanceof ZodError) {
+      return res.status(400).json({
+        ok: false,
+        error: error.issues[0]?.message ?? "Invalid request body.",
+        details: error.issues,
+      });
+    }
+
     return res.status(400).json({
       ok: false,
-      error: "Field 'message' is required and must be a non-empty string.",
+      error: "Invalid request body.",
     });
   }
-
-  if (message.length > 4000) {
-    return res.status(400).json({
-      ok: false,
-      error: "Field 'message' is too long (max 4000 characters).",
-    });
-  }
-
-  if (context !== undefined && typeof context !== "object") {
-    return res.status(400).json({
-      ok: false,
-      error: "Field 'context' must be an object when provided.",
-    });
-  }
-
-  return next();
 }
-

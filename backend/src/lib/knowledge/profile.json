@@ -1,0 +1,34 @@
+{
+  "name": "Hampus Bosson",
+  "headline": "Full-stack developer focused on backend systems, real-time applications, and interactive web experiences.",
+  "location": "Stockholm, Sweden",
+  "summary": "I build technical portfolio projects that combine strong backend architecture with interactive frontends. My focus is on systems that demonstrate real engineering complexity, such as real-time collaboration, 3D applications, and scalable APIs.",
+  "education": [
+    {
+      "institution": "University of Groningen",
+      "degree": "Bachelor's in Computing Science",
+      "status": "ongoing"
+    }
+  ],
+  "interests": [
+    "backend architecture",
+    "real-time systems",
+    "computer graphics",
+    "3D web applications",
+    "performance optimization"
+  ],
+  "allowedTopics": [
+    "background",
+    "projects",
+    "skills",
+    "experience",
+    "education",
+    "tech stack",
+    "career goals"
+  ],
+  "contact": {
+    "email": "hampus@example.com",
+    "github": "https://github.com/yourusername",
+    "linkedin": "https://linkedin.com/in/yourprofile"
+  }
+}

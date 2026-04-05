@@ -1,0 +1,62 @@
+[
+  {
+    "id": "typescript",
+    "name": "TypeScript",
+    "category": "language",
+    "level": "advanced",
+    "evidence": [
+      "used in full-stack projects",
+      "built APIs and frontend apps"
+    ]
+  },
+  {
+    "id": "react",
+    "name": "React",
+    "category": "frontend",
+    "level": "advanced",
+    "evidence": [
+      "built interactive portfolio applications",
+      "used with Three.js and Tailwind"
+    ]
+  },
+  {
+    "id": "node",
+    "name": "Node.js",
+    "category": "backend",
+    "level": "advanced",
+    "evidence": [
+      "built REST APIs",
+      "handled backend logic and integrations"
+    ]
+  },
+  {
+    "id": "postgres",
+    "name": "PostgreSQL",
+    "category": "database",
+    "level": "intermediate",
+    "evidence": [
+      "used with Prisma ORM",
+      "designed relational schemas"
+    ]
+  },
+  {
+    "id": "java",
+    "name": "Java",
+    "category": "language",
+    "level": "intermediate",
+    "evidence": [
+      "built a custom HTTP proxy server",
+      "worked with multithreading"
+    ]
+  },
+  {
+    "id": "threejs",
+    "name": "Three.js",
+    "category": "graphics",
+    "level": "intermediate",
+    "evidence": [
+      "built 3D web applications",
+      "worked with react-three-fiber"
+    ]
+  }
+]
