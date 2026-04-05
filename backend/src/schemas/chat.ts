@@ -6,6 +6,7 @@ export const chatRequestSchema = z.object({
     .trim()
     .min(1, "Field 'message' is required and must be a non-empty string.")
     .max(4000, "Field 'message' is too long (max 4000 characters)."),
+  chatId: z.string().uuid().optional(),
   context: z.record(z.string(), z.unknown()).optional(),
 });
 
