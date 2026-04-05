@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import { getChatMessages, getChats, postChatMessage } from "../../api/chat";
 import { sfx } from "../../audio/sfx";
+import type { ApiChatStoredMessage, ChatMessage } from "../../types/chat";
 
 interface ChatOverlayProps {
   isOpen: boolean;
@@ -15,37 +18,55 @@ const SUGGESTIONS = [
 
 const FADE_MS = 220;
 
-type ChatMessage = {
-  id: number;
-  role: "user" | "assistant";
-  content: string;
-};
+function formatAssistantMarkdown(content: string) {
+  const normalized = content.replace(/\r\n/g, "\n").trim();
+  if (!normalized) return normalized;
 
-const buildAssistantReply = (prompt: string): string => {
-  const text = prompt.toLowerCase();
-  if (text.includes("intro") || text.includes("yourself")) {
-    return "I build interactive web experiences with React, Three.js, and a strong focus on smooth UX and performance.";
-  }
-  if (text.includes("stack")) {
-    return "Main stack: React, TypeScript, React Three Fiber, Drei, GSAP, TailwindCSS, and Vite.";
-  }
-  if (text.includes("performance")) {
-    return "I profile draw calls, cap DPR where needed, keep scenes demand-rendered when possible, and optimize mesh/material usage.";
-  }
-  if (text.includes("project")) {
-    return "Start with the project that best shows both technical depth and polish, then explore the others by complexity.";
-  }
-  return "Great question. I can explain project choices, architecture decisions, performance tradeoffs, and implementation details.";
-};
+  return normalized
+    .split("\n")
+    .map((line, index, lines) => {
+      if (!line.trim()) return "";
+
+      const nextLine = lines[index + 1]?.trim() ?? "";
+      const isMarkdownBlock =
+        /^#{1,6}\s/.test(line) ||
+        /^[-*+]\s/.test(line) ||
+        /^\d+\.\s/.test(line) ||
+        /^>\s/.test(line);
+
+      if (isMarkdownBlock || !nextLine) {
+        return line;
+      }
+
+      // Preserve single-line breaks for answers that come back as plain text.
+      return `${line}  `;
+    })
+    .join("\n");
+}
+
+function toOverlayMessages(messages: ApiChatStoredMessage[]): ChatMessage[] {
+  return messages
+    .filter(
+      (message): message is ApiChatStoredMessage & { role: "user" | "assistant" } =>
+        message.role === "user" || message.role === "assistant",
+    )
+    .map((message, index) => ({
+      id: Number.parseInt(message.id.replace(/\D/g, "").slice(-12), 10) || index,
+      role: message.role,
+      content: message.content,
+    }));
+}
 
 export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [chatId, setChatId] = useState<string | null>(null);
+  const [isLoadingHistory, setIsLoadingHistory] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
   const closeTimeout = useRef<number | null>(null);
-  const replyTimeout = useRef<number | null>(null);
   const listRef = useRef<HTMLDivElement | null>(null);
+  const loadRequestRef = useRef(0);
 
   // Trigger entry visibility once mounted/opened.
   useEffect(() => {
@@ -58,9 +79,42 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
   useEffect(() => {
     return () => {
       if (closeTimeout.current) window.clearTimeout(closeTimeout.current);
-      if (replyTimeout.current) window.clearTimeout(replyTimeout.current);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const requestId = ++loadRequestRef.current;
+    setIsLoadingHistory(true);
+
+    void (async () => {
+      try {
+        const { chats } = await getChats();
+        if (loadRequestRef.current !== requestId) return;
+
+        if (chats.length === 0) {
+          setChatId(null);
+          setMessages([]);
+          return;
+        }
+
+        const latestChat = await getChatMessages(chats[0].id);
+        if (loadRequestRef.current !== requestId) return;
+
+        setChatId(latestChat.id);
+        setMessages(toOverlayMessages(latestChat.messages));
+      } catch (error) {
+        if (loadRequestRef.current !== requestId) return;
+        console.error(error);
+        setChatId(null);
+        setMessages([]);
+      } finally {
+        if (loadRequestRef.current !== requestId) return;
+        setIsLoadingHistory(false);
+      }
+    })();
+  }, [isOpen]);
 
   // Keep the latest messages in view as content changes.
   useEffect(() => {
@@ -80,9 +134,9 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
     }, FADE_MS);
   };
 
-  const submitMessage = (text: string) => {
+  const submitMessage = async (text: string) => {
     const trimmed = text.trim();
-    if (!trimmed || isReplying) return;
+    if (!trimmed || isReplying || isLoadingHistory) return;
 
     const userMessage: ChatMessage = {
       id: Date.now(),
@@ -91,18 +145,36 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
     };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
-
     setIsReplying(true);
-    if (replyTimeout.current) window.clearTimeout(replyTimeout.current);
-    replyTimeout.current = window.setTimeout(() => {
+
+    try {
+      const result = await postChatMessage({
+        message: trimmed,
+        chatId: chatId ?? undefined,
+      });
+
+      setChatId(result.chatId);
+
       const assistantMessage: ChatMessage = {
         id: Date.now() + 1,
         role: "assistant",
-        content: buildAssistantReply(trimmed),
+        content: result.answer,
       };
+
       setMessages((prev) => [...prev, assistantMessage]);
+    } catch (error) {
+      console.error(error);
+
+      const assistantMessage: ChatMessage = {
+        id: Date.now() + 1,
+        role: "assistant",
+        content: "Something went wrong while sending that message. Please try again.",
+      };
+
+      setMessages((prev) => [...prev, assistantMessage]);
+    } finally {
       setIsReplying(false);
-    }, 520);
+    }
   };
 
   return (
@@ -145,7 +217,11 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
             ref={listRef}
             className="h-full overflow-y-auto pr-1 [scrollbar-color:rgba(255,255,255,0.22)_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/20"
           >
-            {messages.length === 0 && !isReplying ? (
+            {isLoadingHistory ? (
+              <div className="mx-auto mt-10 max-w-xl text-center text-sm text-white/52">
+                Loading conversation...
+              </div>
+            ) : messages.length === 0 && !isReplying ? (
               <div className="mx-auto mt-10 max-w-xl text-center text-sm text-white/52">
                 Start by clicking a suggestion or typing your own question.
               </div>
@@ -160,7 +236,13 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
                         : "border border-white/14 bg-white/[0.05] text-white/88"
                     }`}
                   >
-                    {message.content}
+                    {message.role === "assistant" ? (
+                      <div className="chat-markdown max-w-none text-inherit">
+                        <ReactMarkdown>{formatAssistantMarkdown(message.content)}</ReactMarkdown>
+                      </div>
+                    ) : (
+                      message.content
+                    )}
                   </div>
                 ))}
                 {isReplying && (
@@ -183,7 +265,9 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
                 key={suggestion}
                 type="button"
                 onPointerEnter={() => sfx.play("hover")}
-                onClick={() => submitMessage(suggestion)}
+                onClick={() => {
+                  void submitMessage(suggestion);
+                }}
                 className="rounded-3xl border border-white/18 bg-white/[0.04] px-4 py-3 text-left text-[13px] leading-snug text-white/88 transition-colors hover:bg-white/[0.1]"
               >
                 {suggestion}
@@ -195,7 +279,7 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            submitMessage(input);
+            void submitMessage(input);
           }}
           className="relative mt-4"
         >
@@ -209,7 +293,7 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
             <button
               type="submit"
               onPointerEnter={() => sfx.play("hover")}
-              disabled={isReplying}
+              disabled={isReplying || isLoadingHistory}
               className="rounded-xl border border-brand-primary/40 bg-brand-primary/16 px-3.5 py-2 text-sm font-medium text-brand-secondary transition-colors hover:bg-brand-primary/24 hover:cursor-pointer"
             >
               {isReplying ? "..." : "Send"}

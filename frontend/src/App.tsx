@@ -18,23 +18,23 @@ export default function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   /** INIT SOUND */
-  // useEffect(() => {
-  //   sfx.init();
+  useEffect(() => {
+    sfx.init();
 
-  //   const unlock = () => {
-  //     sfx.unlock();
-  //     window.removeEventListener("pointerdown", unlock);
-  //     window.removeEventListener("keydown", unlock);
-  //   };
+    const unlock = () => {
+      sfx.unlock();
+      window.removeEventListener("pointerdown", unlock);
+      window.removeEventListener("keydown", unlock);
+    };
 
-  //   window.addEventListener("pointerdown", unlock, { once: true });
-  //   window.addEventListener("keydown", unlock, { once: true });
+    window.addEventListener("pointerdown", unlock, { once: true });
+    window.addEventListener("keydown", unlock, { once: true });
 
-  //   return () => {
-  //     window.removeEventListener("pointerdown", unlock);
-  //     window.removeEventListener("keydown", unlock);
-  //   };
-  // }, []);
+    return () => {
+      window.removeEventListener("pointerdown", unlock);
+      window.removeEventListener("keydown", unlock);
+    };
+  }, []);
 
   return (
     <div className="relative h-screen w-screen">

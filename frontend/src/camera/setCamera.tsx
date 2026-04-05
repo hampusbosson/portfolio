@@ -17,7 +17,7 @@ function SetCamera({ activeScreen }: SetCameraProps) {
       cameraControlsRef.current.setLookAt(0, -1.2, 10.5, 0, -2.2, 0, true);
     } 
     if (activeScreen === "about" && cameraControlsRef.current) {
-      cameraControlsRef.current.setLookAt(9, 1.5, 9, 9, 1.5, 0, true);
+      cameraControlsRef.current.setLookAt(9, -1.2, 10.5, 9, -2.2, 0, true);
     } 
 
   }, [activeScreen]);
