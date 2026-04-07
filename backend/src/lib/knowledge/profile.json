@@ -1,12 +1,12 @@
 {
   "name": "Hampus Bosson",
-  "headline": "Full-stack developer focused on backend systems, real-time applications, and interactive web experiences.",
+  "headline": "Full-stack developer with a strong backend focus, building technically ambitious products across real-time systems, interactive web experiences, and full-stack application architecture.",
   "location": "Stockholm, Sweden",
-  "summary": "I build technical portfolio projects that combine strong backend architecture with interactive frontends. My focus is on systems that demonstrate real engineering complexity, such as real-time collaboration, 3D applications, and scalable APIs.",
+  "summary": "I am a full-stack developer who enjoys building products with real engineering depth, especially where backend architecture, product design, and interactive frontend work meet. My projects often explore realtime collaboration, 3D interfaces, API design, queue-driven workflows, and AI-assisted features, because I like systems that are both technically demanding and genuinely useful. I care about building things that feel thought through end to end, from architecture and data flow to clarity of interaction and overall product quality.",
   "education": [
     {
-      "institution": "University of Groningen",
-      "degree": "Bachelor's in Computing Science",
+      "institution": "Stockholm University",
+      "degree": "Bachelor's in Computer and Systems Sciences",
       "status": "ongoing"
     }
   ],
@@ -15,7 +15,18 @@
     "real-time systems",
     "computer graphics",
     "3D web applications",
-    "performance optimization"
+    "performance optimization",
+    "full-stack product development",
+    "developer tools",
+    "system design",
+    "API design",
+    "AI-assisted product features",
+    "interactive web experiences",
+    "endurance sports",
+    "running",
+    "strength training",
+    "travel",
+    "golf"
   ],
   "allowedTopics": [
     "background",

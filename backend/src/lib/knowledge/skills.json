@@ -5,8 +5,8 @@
     "category": "language",
     "level": "advanced",
     "evidence": [
-      "used in full-stack projects",
-      "built APIs and frontend apps"
+      "used across multiple full-stack projects including the interactive portfolio, GitHub Security Scanner, and StudySphere",
+      "built typed frontend applications, backend APIs, and knowledge retrieval flows"
     ]
   },
   {
@@ -15,28 +15,158 @@
     "category": "frontend",
     "level": "advanced",
     "evidence": [
-      "built interactive portfolio applications",
-      "used with Three.js and Tailwind"
+      "built interactive frontends for portfolio, security, study, and monitoring projects",
+      "used React to structure product-style interfaces, dashboards, and complex UI flows"
     ]
   },
   {
-    "id": "node",
+    "id": "react-three-fiber",
+    "name": "React Three Fiber",
+    "category": "frontend",
+    "level": "advanced",
+    "evidence": [
+      "used for the collaborative 3D editor and the interactive portfolio",
+      "combined 3D scenes with HTML overlays and interaction-heavy UI presentation"
+    ]
+  },
+  {
+    "id": "threejs",
+    "name": "Three.js",
+    "category": "graphics",
+    "level": "advanced",
+    "evidence": [
+      "built browser-based 3D experiences with object interaction, scene rendering, and animated presentation flows",
+      "used in both the collaborative 3D editor and the portfolio platform"
+    ]
+  },
+  {
+    "id": "tailwind-css",
+    "name": "Tailwind CSS",
+    "category": "frontend",
+    "level": "advanced",
+    "evidence": [
+      "used in the portfolio, GitHub Security Scanner, and StudySphere",
+      "built polished dashboards, overlays, and responsive product interfaces"
+    ]
+  },
+  {
+    "id": "nodejs",
     "name": "Node.js",
     "category": "backend",
     "level": "advanced",
     "evidence": [
-      "built REST APIs",
-      "handled backend logic and integrations"
+      "built backend services and APIs for portfolio, GitHub Security Scanner, and StudySphere",
+      "handled integrations, application logic, and server-side orchestration"
     ]
   },
   {
-    "id": "postgres",
+    "id": "express",
+    "name": "Express",
+    "category": "backend",
+    "level": "advanced",
+    "evidence": [
+      "used to build backend APIs for the portfolio, GitHub Security Scanner, and StudySphere",
+      "implemented routing, validation, chat endpoints, and application workflows"
+    ]
+  },
+  {
+    "id": "prisma",
+    "name": "Prisma",
+    "category": "backend",
+    "level": "advanced",
+    "evidence": [
+      "used with PostgreSQL in the portfolio, GitHub Security Scanner, and StudySphere",
+      "modeled relational data and persisted chats, scans, reports, and application entities"
+    ]
+  },
+  {
+    "id": "postgresql",
     "name": "PostgreSQL",
     "category": "database",
+    "level": "advanced",
+    "evidence": [
+      "used as the primary relational database in several full-stack projects",
+      "worked with persisted scene data, scans, reports, users, lectures, and chat history"
+    ]
+  },
+  {
+    "id": "openai-api",
+    "name": "OpenAI API",
+    "category": "ai",
     "level": "intermediate",
     "evidence": [
-      "used with Prisma ORM",
-      "designed relational schemas"
+      "used to build a grounded portfolio assistant with retrieval-backed responses",
+      "integrated AI workflows for StudySphere summaries and quiz generation"
+    ]
+  },
+  {
+    "id": "docker",
+    "name": "Docker",
+    "category": "infrastructure",
+    "level": "intermediate",
+    "evidence": [
+      "used in collaborative 3D editor, GitHub Security Scanner, and StudySphere setups",
+      "worked with containerized local development and service orchestration"
+    ]
+  },
+  {
+    "id": "redis",
+    "name": "Redis",
+    "category": "backend",
+    "level": "intermediate",
+    "evidence": [
+      "used in GitHub Security Scanner to support queued scan execution",
+      "integrated Redis-backed background processing into a full-stack workflow"
+    ]
+  },
+  {
+    "id": "bullmq",
+    "name": "BullMQ",
+    "category": "backend",
+    "level": "intermediate",
+    "evidence": [
+      "used to orchestrate queued scan jobs in GitHub Security Scanner",
+      "handled scan lifecycle states, cancellations, and recovery flows"
+    ]
+  },
+  {
+    "id": "github-integrations",
+    "name": "GitHub Integrations",
+    "category": "backend",
+    "level": "intermediate",
+    "evidence": [
+      "implemented GitHub OAuth and GitHub App flows in GitHub Security Scanner",
+      "synced repository metadata and connected installations to product workflows"
+    ]
+  },
+  {
+    "id": "csharp",
+    "name": "C#",
+    "category": "language",
+    "level": "intermediate",
+    "evidence": [
+      "used for the backend of the collaborative 3D editor",
+      "worked with ASP.NET Core and Entity Framework Core in a realtime application"
+    ]
+  },
+  {
+    "id": "aspnet-core",
+    "name": "ASP.NET Core",
+    "category": "backend",
+    "level": "intermediate",
+    "evidence": [
+      "used to build the API and realtime backend for the collaborative 3D editor",
+      "structured REST endpoints and realtime hub communication for shared scene editing"
+    ]
+  },
+  {
+    "id": "signalr",
+    "name": "SignalR",
+    "category": "backend",
+    "level": "intermediate",
+    "evidence": [
+      "used for realtime multi-user synchronization in the collaborative 3D editor",
+      "handled shared scene updates, presence, and collaborative interaction events"
     ]
   },
   {
@@ -45,18 +175,28 @@
     "category": "language",
     "level": "intermediate",
     "evidence": [
-      "built a custom HTTP proxy server",
-      "worked with multithreading"
+      "built the backend for Proxy Inspector in Java",
+      "worked with lower-level networking, request parsing, and concurrent processing"
     ]
   },
   {
-    "id": "threejs",
-    "name": "Three.js",
-    "category": "graphics",
+    "id": "rest-api-design",
+    "name": "REST API Design",
+    "category": "backend",
+    "level": "advanced",
+    "evidence": [
+      "designed APIs across portfolio, security, study, and monitoring projects",
+      "worked on request validation, structured responses, and clear frontend/backend boundaries"
+    ]
+  },
+  {
+    "id": "realtime-systems",
+    "name": "Realtime Systems",
+    "category": "backend",
     "level": "intermediate",
     "evidence": [
-      "built 3D web applications",
-      "worked with react-three-fiber"
+      "built multi-user synchronization in the collaborative 3D editor",
+      "worked with live updates, presence, and consistency challenges in shared interactive systems"
     ]
   }
 ]

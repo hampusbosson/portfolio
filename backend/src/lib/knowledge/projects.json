@@ -2,32 +2,200 @@
   {
     "id": "collab-3d-editor",
     "name": "Collaborative 3D Editor",
-    "oneLiner": "A real-time collaborative 3D scene editor built for the web.",
-    "description": "A backend-heavy project focused on real-time synchronization of 3D scenes between multiple users. The system handles shared state, concurrent updates, and persistent storage of scene data.",
+    "oneLiner": "A real-time collaborative 3D scene editor for the web, with live multi-user sync, persistence, and interactive object editing.",
+    "description": "A full-stack web application where multiple users can create and edit the same 3D scene in real time. The project combines a React-based 3D editor with an ASP.NET Core backend, SignalR-powered realtime synchronization, and PostgreSQL persistence. It was built to explore shared state, concurrent edits, live presence, and the challenges of making collaborative tooling feel responsive and reliable in the browser.",
     "tech": [
       "TypeScript",
       "React",
+      "React Three Fiber",
       "Three.js",
-      "Node.js",
+      "C#",
+      "ASP.NET Core",
+      "SignalR",
+      "Entity Framework Core",
       "PostgreSQL",
-      "WebSockets"
+      "Docker",
+      "Render"
     ],
     "tags": [
       "3d",
       "realtime",
       "collaboration",
-      "backend"
+      "fullstack",
+      "websockets",
+      "portfolio"
     ],
     "features": [
       "multi-user scene editing",
       "real-time object synchronization",
-      "scene persistence",
-      "basic 3D object manipulation"
+      "live collaborator presence",
+      "live selection indicators",
+      "scene persistence with PostgreSQL",
+      "3D object creation, transform, and material editing",
+      "undo and redo support",
+      "scene dashboard with rendered thumbnails",
+      "responsive dashboard and mobile-friendly editor layout"
     ],
     "problemsSolved": [
-      "handling concurrent updates in real-time",
-      "maintaining consistent shared state",
-      "designing scalable websocket communication"
+      "handling concurrent updates in a shared realtime scene",
+      "keeping client state and persisted database state consistent",
+      "broadcasting collaborative presence and selection without desynchronizing users",
+      "designing a clean API split between REST endpoints and realtime SignalR events",
+      "making interactive 3D editing usable inside a browser-based interface",
+      "deploying a full-stack realtime application with database, API, and frontend hosting"
+    ],
+    "architecture": {
+      "frontend": "React + TypeScript application using React Three Fiber/Three.js for the 3D editor UI",
+      "backend": "ASP.NET Core Web API with SignalR hub for realtime scene updates",
+      "database": "PostgreSQL with Entity Framework Core for scene and object persistence",
+      "deployment": "Frontend and backend deployed separately, with PostgreSQL hosted as a managed service"
+    },
+    "awards": [
+      "Best project award in the course Webbprogrammering 2"
+    ],
+    "recruiterTalkingPoints": [
+      "Built a full-stack collaborative product rather than a static demo",
+      "Implemented realtime multi-user synchronization with persistent storage",
+      "Worked across frontend interaction design, backend architecture, database modeling, and deployment",
+      "Focused on both technical depth and product polish, including thumbnails, undo/redo, and responsive layout"
+    ],
+    "status": "deployed",
+    "links": {
+      "repo": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "proxy-inspector",
+    "name": "Proxy Inspector",
+    "oneLiner": "A custom HTTP forward proxy with rule-based traffic control, a monitoring REST API, and a live developer dashboard.",
+    "description": "A full-stack developer tool built to inspect and monitor HTTP traffic flowing through a custom proxy. The backend is written in Java and handles request parsing, policy evaluation, forwarding, transaction logging, and API exposure without relying on heavyweight frameworks. On top of that, the project includes a React and TypeScript dashboard that visualizes traffic health, request stats, verdicts, durations, bytes relayed, and recent transaction history in real time. The project was built to explore low-level HTTP handling, policy enforcement, backend design, and how to present operational data through a clean monitoring interface.",
+    "tech": [
+      "Java",
+      "Maven",
+      "HTTP",
+      "REST API",
+      "TypeScript",
+      "React",
+      "Vite",
+      "CSS",
+      "JUnit 5"
+    ],
+    "tags": [
+      "proxy",
+      "networking",
+      "monitoring",
+      "developer-tools",
+      "fullstack",
+      "java",
+      "react",
+      "portfolio"
+    ],
+    "features": [
+      "custom HTTP forward proxy",
+      "host blocking rules",
+      "host-specific path blocking",
+      "per-client rate limiting",
+      "transaction logging with verdicts, durations, and bytes relayed",
+      "REST API for health, stats, and transaction history",
+      "live monitoring dashboard with health badge and overview cards",
+      "transaction table with verdict filtering, limit selection, and auto-refresh",
+      "relative timestamps and clear loading, empty, and error states",
+      "backend unit tests for config parsing, policy logic, transaction aggregation, and request parsing"
+    ],
+    "problemsSolved": [
+      "building a forward proxy from lower-level Java networking primitives instead of relying on a proxy framework",
+      "separating proxy behavior, policy evaluation, transaction storage, and API exposure into a clean architecture",
+      "tracking and surfacing useful operational data such as blocked requests, errors, durations, and bytes transferred",
+      "designing a frontend that makes raw proxy traffic understandable at a glance",
+      "connecting a custom backend API to a responsive dashboard with live polling and filtering",
+      "documenting and packaging a full-stack developer tool as a polished portfolio project"
+    ],
+    "architecture": {
+      "frontend": "React and TypeScript single-page dashboard built with Vite, polling the backend API for health, stats, and recent transactions",
+      "backend": "Java 17 application with a custom HTTP forward proxy, policy engine, transaction store, and lightweight REST API server",
+      "database": "No database; transactions are stored in memory with a configurable retention limit",
+      "deployment": "Designed primarily for local development and portfolio demonstration, with the frontend and backend running as separate processes"
+    },
+    "awards": [
+      "Best project award in the course Programming for Internet"
+    ],
+    "recruiterTalkingPoints": [
+      "Built custom backend infrastructure instead of only consuming existing services or frameworks",
+      "Worked across low-level networking, API design, frontend monitoring UX, and project documentation",
+      "Turned a systems-style backend project into a polished full-stack portfolio piece with a live dashboard",
+      "Added tests around the core backend logic to make the project more credible and maintainable",
+      "Demonstrates both technical depth and product thinking through observability, filtering, and developer-facing UX"
+    ],
+    "status": "completed",
+    "links": {
+      "repo": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "github-security-scanner",
+    "name": "GitHub Security Scanner",
+    "oneLiner": "A full-stack GitHub repository security scanning workspace with queued execution, findings storage, and report review.",
+    "description": "A full-stack web application for scanning GitHub repositories and reviewing security findings in a focused workspace. The project combines a React frontend, an Express and Prisma backend, GitHub OAuth plus GitHub App integration, PostgreSQL persistence, Redis-backed queue processing, and a Strix-powered scan pipeline. It was built to explore repository synchronization, async job orchestration, scan lifecycle handling, cancellation and recovery flows, and how to present security analysis in a clear product interface.",
+    "tech": [
+      "TypeScript",
+      "React",
+      "React Router",
+      "Vite",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "Prisma",
+      "PostgreSQL",
+      "Redis",
+      "BullMQ",
+      "GitHub OAuth",
+      "GitHub App",
+      "Docker",
+      "ngrok",
+      "Strix"
+    ],
+    "tags": [
+      "security",
+      "github",
+      "fullstack",
+      "queue-processing",
+      "developer-tools",
+      "portfolio"
+    ],
+    "features": [
+      "GitHub OAuth login flow",
+      "GitHub App installation and repository sync",
+      "repository picker populated from connected GitHub installations",
+      "queued scan execution with BullMQ and Redis",
+      "scan lifecycle states including pending, running, completed, failed, and cancelled",
+      "scan cancellation and interrupted-run recovery",
+      "persisted findings and report storage in PostgreSQL",
+      "security workspace for reviewing reports and vulnerabilities",
+      "repository metadata display including visibility, branch, language, and latest commit",
+      "structured vulnerability presentation with severity, description, and remediation guidance"
+    ],
+    "problemsSolved": [
+      "connecting GitHub authentication and GitHub App installation into one coherent workflow",
+      "syncing repository metadata from GitHub into a local relational data model",
+      "running long-lived scan jobs asynchronously without blocking the request cycle",
+      "handling stuck cancellations and recovering scans left in inconsistent states after restarts",
+      "persisting scan results in a way that supports both lifecycle tracking and findings review",
+      "designing a UI that makes scan progress, report output, and findings easy to understand quickly"
+    ],
+    "architecture": {
+      "frontend": "React and TypeScript application with authenticated routes, a repository-driven scan workspace, and findings/report views",
+      "backend": "Express API with GitHub OAuth, GitHub App integration, scan endpoints, queue orchestration, and Strix process execution",
+      "database": "PostgreSQL via Prisma for users, installations, repositories, scans, reports, and vulnerabilities",
+      "infrastructure": "Redis for BullMQ job processing, Docker Compose for local services, and ngrok for GitHub callback and webhook tunneling during development"
+    },
+    "recruiterTalkingPoints": [
+      "Built a full-stack product around a real GitHub integration rather than a static frontend concept",
+      "Worked across authentication, API design, background jobs, persistence, and UI workflow design",
+      "Handled real engineering issues like cancellation bugs, queue failures, and recovery of interrupted jobs",
+      "Integrated third-party tooling into a usable product flow instead of treating it as an isolated script",
+      "Focused on both technical depth and product clarity by shaping the app into a clean security workspace"
     ],
     "status": "in_progress",
     "links": {
@@ -36,33 +204,132 @@
     }
   },
   {
-    "id": "proxy-server",
-    "name": "HTTP Proxy Inspector",
-    "oneLiner": "A custom-built HTTP proxy server in Java.",
-    "description": "A low-level networking project implementing an HTTP/1.1 proxy server from scratch. Focused on understanding protocols, request parsing, and concurrent connections.",
+    "id": "studysphere",
+    "name": "StudySphere",
+    "oneLiner": "An AI-assisted study workspace for organizing lecture material, generating summaries and quizzes, and planning study sessions.",
+    "description": "A full-stack study app built around the real student workflow of collecting lecture material, reviewing it, practicing it, and planning when to revisit it. Users can create courses, add lectures from document/PDF links, read the source material inside the app, generate AI summaries, generate multiple-choice quizzes from lecture content, and manage study sessions in a built-in calendar. The project combines a React frontend, a TypeScript/Express backend, OpenAI-powered content generation, Prisma/PostgreSQL data storage, and a polished interface designed to feel like a modern learning product.",
     "tech": [
-      "Java",
-      "TCP",
-      "Multithreading"
+      "TypeScript",
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "React Router",
+      "React Hook Form",
+      "TipTap",
+      "Node.js",
+      "Express",
+      "Prisma",
+      "PostgreSQL",
+      "OpenAI API",
+      "Docker"
     ],
     "tags": [
-      "backend",
-      "networking",
-      "java"
+      "ai",
+      "education",
+      "study-app",
+      "fullstack",
+      "typescript",
+      "portfolio"
     ],
     "features": [
-      "HTTP request parsing",
-      "multi-threaded client handling",
-      "basic request inspection and logging"
+      "course and lecture organization",
+      "lecture creation from document and PDF URLs",
+      "inline lecture reading workflow",
+      "AI-generated lecture summaries",
+      "AI-generated multiple-choice quizzes from lecture content",
+      "day, week, and month calendar views",
+      "study session and event creation",
+      "homepage dashboard with today's events and upcoming events",
+      "dark mode by default with light mode toggle",
+      "responsive learning-app style interface"
     ],
     "problemsSolved": [
-      "handling raw socket connections",
-      "parsing HTTP protocol manually",
-      "managing concurrency safely"
+      "turning long lecture PDFs into faster-to-review study material",
+      "generating useful quiz questions from unstructured lecture content",
+      "keeping lecture content, summaries, quizzes, and planning in one workflow",
+      "designing a frontend experience that feels polished across dark and light mode",
+      "structuring a full-stack app around course, lecture, and study-session relationships",
+      "running the app locally with a containerized PostgreSQL-backed development setup"
     ],
-    "status": "done",
+    "architecture": {
+      "frontend": "React + TypeScript SPA built with Vite, using Tailwind CSS for styling and TipTap for rich summary display/editing",
+      "backend": "Express + TypeScript API handling authentication, course and lecture management, PDF/content extraction, and AI-powered summary and quiz generation",
+      "database": "PostgreSQL with Prisma for users, courses, lectures, and related application data",
+      "deployment": "Primarily configured for local full-stack development with Docker Compose for the backend and database"
+    },
+    "recruiterTalkingPoints": [
+      "Built a full-stack product with real user flows instead of a single isolated AI feature",
+      "Integrated OpenAI into a practical education workflow by generating summaries and quiz content from lecture material",
+      "Worked across frontend UX, backend API design, database modeling, and local Docker-based infrastructure",
+      "Focused on product polish as well as functionality, including theming, dashboard flows, modals, calendar planning, and lecture workspace design"
+    ],
+    "status": "in_progress",
     "links": {
-      "repo": ""
+      "repo": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "interactive-portfolio",
+    "name": "Interactive Portfolio Platform",
+    "oneLiner": "A 3D portfolio experience with custom screen-based navigation, a backend knowledge system, and an AI assistant grounded in project-specific data.",
+    "description": "A full-stack portfolio platform built to present projects through a more interactive and technically differentiated experience than a standard website. The frontend combines React, React Three Fiber, Three.js, and layered HTML overlays to create screen-based navigation, animated transitions, and project-specific presentation flows. The backend includes an Express API, a structured knowledge layer, and an OpenAI-powered assistant that answers questions using retrieved portfolio data rather than a generic chatbot approach. The project was built to explore interactive UI architecture, grounded AI responses, and how to turn a portfolio into a product-like system.",
+    "tech": [
+      "TypeScript",
+      "React",
+      "React Three Fiber",
+      "Three.js",
+      "Vite",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "OpenAI API",
+      "Prisma",
+      "PostgreSQL"
+    ],
+    "tags": [
+      "portfolio",
+      "3d",
+      "interactive-ui",
+      "ai",
+      "fullstack",
+      "typescript",
+      "developer-branding"
+    ],
+    "features": [
+      "3D screen-based portfolio navigation",
+      "custom overlays for project, about, and chat views",
+      "interactive project presentation flows",
+      "AI chat assistant grounded in portfolio knowledge",
+      "structured backend knowledge retrieval for projects, skills, and experience",
+      "persistent chat history tied to a client-specific user ID",
+      "responsive layout combining WebGL scenes with HTML content",
+      "custom visual polish including animated transitions, layered depth, and subtle motion"
+    ],
+    "problemsSolved": [
+      "making a portfolio feel like a product experience instead of a static content site",
+      "combining 3D rendering and conventional HTML overlays without creating fragile interaction layers",
+      "keeping assistant responses grounded in curated portfolio data rather than hallucinated generic answers",
+      "structuring portfolio content into retrievable knowledge chunks for better question answering",
+      "designing a UI that balances visual personality with readability and professional clarity",
+      "coordinating frontend presentation, backend APIs, and AI integration as one coherent system"
+    ],
+    "architecture": {
+      "frontend": "React + TypeScript application using React Three Fiber and Three.js for the 3D scene layer, with HTML overlays for content-heavy screens and interaction flows",
+      "backend": "Express + TypeScript API handling chat requests, knowledge retrieval, request validation, and assistant orchestration",
+      "database": "PostgreSQL with Prisma for persisted chat threads and messages",
+      "deployment": "Frontend and backend deployed as separate services, with the assistant grounded in structured local portfolio data"
+    },
+    "recruiterTalkingPoints": [
+      "Built a portfolio as a real interactive product rather than a static marketing page",
+      "Combined 3D frontend work, backend API design, knowledge retrieval, and AI integration in one project",
+      "Focused on grounded assistant behavior by structuring portfolio data instead of relying on an unbounded chatbot",
+      "Demonstrates both visual product thinking and systems-level engineering across the full stack"
+    ],
+    "status": "deployed",
+    "links": {
+      "repo": "",
+      "demo": ""
     }
   }
 ]

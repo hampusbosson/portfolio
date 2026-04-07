@@ -26,7 +26,15 @@ export type Project = {
   tags: string[];
   features: string[];
   problemsSolved?: string[];
-  status: "planned" | "in_progress" | "done";
+  architecture?: {
+    frontend?: string;
+    backend?: string;
+    database?: string;
+    deployment?: string;
+  };
+  awards?: string[];
+  recruiterTalkingPoints?: string[];
+  status: "planned" | "in_progress" | "completed" | "deployed";
   links?: {
     repo?: string;
     demo?: string;

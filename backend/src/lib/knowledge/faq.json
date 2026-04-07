@@ -1,17 +1,87 @@
 [
   {
-    "id": "what-kind-of-dev",
+    "id": "what-kind-of-developer",
     "question": "What kind of developer is Hampus?",
-    "answer": "Hampus is a full-stack developer with a strong focus on backend systems and technically complex projects, often involving real-time features or interactive interfaces."
+    "answer": "Hampus is a full-stack developer with a strong focus on backend systems, interactive web applications, and projects that involve real engineering complexity."
   },
   {
-    "id": "what-projects",
+    "id": "what-does-he-focus-on",
+    "question": "What does Hampus focus on technically?",
+    "answer": "He is especially interested in backend architecture, real-time systems, 3D web experiences, API design, and technically ambitious full-stack products."
+  },
+  {
+    "id": "which-project-stands-out-most",
+    "question": "Which project stands out the most?",
+    "answer": "The Collaborative 3D Editor stands out strongly because it combines real-time multi-user synchronization, 3D interaction, backend architecture, and persistent data handling in one product."
+  },
+  {
+    "id": "what-projects-has-he-built",
     "question": "What projects has Hampus built?",
-    "answer": "Hampus has built projects such as a collaborative 3D editor and a custom HTTP proxy server, focusing on backend complexity and real-time systems."
+    "answer": "His projects include a Collaborative 3D Editor, Proxy Inspector, GitHub Security Scanner, StudySphere, and an Interactive Portfolio Platform with a grounded AI assistant."
   },
   {
-    "id": "tech-stack",
-    "question": "What technologies does Hampus use?",
-    "answer": "Hampus primarily works with TypeScript, React, Node.js, PostgreSQL, and Java, along with tools like Three.js for 3D web development."
+    "id": "what-is-the-collab-editor",
+    "question": "What is the Collaborative 3D Editor project?",
+    "answer": "It is a real-time collaborative 3D scene editor for the web where multiple users can create and edit the same scene together with live synchronization, presence, and persistence."
+  },
+  {
+    "id": "what-is-the-security-scanner",
+    "question": "What is the GitHub Security Scanner project?",
+    "answer": "It is a full-stack scanning workspace for GitHub repositories that combines authentication, repository sync, queued scan execution, persisted findings, and a review interface for reports and vulnerabilities."
+  },
+  {
+    "id": "what-is-studysphere",
+    "question": "What is StudySphere?",
+    "answer": "StudySphere is an AI-assisted study app for organizing lecture material, generating summaries and quizzes, and planning study sessions inside a structured learning workflow."
+  },
+  {
+    "id": "what-is-the-portfolio-project",
+    "question": "What is the Interactive Portfolio Platform project?",
+    "answer": "It is a portfolio platform built as a product-like experience, combining 3D presentation, layered UI flows, a backend knowledge system, and an AI assistant grounded in curated project data."
+  },
+  {
+    "id": "what-tech-stack-does-he-use",
+    "question": "What technologies does Hampus use most?",
+    "answer": "He works most often with TypeScript, React, Node.js, Express, PostgreSQL, Prisma, React Three Fiber, and Three.js, depending on the project."
+  },
+  {
+    "id": "does-he-work-with-backend",
+    "question": "Does Hampus work with backend development?",
+    "answer": "Yes. Backend work is a major part of his profile, including API design, database-backed applications, realtime systems, queue-driven workflows, and integration-heavy product logic."
+  },
+  {
+    "id": "does-he-work-with-3d",
+    "question": "Does Hampus work with 3D web development?",
+    "answer": "Yes. He has built projects using React Three Fiber and Three.js, including the Collaborative 3D Editor and the Interactive Portfolio Platform."
+  },
+  {
+    "id": "does-he-work-with-ai",
+    "question": "Does Hampus build AI features?",
+    "answer": "Yes. He has integrated AI into products such as StudySphere and the portfolio assistant, with an emphasis on useful workflows and grounded responses rather than generic chat features."
+  },
+  {
+    "id": "what-kind-of-problems-does-he-like",
+    "question": "What kinds of problems does Hampus enjoy solving?",
+    "answer": "He is drawn to problems involving system design, realtime interaction, product architecture, data flow, and technically challenging features that require both backend depth and strong frontend execution."
+  },
+  {
+    "id": "how-does-he-approach-projects",
+    "question": "How does Hampus approach building projects?",
+    "answer": "He tends to build projects as complete systems rather than isolated demos, paying attention to architecture, product flow, technical depth, and how the final result feels to use."
+  },
+  {
+    "id": "what-is-he-studying",
+    "question": "What is Hampus studying?",
+    "answer": "He is studying for a Bachelor's degree in Computer and Systems Sciences at Stockholm University."
+  },
+  {
+    "id": "what-are-his-career-goals",
+    "question": "What are Hampus's career goals?",
+    "answer": "He wants to work on technically ambitious software products where he can keep growing in backend architecture, full-stack product development, and systems with meaningful engineering depth."
+  },
+  {
+    "id": "have-his-projects-received-recognition",
+    "question": "Have any of Hampus's projects received recognition or awards?",
+    "answer": "Yes. The Collaborative 3D Editor received the best project award in the course Webbprogrammering 2, and Proxy Inspector received the best project award in the course Programming for Internet."
   }
 ]

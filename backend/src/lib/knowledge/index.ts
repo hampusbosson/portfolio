@@ -22,6 +22,54 @@ const skills = skillsJson as Skill[];
 const faqs = faqJson as FAQ[];
 const policies = policiesJson as Policies;
 
+function formatProjectText(project: Project): string {
+  const architectureEntries = project.architecture
+    ? Object.entries(project.architecture)
+        .filter(([, value]) => Boolean(value))
+        .map(([area, value]) => `${area}: ${value}`)
+    : [];
+
+  return [
+    project.oneLiner,
+    project.description,
+    `Tech: ${project.tech.join(", ")}`,
+    project.features.length ? `Features: ${project.features.join(", ")}` : "",
+    project.problemsSolved?.length
+      ? `Problems solved: ${project.problemsSolved.join(", ")}`
+      : "",
+    architectureEntries.length
+      ? `Architecture: ${architectureEntries.join("; ")}`
+      : "",
+    project.awards?.length
+      ? `Awards: ${project.awards.join(", ")}`
+      : "",
+    project.recruiterTalkingPoints?.length
+      ? `Recruiter talking points: ${project.recruiterTalkingPoints.join(", ")}`
+      : "",
+    `Status: ${project.status}`
+  ]
+    .filter(Boolean)
+    .join(". ");
+}
+
+function getProjectTags(project: Project): string[] {
+  const architectureTags = project.architecture
+    ? Object.entries(project.architecture).flatMap(([area, value]) =>
+        value ? [area, ...value.toLowerCase().split(/[^\p{L}\p{N}#+.-]+/u)] : []
+      )
+    : [];
+
+  return [...new Set([
+    ...project.tags,
+    project.id,
+    ...project.tech.map((tech) => tech.toLowerCase()),
+    ...(project.awards?.flatMap((award) =>
+      award.toLowerCase().split(/[^\p{L}\p{N}#+.-]+/u)
+    ) ?? []),
+    ...architectureTags.filter(Boolean)
+  ])];
+}
+
 export function getKnowledgeChunks(): KnowledgeChunk[] {
   const chunks: KnowledgeChunk[] = [];
 
@@ -52,19 +100,8 @@ export function getKnowledgeChunks(): KnowledgeChunk[] {
       id: `project-${project.id}`,
       type: "project",
       title: project.name,
-      text: [
-        project.oneLiner,
-        project.description,
-        `Tech: ${project.tech.join(", ")}`,
-        `Features: ${project.features.join(", ")}`,
-        project.problemsSolved?.length
-          ? `Problems solved: ${project.problemsSolved.join(", ")}`
-          : "",
-        `Status: ${project.status}`
-      ]
-        .filter(Boolean)
-        .join(". "),
-      tags: [...project.tags, ...project.tech.map((t) => t.toLowerCase())],
+      text: formatProjectText(project),
+      tags: getProjectTags(project),
       sourceRef: "projects.json"
     });
   }

@@ -1,35 +1,43 @@
 [
   {
-    "id": "lvmh-project",
-    "title": "Project Collaboration with LVMH",
-    "type": "academic_project",
-    "summary": "Worked in a multinational team to deliver market analysis and strategic insights.",
+    "id": "project-in-software-engineering",
+    "title": "Project in Software Engineering",
+    "type": "academic_team_project",
+    "summary": "Worked in a software development team over roughly three months using Scrum in a course built around agile delivery. The team worked in sprints, held daily standups, rotated responsibilities, and delivered strong results, earning the highest grade in the course.",
     "responsibilities": [
-      "conducted market research",
-      "analyzed business data",
-      "presented findings to stakeholders"
+      "worked as part of a cross-functional development team in a Scrum-based workflow",
+      "participated in sprint planning, daily standups, reviews, and retrospectives",
+      "rotated into the Scrum Master role and helped lead the team through sprint execution",
+      "supported team coordination, communication, and delivery throughout the project period"
     ],
     "skillsDemonstrated": [
-      "presentation",
-      "analysis",
+      "agile development",
+      "scrum",
+      "scrum master responsibilities",
+      "team leadership",
       "teamwork",
-      "communication"
+      "communication",
+      "software project delivery"
     ]
   },
   {
-    "id": "investment-team",
-    "title": "Groningen Investment Team",
-    "type": "student_organization",
-    "summary": "Participated in investment research and analysis as part of a student-led team.",
+    "id": "independent-software-projects",
+    "title": "Independent Software Projects",
+    "type": "independent_project_work",
+    "summary": "Built a portfolio of technically ambitious software projects independently, with a strong focus on backend architecture, interactive frontend systems, and full-stack product development. These projects include realtime collaboration, security scanning workflows, AI-assisted features, and 3D web applications.",
     "responsibilities": [
-      "analyzed companies and markets",
-      "worked on investment cases",
-      "collaborated with team members"
+      "designed and built full-stack projects from concept through implementation",
+      "worked across frontend development, backend APIs, data modeling, and deployment setup",
+      "explored technically challenging areas such as realtime synchronization, queue processing, and grounded AI integration",
+      "treated portfolio projects as complete systems with attention to architecture, usability, and product polish"
     ],
     "skillsDemonstrated": [
-      "financial analysis",
-      "critical thinking",
-      "teamwork"
+      "self-directed learning",
+      "full-stack development",
+      "backend architecture",
+      "system design",
+      "product thinking",
+      "technical initiative"
     ]
   }
 ]
