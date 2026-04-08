@@ -1,9 +1,9 @@
-import profileJson from "./profile.json" with { type: "json" };
-import projectsJson from "./projects.json" with { type: "json" };
-import experienceJson from "./experience.json" with { type: "json" };
-import skillsJson from "./skills.json" with { type: "json" };
-import faqJson from "./faq.json" with { type: "json" };
-import policiesJson from "./policies.json" with { type: "json" };
+import profileJson from "../profile.json" with { type: "json" };
+import projectsJson from "../projects.json" with { type: "json" };
+import experienceJson from "../experience.json" with { type: "json" };
+import skillsJson from "../skills.json" with { type: "json" };
+import faqJson from "../faq.json" with { type: "json" };
+import policiesJson from "../policies.json" with { type: "json" };
 
 import type {
   FAQ,

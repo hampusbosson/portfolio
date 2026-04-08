@@ -2,7 +2,7 @@ import { zodTextFormat } from "openai/helpers/zod";
 import { openai } from "./client.js";
 import { PORTFOLIO_SYSTEM_PROMPT } from "./prompts.js";
 import { PortfolioAnswerSchema } from "./schemas.js";
-import type { KnowledgeChunk } from "../knowledge/types.js";
+import type { KnowledgeChunk } from "../knowledge/core/types.js";
 
 type HistoryMessage = {
   role: "user" | "assistant";

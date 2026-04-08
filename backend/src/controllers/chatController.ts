@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { classifyScope } from "../lib/guardrails/classifyScope.js";
-import { retrieveRelevantChunksWithScores } from "../lib/knowledge/retrieve.js";
+import { retrieveRelevantChunksWithScores } from "../lib/knowledge/core/retrieve.js";
 import { generatePortfolioAnswer } from "../lib/openai/generatePortfolioAnswer.js";
 import {
   createChat,
