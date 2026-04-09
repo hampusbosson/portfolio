@@ -188,7 +188,7 @@ export function WobbleSphere({
 
           sfx.play("pop", {
             playbackRate: 0.9 + Math.random() * 0.3,
-            volume: 0.8 + Math.random() * 0.2,
+            volume: 0.4 + Math.random() * 0.1,
           });
         }
       }}

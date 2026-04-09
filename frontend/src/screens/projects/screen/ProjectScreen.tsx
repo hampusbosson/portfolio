@@ -196,6 +196,10 @@ export default function ProjectScreen({
         title={title}
         activeIndex={safeIndex}
         onInfoClick={onOpenProjectInfo}
+        onGithubClick={() => {
+          if (!activeProject.githubLink) return;
+          window.open(activeProject.githubLink, "_blank", "noopener,noreferrer");
+        }}
       />
 
       {/* Inset image */}

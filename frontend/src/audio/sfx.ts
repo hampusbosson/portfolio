@@ -7,7 +7,7 @@ type SfxConfig = {
 };
 
 const CONFIG: Record<SfxName, SfxConfig> = {
-  pop: { url: "/sound/bubble-pop.mp3", poolSize: 6, volume: 1 },
+  pop: { url: "/sound/bubble-pop.mp3", poolSize: 6, volume: 0.2 },
   hover: { url: "/sound/hover-button.mp3", poolSize: 8, volume: 0.15 },
 };
 
@@ -51,11 +51,12 @@ class Sfx {
 
     const idx = this.indices.get(name) ?? 0;
     const audio = pool[idx];
+    const baseVolume = CONFIG[name].volume ?? 1;
 
     this.indices.set(name, (idx + 1) % pool.length);
 
     if (opts?.reset !== false) audio.currentTime = 0;
-    if (opts?.volume != null) audio.volume = opts.volume;
+    audio.volume = Math.min(1, Math.max(0, baseVolume * (opts?.volume ?? 1)));
     if (opts?.playbackRate != null) audio.playbackRate = opts.playbackRate;
 
     audio.play().catch(() => {});

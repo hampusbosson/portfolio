@@ -191,8 +191,8 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
                         Core Stack
                       </h2>
                       <p className="mt-3 text-[15px] leading-7 text-brand-muted">
-                        TypeScript, React, Node.js, Express, PostgreSQL,
-                        Prisma, React Three Fiber, Three.js
+                        TypeScript, JavaScript, Java, C#, React, Node.js,
+                        Express, PostgreSQL 
                       </p>
                     </div>
                     <div>
@@ -230,7 +230,7 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
                     GitHub
                   </a>
                   <a
-                    href="https://www.linkedin.com"
+                    href="https://www.linkedin.com/in/hampus-bosson-897815270/"
                     target="_blank"
                     rel="noreferrer"
                     className="rounded-lg border border-white/20 bg-white/[0.06] px-3 py-2 text-sm font-medium text-brand-secondary transition-colors hover:bg-white/[0.12]"

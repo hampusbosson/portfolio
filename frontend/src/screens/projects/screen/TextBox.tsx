@@ -8,10 +8,12 @@ function TextBox({
   title,
   activeIndex,
   onInfoClick,
+  onGithubClick,
 }: {
   title: string;
   activeIndex: number;
   onInfoClick: () => void;
+  onGithubClick: () => void;
 }) {
   const groupRef = useRef<THREE.Group>(null!);
   const titleMatRef = useRef<THREE.MeshBasicMaterial>(null!);
@@ -151,7 +153,7 @@ function TextBox({
 
       <Text
         ref={githubRef}
-        onClick={() => {}}
+        onClick={onGithubClick}
         onPointerOver={() => {
           if (!githubHovered.current) sfx.play("hover");
           githubHovered.current = true;

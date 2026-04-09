@@ -67,7 +67,11 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
   const [isReplying, setIsReplying] = useState(false);
   const closeTimeout = useRef<number | null>(null);
   const listRef = useRef<HTMLDivElement | null>(null);
+  const latestAssistantMessageRef = useRef<HTMLDivElement | null>(null);
   const loadRequestRef = useRef(0);
+  const pendingScrollTargetRef = useRef<"bottom" | "assistant-start" | null>(
+    null,
+  );
 
   const handleClose = () => {
     setIsVisible(false);
@@ -114,6 +118,7 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
         if (loadRequestRef.current !== requestId) return;
 
         setChatId(latestChat.id);
+        pendingScrollTargetRef.current = "bottom";
         setMessages(toOverlayMessages(latestChat.messages));
       } catch (error) {
         if (loadRequestRef.current !== requestId) return;
@@ -127,12 +132,28 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
     })();
   }, [isOpen]);
 
-  // Keep the latest messages in view as content changes.
+  // Keep message scrolling aligned with the newest interaction.
   useEffect(() => {
     if (!isOpen) return;
     const listEl = listRef.current;
     if (!listEl) return;
-    listEl.scrollTop = listEl.scrollHeight;
+
+    const pendingScrollTarget = pendingScrollTargetRef.current;
+    if (!pendingScrollTarget) return;
+
+    if (pendingScrollTarget === "assistant-start") {
+      const assistantEl = latestAssistantMessageRef.current;
+      if (assistantEl) {
+        listEl.scrollTo({
+          top: Math.max(0, assistantEl.offsetTop - 12),
+          behavior: "auto",
+        });
+      }
+    } else {
+      listEl.scrollTop = listEl.scrollHeight;
+    }
+
+    pendingScrollTargetRef.current = null;
   }, [messages, isReplying, isOpen]);
 
   if (!isOpen) return null;
@@ -146,6 +167,7 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
       role: "user",
       content: trimmed,
     };
+    pendingScrollTargetRef.current = "bottom";
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsReplying(true);
@@ -164,6 +186,7 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
         content: result.answer,
       };
 
+      pendingScrollTargetRef.current = "assistant-start";
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
       console.error(error);
@@ -174,6 +197,7 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
         content: "Something went wrong while sending that message. Please try again.",
       };
 
+      pendingScrollTargetRef.current = "assistant-start";
       setMessages((prev) => [...prev, assistantMessage]);
     } finally {
       setIsReplying(false);
@@ -187,7 +211,7 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
       }`}
     >
       <div
-        className="pointer-events-auto absolute inset-0 bg-black/65 backdrop-blur-md"
+        className="pointer-events-auto absolute inset-0 bg-black/86 backdrop-blur-md"
         onClick={handleClose}
       />
 
@@ -232,6 +256,12 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
                 {messages.map((message) => (
                   <div
                     key={message.id}
+                    ref={
+                      message.role === "assistant" &&
+                      message.id === messages[messages.length - 1]?.id
+                        ? latestAssistantMessageRef
+                        : null
+                    }
                     className={`max-w-[82%] rounded-2xl px-4 py-3 text-[15px] leading-relaxed ${
                       message.role === "user"
                         ? "ml-auto border border-brand-primary/35 bg-brand-primary/13 text-white"
