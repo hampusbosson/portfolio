@@ -13,6 +13,7 @@ interface ExperienceProps {
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
   onOpenProjectInfo: () => void;
   isProjectInfoOpen: boolean;
+  isChatOpen: boolean;
 }
 
 export default function Experience({
@@ -21,6 +22,7 @@ export default function Experience({
   setCurrentIndex,
   onOpenProjectInfo,
   isProjectInfoOpen,
+  isChatOpen,
 }: ExperienceProps) {
   return (
     <>
@@ -38,6 +40,7 @@ export default function Experience({
         isActive={activePage === "projects"}
         onOpenProjectInfo={onOpenProjectInfo}
         isProjectInfoOpen={isProjectInfoOpen}
+        isChatOpen={isChatOpen}
       />
       <Environment
         preset={"city"}

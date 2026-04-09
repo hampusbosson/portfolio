@@ -55,6 +55,7 @@ export default function App() {
           setCurrentIndex={setCurrentIndex}
           onOpenProjectInfo={() => setIsProjectInfoOpen(true)}
           isProjectInfoOpen={isProjectInfoOpen}
+          isChatOpen={isChatOpen}
         />
         <Perf position="hidden" />
       </Canvas>
@@ -72,6 +73,7 @@ export default function App() {
             <ProjectInfoOverlay
               currentIndex={currentIndex}
               onClose={() => setIsProjectInfoOpen(false)}
+              isEscapeEnabled={!isChatOpen}
             />
           )}
         </>

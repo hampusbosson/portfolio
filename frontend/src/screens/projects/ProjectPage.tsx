@@ -14,6 +14,7 @@ interface ProjectPageProps {
   isActive: boolean;
   onOpenProjectInfo: () => void;
   isProjectInfoOpen: boolean;
+  isChatOpen: boolean;
 }
 
 export default function ProjectPage({
@@ -22,6 +23,7 @@ export default function ProjectPage({
   isActive,
   onOpenProjectInfo,
   isProjectInfoOpen,
+  isChatOpen,
 }: ProjectPageProps) {
   /**
    * SCROLL CONTROLS FOR PROJECT SCREEN
@@ -79,7 +81,7 @@ export default function ProjectPage({
         <KeyboardControls map={keyMap}>
           <KeyboardIndexController
             isActive={isActive}
-            isBlocked={isProjectInfoOpen}
+            isBlocked={isProjectInfoOpen || isChatOpen}
             setCurrentIndex={setCurrentIndex}
           />
           <Scene

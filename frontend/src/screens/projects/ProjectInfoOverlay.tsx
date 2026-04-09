@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { projects } from "../../content/projects";
 import { sfx } from "../../audio/sfx";
+import { useEscapeKey } from "../../utils/useEscapeKey";
 
 interface ProjectInfoOverlayProps {
   currentIndex: number;
   onClose: () => void;
+  isEscapeEnabled?: boolean;
 }
 
 type ProjectDetails = {
@@ -319,6 +321,7 @@ const PROJECT_DETAILS: Record<string, ProjectDetails> = {
 export default function ProjectInfoOverlay({
   currentIndex,
   onClose,
+  isEscapeEnabled = true,
 }: ProjectInfoOverlayProps) {
   const safeIndex = Math.min(Math.max(currentIndex, 0), projects.length - 1);
   const project = projects[safeIndex];
@@ -330,6 +333,15 @@ export default function ProjectInfoOverlay({
     setActiveMediaIndex(0);
     setIsLightboxOpen(false);
   }, [project.id]);
+
+  useEscapeKey(() => {
+    if (isLightboxOpen) {
+      setIsLightboxOpen(false);
+      return;
+    }
+
+    onClose();
+  }, isEscapeEnabled);
 
   const media = details.media;
   const activeMedia = media[Math.min(activeMediaIndex, media.length - 1)];

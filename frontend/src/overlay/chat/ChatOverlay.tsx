@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import { getChatMessages, getChats, postChatMessage } from "../../api/chat";
 import { sfx } from "../../audio/sfx";
 import type { ApiChatStoredMessage, ChatMessage } from "../../types/chat";
+import { useEscapeKey } from "../../utils/useEscapeKey";
 
 interface ChatOverlayProps {
   isOpen: boolean;
@@ -68,6 +69,16 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
   const listRef = useRef<HTMLDivElement | null>(null);
   const loadRequestRef = useRef(0);
 
+  const handleClose = () => {
+    setIsVisible(false);
+    if (closeTimeout.current) window.clearTimeout(closeTimeout.current);
+    closeTimeout.current = window.setTimeout(() => {
+      onClose();
+    }, FADE_MS);
+  };
+
+  useEscapeKey(handleClose, isOpen);
+
   // Trigger entry visibility once mounted/opened.
   useEffect(() => {
     if (!isOpen) return;
@@ -125,14 +136,6 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
   }, [messages, isReplying, isOpen]);
 
   if (!isOpen) return null;
-
-  const handleClose = () => {
-    setIsVisible(false);
-    if (closeTimeout.current) window.clearTimeout(closeTimeout.current);
-    closeTimeout.current = window.setTimeout(() => {
-      onClose();
-    }, FADE_MS);
-  };
 
   const submitMessage = async (text: string) => {
     const trimmed = text.trim();

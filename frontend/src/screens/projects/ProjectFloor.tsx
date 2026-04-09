@@ -29,7 +29,7 @@ export default function ProjectFloor({ isPaused }: ProjectFloorProps) {
     <group>
       {/* Rocky base */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-        <planeGeometry args={[30, 20]}/>
+        <planeGeometry args={[42, 20]}/>
         <meshStandardMaterial
           map={baseColorMap}
           normalMap={normalMap}
@@ -46,7 +46,7 @@ export default function ProjectFloor({ isPaused }: ProjectFloorProps) {
         position={[0, 0.02, 0]}
         renderOrder={2}
       >
-        <planeGeometry args={[40, 20]} />
+        <planeGeometry args={[40, 16]} />
         <MeshReflectorMaterial
           mirror={1}
           envMapIntensity={0}
