@@ -25,6 +25,18 @@ model Chat {
   @@index([ownerId, updatedAt(sort: Desc)])
 }
 
+model ContactSubmission {
+  id        String   @id @default(uuid()) @db.Uuid
+  ownerId   String
+  name      String
+  email     String
+  message   String   @db.Text
+  createdAt DateTime @default(now())
+
+  @@index([ownerId])
+  @@index([createdAt(sort: Desc)])
+}
+
 model Message {
   id           String      @id @default(uuid()) @db.Uuid
   chatId        String      @db.Uuid

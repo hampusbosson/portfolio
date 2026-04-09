@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import { sendContactSubmissionEmail } from "../lib/contact/contactMailer.js";
 import { saveContactSubmission } from "../lib/contact/contactService.js";
 import type { SubmitContactResponse } from "../types/contact.js";
 
@@ -13,6 +14,8 @@ export async function postContact(req: Request, res: Response) {
       email,
       message,
     });
+
+    await sendContactSubmissionEmail(submission);
 
     const response: SubmitContactResponse = {
       ok: true,
