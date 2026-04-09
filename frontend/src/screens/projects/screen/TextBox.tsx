@@ -30,6 +30,7 @@ function TextBox({
 
   const progress = useRef(1); // 0..1
   const allowAnimate = useRef(true);
+  const hoverAnimating = useRef(false);
   const delayTimeout = useRef<number | null>(null);
 
 
@@ -50,10 +51,12 @@ function TextBox({
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;
-    if (!allowAnimate.current) return;
+    if (!allowAnimate.current && !hoverAnimating.current) return;
 
     // advance 0..1 (tweak speed here)
-    progress.current = Math.min(1, progress.current + delta * 3.0);
+    if (allowAnimate.current) {
+      progress.current = Math.min(1, progress.current + delta * 3.0);
+    }
 
     // ease-out cubic
     const t = 1 - Math.pow(1 - progress.current, 3);
@@ -83,6 +86,17 @@ function TextBox({
       const s = THREE.MathUtils.lerp(githubRef.current.scale.x, target, 1 - Math.exp(-16 * delta));
       githubRef.current.scale.setScalar(s);
     }
+
+    if (progress.current >= 1) {
+      allowAnimate.current = false;
+    }
+
+    const infoSettled = !infoRef.current
+      || Math.abs(infoRef.current.scale.x - (infoHovered.current ? 0.114 : 0.105)) < 0.0005;
+    const githubSettled = !githubRef.current
+      || Math.abs(githubRef.current.scale.x - (githubHovered.current ? 0.114 : 0.105)) < 0.0005;
+
+    hoverAnimating.current = !(infoSettled && githubSettled);
   });
 
   useEffect(() => {
@@ -116,10 +130,12 @@ function TextBox({
         onPointerOver={() => {
           if (!infoHovered.current) sfx.play("hover");
           infoHovered.current = true;
+          hoverAnimating.current = true;
           document.body.style.cursor = "pointer";
         }}
         onPointerOut={() => {
           infoHovered.current = false;
+          hoverAnimating.current = true;
           if (!githubHovered.current) document.body.style.cursor = "default";
         }}
         position={[0, -0.32, 0]}
@@ -139,10 +155,12 @@ function TextBox({
         onPointerOver={() => {
           if (!githubHovered.current) sfx.play("hover");
           githubHovered.current = true;
+          hoverAnimating.current = true;
           document.body.style.cursor = "pointer";
         }}
         onPointerOut={() => {
           githubHovered.current = false;
+          hoverAnimating.current = true;
           if (!infoHovered.current) document.body.style.cursor = "default";
         }}
         position={[0.5, -0.32, 0]}

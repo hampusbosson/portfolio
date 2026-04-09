@@ -120,8 +120,8 @@ function preloadProjectVideos() {
   if (typeof document === "undefined") return;
 
   for (const src of PROJECT_VIDEO_URLS) {
-    const video = getOrCreateVideoElement(src);
-    getOrCreateVideoTexture(src);
+    const video = getOrCreateVideoElement(src ? src : "");
+    getOrCreateVideoTexture(src ? src : "");
     video.addEventListener(
       "canplaythrough",
       () => {

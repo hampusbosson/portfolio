@@ -40,7 +40,7 @@ export default function App() {
     <div className="relative h-screen w-screen">
       <Canvas
         frameloop="always"
-        dpr={1.5}
+        dpr={[1, 1.25]}
         gl={{ powerPreference: "high-performance" }}
         camera={{
           fov: 30,
@@ -57,10 +57,13 @@ export default function App() {
           isProjectInfoOpen={isProjectInfoOpen}
           isChatOpen={isChatOpen}
         />
-        <Perf position="hidden" />
+        {/* <Perf position="hidden" /> */}
       </Canvas>
       <SceneOverlay activePage={activePage} setActivePage={setActivePage} />
-      <AssistantOrbOverlay onOpenChat={() => setIsChatOpen(true)} />
+      <AssistantOrbOverlay
+        activePage={activePage}
+        onOpenChat={() => setIsChatOpen(true)}
+      />
       <ChatOverlay isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
       {activePage === "projects" && (
         <>

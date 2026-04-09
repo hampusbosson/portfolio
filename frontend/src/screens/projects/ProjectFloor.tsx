@@ -29,7 +29,7 @@ export default function ProjectFloor({ isPaused }: ProjectFloorProps) {
     <group>
       {/* Rocky base */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-        <planeGeometry args={[42, 20]}/>
+        <planeGeometry args={[42, 20]} />
         <meshStandardMaterial
           map={baseColorMap}
           normalMap={normalMap}
@@ -46,23 +46,23 @@ export default function ProjectFloor({ isPaused }: ProjectFloorProps) {
         position={[0, 0.02, 0]}
         renderOrder={2}
       >
-        <planeGeometry args={[40, 16]} />
+        <planeGeometry args={[15, 15]} />
         <MeshReflectorMaterial
           mirror={1}
           envMapIntensity={0}
-          resolution={isPaused ? 256 : 1024}
-          blur={isPaused ? [0, 0] : [10, 4]}
-          mixBlur={0.2}
-          mixStrength={1.5}
+          resolution={isPaused ? 128 : 512}
+          blur={isPaused ? [0, 0] : [4, 2]}
+          mixBlur={0.1}
+          mixStrength={1.1}
           depthScale={0.6}
           minDepthThreshold={0.35}
           maxDepthThreshold={1.25}
           reflectorOffset={0.015}
-          roughness={0.65}
+          roughness={0.75}
           metalness={1}
           color="#cfd6df"
           transparent
-          opacity={0.15}
+          opacity={0.12}
           depthWrite={false}
           dithering
         />
