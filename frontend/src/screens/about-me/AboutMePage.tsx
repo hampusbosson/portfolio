@@ -152,13 +152,14 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
                 <div className="mx-auto w-full max-w-[980px]">
                 <section className="mt-0 border-b border-white/10 pb-8">
                   <p className="text-[34px] leading-tight font-light tracking-tight text-brand-secondary md:text-[54px]">
-                    Frontend Developer focused on performant 3D web experiences.
+                    Full-stack developer building ambitious web products with strong backend depth.
                   </p>
                   <p className="mt-5 text-[19px] leading-9 text-brand-muted md:max-w-[90%]">
-                    I&apos;m a software engineer specializing in web development
-                    infrastructure. My passion is improving developer experience
-                    by creating tools and products that streamline real-world
-                    workflows.
+                    I build full-stack applications with a particular interest
+                    in backend architecture, real-time systems, and interactive
+                    frontend experiences. The work I enjoy most sits where
+                    technical depth, product thinking, and thoughtful UI all
+                    need to come together.
                   </p>
                 </section>
 
@@ -168,16 +169,19 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
                       Profile
                     </h2>
                     <p className="mt-3 text-[16px] leading-8 text-brand-muted">
-                      I design and build interactive web products where visual
-                      quality and technical reliability have equal priority. My
-                      work sits at the intersection of polished UI, real-time
-                      graphics, and performance-aware engineering.
+                      I have built projects spanning real-time collaboration, 3D
+                      editing, security scanning workflows, AI-assisted study
+                      tools, and this portfolio platform itself. Across those
+                      projects, I usually take ownership end to end: frontend,
+                      backend APIs, data modeling, integration work, and the
+                      overall product direction.
                     </p>
                     <p className="mt-3 text-[16px] leading-8 text-brand-muted">
-                      I prefer clear architecture, deliberate motion, and
-                      interfaces that feel intentional. The goal is not only to
-                      make things look good, but to make them fast, robust, and
-                      maintainable.
+                      I am especially motivated by products that have real
+                      engineering complexity behind them. That includes
+                      synchronization, queue-driven workflows, authentication,
+                      database-backed systems, and interfaces that still feel
+                      clean and intentional despite the technical depth.
                     </p>
                   </div>
 
@@ -187,8 +191,8 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
                         Core Stack
                       </h2>
                       <p className="mt-3 text-[15px] leading-7 text-brand-muted">
-                        React, TypeScript, React Three Fiber, Drei, TailwindCSS,
-                        GSAP, Vite
+                        TypeScript, React, Node.js, Express, PostgreSQL,
+                        Prisma, React Three Fiber, Three.js
                       </p>
                     </div>
                     <div>
@@ -196,8 +200,8 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
                         Principles
                       </h2>
                       <p className="mt-3 text-[15px] leading-7 text-brand-muted">
-                        Performance first, clean structure, strong product
-                        thinking.
+                        Clear architecture, strong product ownership,
+                        performance-aware implementation, and thoughtful UX.
                       </p>
                     </div>
                   </div>
@@ -208,9 +212,9 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
                     Current Focus
                   </h2>
                   <p className="mt-3 text-[16px] leading-8 text-brand-muted">
-                    Building a portfolio platform with immersive 3D interaction,
-                    clear storytelling, and production-ready engineering
-                    standards.
+                    Looking for a full-stack role where I can keep growing in
+                    backend architecture while building polished, technically
+                    ambitious products with a strong team.
                   </p>
                 </section>
 
@@ -218,7 +222,7 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
 
                 <footer className="mt-8 flex items-center gap-2 border-t border-white/10 pt-7 pb-10">
                   <a
-                    href="https://github.com"
+                    href="https://github.com/hampusbosson"
                     target="_blank"
                     rel="noreferrer"
                     className="rounded-lg border border-white/20 bg-white/[0.06] px-3 py-2 text-sm font-medium text-brand-secondary transition-colors hover:bg-white/[0.12]"

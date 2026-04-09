@@ -200,7 +200,6 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
             <h2 className="text-3xl font-medium tracking-tight text-white md:text-4xl">
               Ask me anything
             </h2>
-            <p className="mt-3 text-2xl leading-none text-white/90">✦</p>
           </div>
           <button
             type="button"

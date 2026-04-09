@@ -1,24 +1,22 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
+import { submitContactForm } from "../../api/contact";
+import { ApiError } from "../../api/client";
+import type { ContactFormValues } from "../../types/contact";
 
-type FormState = {
-  name: string;
-  email: string;
-  message: string;
-};
-
-const INITIAL_FORM: FormState = {
+const INITIAL_FORM: ContactFormValues = {
   name: "",
   email: "",
   message: "",
 };
 
 export default function AboutContactForm() {
-  const [form, setForm] = useState<FormState>(INITIAL_FORM);
+  const [form, setForm] = useState<ContactFormValues>(INITIAL_FORM);
   const [error, setError] = useState<string>("");
   const [sent, setSent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const name = form.name.trim();
@@ -36,18 +34,32 @@ export default function AboutContactForm() {
     }
 
     setError("");
-    setSent(true);
-    setForm(INITIAL_FORM);
+    setSent(false);
+    setIsSubmitting(true);
+
+    try {
+      await submitContactForm({ name, email, message });
+      setSent(true);
+      setForm(INITIAL_FORM);
+    } catch (submitError) {
+      if (submitError instanceof ApiError) {
+        setError(submitError.message);
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <section className="mt-8 border-t border-white/10 pt-7">
       <div className="mb-4">
         <h2 className="text-[16px] font-medium text-brand-primary">
-          Work With Me
+          Get In Touch
         </h2>
         <p className="mt-2 text-[15px] text-brand-muted">
-          Tell me what you are building and I will get back to you.
+          If you are recruiting for a developer role, feel free to reach out. I am happy to talk about opportunities, projects, and how I work.
         </p>
       </div>
 
@@ -85,15 +97,16 @@ export default function AboutContactForm() {
           <p className="text-sm text-red-300/90">{error}</p>
           <button
             type="submit"
-            className="rounded-lg border border-brand-primary/45 bg-brand-primary/16 px-4 py-2 text-sm font-medium text-brand-secondary transition-colors hover:bg-brand-primary/24"
+            disabled={isSubmitting}
+            className="rounded-lg border border-brand-primary/45 bg-brand-primary/16 px-4 py-2 text-sm font-medium text-brand-secondary transition-colors hover:bg-brand-primary/24 disabled:cursor-not-allowed disabled:opacity-70"
           >
-            Send message
+            {isSubmitting ? "Sending..." : "Send message"}
           </button>
         </div>
 
         {sent && (
           <p className="text-sm text-emerald-200/90">
-            Message sent. I will get back to you soon.
+            Message sent successfully.
           </p>
         )}
       </form>
