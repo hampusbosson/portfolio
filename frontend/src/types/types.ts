@@ -1,10 +1,12 @@
 export interface Project {
   id: string;
   image: string;
+  video?: string;
   title: string;
   shortTitle: string;
   description: string;
-  githubLink: string;
+  githubLink?: string;
+  demoLink?: string;
 }
 
 export type Position = [number, number, number];

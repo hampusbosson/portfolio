@@ -4,8 +4,6 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { sfx } from "../../../audio/sfx";
 
-const SWAP_DELAY_MS = 280;
-
 function TextBox({
   title,
   activeIndex,
@@ -31,16 +29,11 @@ function TextBox({
   const z = 0.2;
 
   const progress = useRef(1); // 0..1
-  const prevIndex = useRef(activeIndex);
   const allowAnimate = useRef(true);
   const delayTimeout = useRef<number | null>(null);
 
 
   useEffect(() => {
-    // trigger when index changes
-    if (prevIndex.current === activeIndex) return;
-    prevIndex.current = activeIndex;
-
     allowAnimate.current = false;
     progress.current = 0;
 
@@ -51,10 +44,8 @@ function TextBox({
     if (githubMatRef.current) githubMatRef.current.opacity = 0;
 
     if (delayTimeout.current) window.clearTimeout(delayTimeout.current);
-    delayTimeout.current = window.setTimeout(() => {
-      allowAnimate.current = true;
-    }, SWAP_DELAY_MS);
-  }, [activeIndex, startX]);
+    allowAnimate.current = true;
+  }, [activeIndex]);
   
 
   useFrame((_, delta) => {
