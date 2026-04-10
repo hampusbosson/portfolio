@@ -7,6 +7,7 @@ import {
   type KeyboardControlsEntry,
 } from "@react-three/drei";
 import KeyboardIndexController from "./KeyboardIndexController";
+import { useIsMobile } from "../../utils/useIsMobile";
 
 interface ProjectPageProps {
   currentIndex: number;
@@ -25,6 +26,7 @@ export default function ProjectPage({
   isProjectInfoOpen,
   isChatOpen,
 }: ProjectPageProps) {
+  const isMobile = useIsMobile();
   /**
    * SCROLL CONTROLS FOR PROJECT SCREEN
    */
@@ -32,7 +34,7 @@ export default function ProjectPage({
   const isCoolingDown = useRef(false);
 
   useEffect(() => {
-    if (!isActive || isProjectInfoOpen) return;
+    if (!isActive || isProjectInfoOpen || isChatOpen || isMobile) return;
 
     const STEP_THRESHOLD = 80;
     const STEP_COOLDOWN_MS = 220;
@@ -62,7 +64,7 @@ export default function ProjectPage({
     return () => {
       window.removeEventListener("wheel", onWheel);
     };
-  }, [isActive, isProjectInfoOpen, setCurrentIndex]);
+  }, [isActive, isProjectInfoOpen, isChatOpen, isMobile, setCurrentIndex]);
 
   /**
    * KEYBOARD CONTROLS MAP FOR PROJECTSCREEN
@@ -88,6 +90,7 @@ export default function ProjectPage({
             currentIndex={currentIndex}
             onOpenProjectInfo={onOpenProjectInfo}
             isPaused={isProjectInfoOpen}
+            isMobile={isMobile}
           />
         </KeyboardControls>
       </group>

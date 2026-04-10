@@ -1,5 +1,38 @@
 import type { Position, Bubble, BubbleVariant } from "../types/types";
 
+type BubbleSpawnBounds = {
+  x: [number, number];
+  y: [number, number];
+  z: number;
+};
+
+type BubbleSpawnConfig = {
+  radius: [number, number];
+  bounds: BubbleSpawnBounds;
+};
+
+type SpawnBubbleOptions = {
+  isMobile?: boolean;
+};
+
+const DESKTOP_BUBBLE_CONFIG: BubbleSpawnConfig = {
+  radius: [0.3, 0.6],
+  bounds: {
+    x: [-0.5, 3],
+    y: [-0.5, 0.8],
+    z: 1,
+  },
+};
+
+const MOBILE_BUBBLE_CONFIG: BubbleSpawnConfig = {
+  radius: [0.2, 0.4],
+  bounds: {
+    x: [-0.8, 0.8],
+    y: [-1.5, 0],
+    z: 1,
+  },
+};
+
 function randomRange(min: number, max: number) {
   return Math.random() * (max - min) + min;
 }
@@ -13,9 +46,11 @@ function generateNonOverlappingPosition(
     z: number;
   },
   padding = 0.3,
-  maxAttempts = 30,
+  maxAttempts = 120,
 ): Position {
   let attempts = 0;
+  let bestCandidate: Position | null = null;
+  let bestClearance = Number.NEGATIVE_INFINITY;
 
   while (attempts < maxAttempts) {
     const candidate: Position = [
@@ -24,24 +59,38 @@ function generateNonOverlappingPosition(
       bounds.z,
     ];
 
+    let minClearance = Number.POSITIVE_INFINITY;
+
     const overlaps = existing.some((b) => {
       const dx = b.position[0] - candidate[0];
       const dy = b.position[1] - candidate[1];
       const dist = Math.sqrt(dx * dx + dy * dy);
+      const clearance = dist - (b.radius + newRadius + padding);
+
+      minClearance = Math.min(minClearance, clearance);
 
       // dynamic spacing based on radii
-      return dist < b.radius + newRadius + padding;
+      return clearance < 0;
     });
 
     if (!overlaps) return candidate;
 
+    if (minClearance > bestClearance) {
+      bestClearance = minClearance;
+      bestCandidate = candidate;
+    }
+
     attempts++;
   }
 
-  // fallback if too crowded
+  // fallback to the least-overlapping candidate if the space gets crowded
+  if (bestCandidate) {
+    return bestCandidate;
+  }
+
   return [
-    randomRange(bounds.x[0], bounds.x[1]),
-    randomRange(bounds.y[0], bounds.y[1]),
+    (bounds.x[0] + bounds.x[1]) / 2,
+    (bounds.y[0] + bounds.y[1]) / 2,
     bounds.z,
   ];
 }
@@ -62,16 +111,22 @@ function makeVariant(): BubbleVariant {
 }
 
 // spawn a new bubble under screen function
-export function spawnBubble(existing: Bubble[]): Bubble {
+export function spawnBubble(
+  existing: Bubble[],
+  options: SpawnBubbleOptions = {},
+): Bubble {
   const id = crypto.randomUUID();
-  const radius = 0.3 + Math.random() * 0.3;
+  const config = options.isMobile
+    ? MOBILE_BUBBLE_CONFIG
+    : DESKTOP_BUBBLE_CONFIG;
+  const radius = randomRange(config.radius[0], config.radius[1]);
 
   // guarantee bubbles dont end up on top of eachother
-  const position = generateNonOverlappingPosition(existing, radius, {
-    x: [-0.5, 3],
-    y: [-0.5, 0.8],
-    z: 1,
-  });
+  const position = generateNonOverlappingPosition(
+    existing,
+    radius,
+    config.bounds,
+  );
 
   return {
     id,
@@ -81,5 +136,3 @@ export function spawnBubble(existing: Bubble[]): Bubble {
     variant: makeVariant(),
   };
 }
-
-

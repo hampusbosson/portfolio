@@ -3,6 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { sfx } from "../../../audio/sfx";
+import { useIsMobile } from "../../../utils/useIsMobile";
 
 function TextBox({
   title,
@@ -23,8 +24,30 @@ function TextBox({
   const githubRef = useRef<THREE.Mesh>(null!);
   const infoHovered = useRef(false);
   const githubHovered = useRef(false);
+  const isMobile = useIsMobile();
 
-  // animation state
+  const mobileConfig = {
+    groupPosition: [0.05, 0.8, 2.5] as [number, number, number],
+    showButtons: true,
+    titleScale: 0.15,
+    infoPosition: [0, -0.22, 0] as [number, number, number],
+    infoScale: 0.105,
+    githubPosition: [0.5, -0.22, 0] as [number, number, number],
+    githubScale: 0.105,
+  };
+
+  const desktopConfig = {
+    groupPosition: [-0.7, 0, 0] as [number, number, number],
+    showButtons: true,
+    titleScale: 0.2,
+    infoPosition: [0, -0.32, 0] as [number, number, number],
+    infoScale: 0.105,
+    githubPosition: [0.5, -0.32, 0] as [number, number, number],
+    githubScale: 0.105,
+  };
+
+  const config = isMobile ? mobileConfig : desktopConfig;
+
   const startX = -1.6;
   const targetX = -1.0;
   const y = 0.4;
@@ -109,13 +132,13 @@ function TextBox({
   }, []);
 
   return (
-    <group position={[-0.7, 0, 0]}>
+    <group position={config.groupPosition}>
       <group ref={groupRef} position={[targetX, y, z]}>
       <Text
         onClick={() => {}}
         position={[0, 0, 0]}
         color="white"
-        scale={0.2}
+        scale={config.titleScale}
         fontWeight="bold"
         anchorX="left"
         outlineWidth={0.02}
@@ -126,55 +149,59 @@ function TextBox({
         {title}
       </Text>
 
-      <Text
-        ref={infoRef}
-        onClick={onInfoClick}
-        onPointerOver={() => {
-          if (!infoHovered.current) sfx.play("hover");
-          infoHovered.current = true;
-          hoverAnimating.current = true;
-          document.body.style.cursor = "pointer";
-        }}
-        onPointerOut={() => {
-          infoHovered.current = false;
-          hoverAnimating.current = true;
-          if (!githubHovered.current) document.body.style.cursor = "default";
-        }}
-        position={[0, -0.32, 0]}
-        color="#e9f8ff"
-        scale={0.105}
-        anchorX="left"
-        outlineWidth={0.014}
-        outlineColor="#000000"
-      >
-        <meshBasicMaterial ref={infoMatRef} transparent opacity={1} />
-        [ Info ]
-      </Text>
+      {config.showButtons && (
+        <>
+          <Text
+            ref={infoRef}
+            onClick={onInfoClick}
+            onPointerOver={() => {
+              if (!infoHovered.current) sfx.play("hover");
+              infoHovered.current = true;
+              hoverAnimating.current = true;
+              document.body.style.cursor = "pointer";
+            }}
+            onPointerOut={() => {
+              infoHovered.current = false;
+              hoverAnimating.current = true;
+              if (!githubHovered.current) document.body.style.cursor = "default";
+            }}
+            position={config.infoPosition}
+            color="#e9f8ff"
+            scale={config.infoScale}
+            anchorX="left"
+            outlineWidth={0.014}
+            outlineColor="#000000"
+          >
+            <meshBasicMaterial ref={infoMatRef} transparent opacity={1} />
+            [ Info ]
+          </Text>
 
-      <Text
-        ref={githubRef}
-        onClick={onGithubClick}
-        onPointerOver={() => {
-          if (!githubHovered.current) sfx.play("hover");
-          githubHovered.current = true;
-          hoverAnimating.current = true;
-          document.body.style.cursor = "pointer";
-        }}
-        onPointerOut={() => {
-          githubHovered.current = false;
-          hoverAnimating.current = true;
-          if (!infoHovered.current) document.body.style.cursor = "default";
-        }}
-        position={[0.5, -0.32, 0]}
-        color="#c39449"
-        scale={0.105}
-        anchorX="left"
-        outlineWidth={0.014}
-        outlineColor="#000000"
-      >
-        <meshBasicMaterial ref={githubMatRef} transparent opacity={1} />
-        [ GitHub ]
-      </Text>
+          <Text
+            ref={githubRef}
+            onClick={onGithubClick}
+            onPointerOver={() => {
+              if (!githubHovered.current) sfx.play("hover");
+              githubHovered.current = true;
+              hoverAnimating.current = true;
+              document.body.style.cursor = "pointer";
+            }}
+            onPointerOut={() => {
+              githubHovered.current = false;
+              hoverAnimating.current = true;
+              if (!infoHovered.current) document.body.style.cursor = "default";
+            }}
+            position={config.githubPosition}
+            color="#c39449"
+            scale={config.githubScale}
+            anchorX="left"
+            outlineWidth={0.014}
+            outlineColor="#000000"
+          >
+            <meshBasicMaterial ref={githubMatRef} transparent opacity={1} />
+            [ GitHub ]
+          </Text>
+        </>
+      )}
       </group>
     </group>
   );

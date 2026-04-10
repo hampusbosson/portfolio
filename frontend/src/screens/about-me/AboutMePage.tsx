@@ -1,24 +1,22 @@
 import { Html } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import AboutContactForm from "./AboutContactForm";
 import AboutHeadshot from "./AboutHeadshot";
 import * as THREE from "three";
+import { useIsMobile } from "../../utils/useIsMobile";
 
 export default function AboutMePage({ isActive }: { isActive?: boolean }) {
-  const { size, pointer } = useThree();
+  const isMobile = useIsMobile();
   const motionRef = useRef<THREE.Group>(null!);
 
   const layout = useMemo(() => {
-    const isMobile = size.width < 768;
-
     if (isMobile) {
       return {
-        position: [9, -1.62, 7.35] as [number, number, number],
-        scale: 0.24,
+        position: [9, -1.62, 6.5] as [number, number, number],
+        scale: 0.23,
         distanceFactor: 2.28,
-        htmlWidth: 660,
-        htmlHeight: 1020,
+        htmlWidth: 700,
+        htmlHeight: 1105,
         frameOuterW: 4.15,
         frameOuterH: 6.45,
         frameInnerW: 3.97,
@@ -41,36 +39,7 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
       frameGlowW: 7.08,
       frameGlowH: 4.13,
     };
-  }, [size.width]);
-
-  /**
-   * ROTATE SCREEN SLIGHTLY ON MOUSE MOVEMENT
-   */
-  // useFrame((_, delta) => {
-  //   if (!isActive) return;
-  //   if (!motionRef.current) return;
-
-  //   const targetRotX = pointer.y * -0.05;
-  //   const targetRotY = pointer.x * 0.05;
-
-  //   motionRef.current.rotation.x = THREE.MathUtils.lerp(
-  //     motionRef.current.rotation.x,
-  //     targetRotX,
-  //     4 * delta,
-  //   );
-
-  //   motionRef.current.rotation.y = THREE.MathUtils.lerp(
-  //     motionRef.current.rotation.y,
-  //     targetRotY,
-  //     4 * delta,
-  //   );
-
-  //   motionRef.current.position.x = THREE.MathUtils.lerp(
-  //     motionRef.current.position.x,
-  //     pointer.x * 0.1,
-  //     3 * delta,
-  //   );
-  // });
+  }, [isMobile]);
 
   return (
     <group

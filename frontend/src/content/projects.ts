@@ -48,7 +48,7 @@ export const projects: Project[] = [
   {
     id: "interactive-portfolio",
     image: "/images/sneaker-store.jpg",
-    title: "Interactive Portfolio Platform",
+    title: "Interactive Portfolio",
     shortTitle: "Portfolio",
     description:
       "3D portfolio experience with custom screen-based navigation, a backend knowledge system, and a grounded AI assistant.",

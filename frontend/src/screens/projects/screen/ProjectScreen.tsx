@@ -16,6 +16,7 @@ const videoTextureCache = new Map<string, VideoTexture>();
 interface ProjectScreenProps {
   activeIndex: number;
   onOpenProjectInfo: () => void;
+  isMobile?: boolean;
 }
 
 type TextureSourceData = {
@@ -135,6 +136,7 @@ function preloadProjectVideos() {
 export default function ProjectScreen({
   activeIndex,
   onOpenProjectInfo,
+  isMobile = false,
 }: ProjectScreenProps) {
   const safeIndex = Math.min(Math.max(activeIndex, 0), projects.length - 1);
   const activeProject = projects[safeIndex];
@@ -190,7 +192,7 @@ export default function ProjectScreen({
   }, [frameMaterial]);
 
   return (
-    <group position={[0, 0.75, 0]}>
+    <group position={isMobile ? [0, 0.75, 0] : [0, 0.75, 0]}>
       <TextBox
         key={activeProject.id}
         title={title}

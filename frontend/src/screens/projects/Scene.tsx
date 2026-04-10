@@ -8,12 +8,14 @@ interface SceneProps {
   currentIndex: number;
   onOpenProjectInfo: () => void;
   isPaused: boolean;
+  isMobile: boolean;
 }
 
 export default function Scene({
   currentIndex,
   onOpenProjectInfo,
   isPaused,
+  isMobile,
 }: SceneProps) {
   const screenRef = useRef<THREE.Group>(null!);
   //const { pointer } = useThree();
@@ -50,12 +52,17 @@ export default function Scene({
 
   return (
     <>
-      <group position={[0, -0.5, 0]}>
+      <group position={isMobile ? [0, -0.55, -0.2] : [0, -0.5, 0]}>
         {/* screen */}
-        <group position={[0, 0, 5]} ref={screenRef}>
+        <group
+          position={isMobile ? [0, 0, 3] : [0, 0, 5]}
+          scale={isMobile ? 0.7 : 1}
+          ref={screenRef}
+        >
           <ProjectScreen
             activeIndex={currentIndex}
             onOpenProjectInfo={onOpenProjectInfo}
+            isMobile={isMobile}
           />
         </group>
         {/* floor */}

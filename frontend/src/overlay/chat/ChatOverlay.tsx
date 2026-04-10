@@ -4,6 +4,7 @@ import { getChatMessages, getChats, postChatMessage } from "../../api/chat";
 import { sfx } from "../../audio/sfx";
 import type { ApiChatStoredMessage, ChatMessage } from "../../types/chat";
 import { useEscapeKey } from "../../utils/useEscapeKey";
+import { useIsMobile } from "../../utils/useIsMobile";
 
 interface ChatOverlayProps {
   isOpen: boolean;
@@ -59,6 +60,7 @@ function toOverlayMessages(messages: ApiChatStoredMessage[]): ChatMessage[] {
 }
 
 export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
+  const isMobile = useIsMobile();
   const [isVisible, setIsVisible] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -206,7 +208,9 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
 
   return (
     <div
-      className={`pointer-events-none fixed inset-0 z-[140] flex items-center justify-center p-4 transition-opacity duration-0 ${
+      className={`pointer-events-none fixed inset-0 z-[140] flex items-center justify-center transition-opacity duration-0 ${
+        isMobile ? "p-0" : "p-4"
+      } ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
     >
@@ -216,32 +220,40 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
       />
 
       <section
-        className={`pointer-events-auto relative z-10 flex h-full w-full max-w-6xl flex-col px-6 pb-6 pt-2 md:px-12 md:pb-6 md:pt-2 transition-all duration-200 ${
+        className={`pointer-events-auto relative z-10 flex h-full w-full flex-col transition-all duration-200 ${
+          isMobile
+            ? "max-w-none px-4 pb-6 pt-6"
+            : "max-w-6xl px-6 pb-6 pt-2 md:px-12 md:pb-6 md:pt-2"
+        } ${
           isVisible ? "translate-y-0" : "translate-y-2"
         }`}
         onWheelCapture={(event) => event.stopPropagation()}
       >
 
-        <div className="relative mt-2 flex items-start justify-between gap-4">
+        <div className={`relative flex items-start justify-between gap-4 ${isMobile ? "mt-0" : "mt-2"}`}>
           <div className="flex gap-4">
-            <h2 className="text-3xl font-medium tracking-tight text-white md:text-4xl">
-              Ask me anything
+            <h2 className={`${isMobile ? "text-[28px]" : "text-3xl md:text-4xl"} font-medium tracking-tight text-white`}>
+              Ask about my work
             </h2>
           </div>
           <button
             type="button"
             onClick={handleClose}
             onPointerEnter={() => sfx.play("hover")}
-            className="rounded-full border border-white/16 bg-white/[0.04] mt-2 px-3 py-1.5 text-xs font-medium text-white/84 transition-colors hover:bg-white/[0.1] hover:cursor-pointer"
+            className={`rounded-full border border-white/16 bg-white/[0.04] font-medium text-white/84 transition-colors hover:bg-white/[0.1] hover:cursor-pointer ${
+              isMobile ? "mt-1 px-3 py-2 text-[11px]" : "mt-2 px-3 py-1.5 text-xs"
+            }`}
           >
             Close
           </button>
         </div>
 
-        <div className="relative mt-8 min-h-0 flex-1">
+        <div className={`relative min-h-0 flex-1 ${isMobile ? "mt-5" : "mt-8"}`}>
           <div
             ref={listRef}
-            className="h-full overflow-y-auto pr-1 [scrollbar-color:rgba(255,255,255,0.22)_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/20"
+            className={`h-full overflow-y-auto [scrollbar-color:rgba(255,255,255,0.22)_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/20 ${
+              isMobile ? "pr-0" : "pr-1"
+            }`}
           >
             {isLoadingHistory ? (
               <div className="mx-auto mt-10 max-w-xl text-center text-sm text-white/52">
@@ -252,7 +264,7 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
                 Start by clicking a suggestion or typing your own question.
               </div>
             ) : (
-              <div className="mx-auto flex max-w-4xl flex-col gap-3 pb-4">
+              <div className={`mx-auto flex max-w-4xl flex-col gap-3 ${isMobile ? "pb-2" : "pb-4"}`}>
                 {messages.map((message) => (
                   <div
                     key={message.id}
@@ -262,7 +274,9 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
                         ? latestAssistantMessageRef
                         : null
                     }
-                    className={`max-w-[82%] rounded-2xl px-4 py-3 text-[15px] leading-relaxed ${
+                    className={`rounded-2xl px-4 py-3 leading-relaxed ${
+                      isMobile ? "max-w-[88%] text-[14px]" : "max-w-[82%] text-[15px]"
+                    } ${
                       message.role === "user"
                         ? "ml-auto border border-brand-primary/35 bg-brand-primary/13 text-white"
                         : "border border-white/14 bg-white/[0.05] text-white/88"
@@ -287,12 +301,16 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
           </div>
         </div>
 
-        <div className="relative mt-4">
-          <p className="mb-3 text-sm font-medium text-white/60">
+        <div className={`relative ${isMobile ? "mt-3" : "mt-4"}`}>
+          <p className={`${isMobile ? "mb-2 text-[13px]" : "mb-3 text-sm"} font-medium text-white/60`}>
             Suggestions on what to ask me
           </p>
-          <div className="grid gap-2.5 md:grid-cols-3">
-            {SUGGESTIONS.slice(0, 3).map((suggestion) => (
+          <div
+            className={`-mx-1 flex overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+              isMobile ? "gap-2" : "gap-2.5"
+            }`}
+          >
+            {SUGGESTIONS.map((suggestion) => (
               <button
                 key={suggestion}
                 type="button"
@@ -300,7 +318,11 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
                 onClick={() => {
                   void submitMessage(suggestion);
                 }}
-                className="rounded-3xl border border-white/18 bg-white/[0.04] px-4 py-3 text-left text-[13px] leading-snug text-white/88 transition-colors hover:bg-white/[0.1]"
+                className={`shrink-0 rounded-3xl border border-white/18 bg-white/[0.04] text-left text-[13px] leading-snug text-white/88 transition-colors hover:bg-white/[0.1] ${
+                  isMobile
+                    ? "min-w-[220px] px-4 py-2.5"
+                    : "min-w-[240px] px-4 py-3"
+                }`}
               >
                 {suggestion}
               </button>
@@ -313,20 +335,26 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
             event.preventDefault();
             void submitMessage(input);
           }}
-          className="relative mt-4"
+          className={`relative ${isMobile ? "mt-3" : "mt-4"}`}
         >
-          <div className="flex items-center gap-2 rounded-2xl border border-white/18 bg-black/35 px-4 py-2.5 shadow-[0_8px_24px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+          <div className={`flex items-center gap-2 rounded-2xl border border-white/18 bg-black/35 shadow-[0_8px_24px_rgba(0,0,0,0.35)] backdrop-blur-xl ${
+            isMobile ? "px-3 py-2" : "px-4 py-2.5"
+          }`}>
             <input
               value={input}
               onChange={(event) => setInput(event.target.value)}
               placeholder="Ask me anything about projects, stack, or process..."
-              className="h-10 min-w-0 flex-1 bg-transparent text-base text-white placeholder:text-white/36 outline-none"
+              className={`min-w-0 flex-1 bg-transparent text-white placeholder:text-white/36 outline-none ${
+                isMobile ? "h-9 text-[15px]" : "h-10 text-base"
+              }`}
             />
             <button
               type="submit"
               onPointerEnter={() => sfx.play("hover")}
               disabled={isReplying || isLoadingHistory}
-              className="rounded-xl border border-brand-primary/40 bg-brand-primary/16 px-3.5 py-2 text-sm font-medium text-brand-secondary transition-colors hover:bg-brand-primary/24 hover:cursor-pointer"
+              className={`rounded-xl border border-brand-primary/40 bg-brand-primary/16 font-medium text-brand-secondary transition-colors hover:bg-brand-primary/24 hover:cursor-pointer ${
+                isMobile ? "px-3 py-2 text-[13px]" : "px-3.5 py-2 text-sm"
+              }`}
             >
               {isReplying ? "..." : "Send"}
             </button>

@@ -10,8 +10,12 @@ import ProjectInfoOverlay from "./screens/projects/ProjectInfoOverlay.tsx";
 import { sfx } from "./audio/sfx.ts";
 import AssistantOrbOverlay from "./overlay/chat/AssistantOrbOverlay.tsx";
 import ChatOverlay from "./overlay/chat/ChatOverlay.tsx";
+import MobileProjectControls from "./screens/projects/MobileProjectControls.tsx";
+import { projects } from "./content/projects.ts";
+import { useIsMobile } from "./utils/useIsMobile.ts";
 
 export default function App() {
+  const isMobile = useIsMobile();
   const [activePage, setActivePage] = useState<Page>("start");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isProjectInfoOpen, setIsProjectInfoOpen] = useState(false);
@@ -67,11 +71,26 @@ export default function App() {
       <ChatOverlay isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
       {activePage === "projects" && (
         <>
-          <ControlsOverlay />
-          <MinimapOverlay
-            currentIndex={currentIndex}
-            onSelect={setCurrentIndex}
-          />
+          {isMobile ? (
+            <MobileProjectControls
+              currentIndex={currentIndex}
+              totalProjects={projects.length}
+              onPrev={() => setCurrentIndex((prev) => Math.max(0, prev - 1))}
+              onNext={() =>
+                setCurrentIndex((prev) =>
+                  Math.min(projects.length - 1, prev + 1),
+                )
+              }
+            />
+          ) : (
+            <>
+              <ControlsOverlay />
+              <MinimapOverlay
+                currentIndex={currentIndex}
+                onSelect={setCurrentIndex}
+              />
+            </>
+          )}
           {isProjectInfoOpen && (
             <ProjectInfoOverlay
               currentIndex={currentIndex}

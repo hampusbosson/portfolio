@@ -16,12 +16,31 @@ export default function AssistantOrbOverlay({
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [onboardingVisible, setOnboardingVisible] = useState(false);
   const hasTriggeredProjectsOnboarding = useRef(false);
+  const showTimeoutRef = useRef<number | null>(null);
+  const hideTimeoutRef = useRef<number | null>(null);
+  const removeTimeoutRef = useRef<number | null>(null);
+
+  const clearOnboardingTimers = () => {
+    if (showTimeoutRef.current) {
+      window.clearTimeout(showTimeoutRef.current);
+      showTimeoutRef.current = null;
+    }
+    if (hideTimeoutRef.current) {
+      window.clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
+    if (removeTimeoutRef.current) {
+      window.clearTimeout(removeTimeoutRef.current);
+      removeTimeoutRef.current = null;
+    }
+  };
 
   useEffect(() => {
     const timeout = window.setTimeout(() => setStartup(false), 2000);
 
     return () => {
       window.clearTimeout(timeout);
+      clearOnboardingTimers();
     };
   }, []);
 
@@ -31,34 +50,24 @@ export default function AssistantOrbOverlay({
     }
 
     hasTriggeredProjectsOnboarding.current = true;
-
-    let showTimeout: number | null = null;
-    let hideTimeout: number | null = null;
-    let removeTimeout: number | null = null;
-
-    showTimeout = window.setTimeout(() => {
+    showTimeoutRef.current = window.setTimeout(() => {
       setShowOnboarding(true);
       window.requestAnimationFrame(() => setOnboardingVisible(true));
     }, 1000);
 
-    hideTimeout = window.setTimeout(() => {
+    hideTimeoutRef.current = window.setTimeout(() => {
       setOnboardingVisible(false);
 
-      removeTimeout = window.setTimeout(() => {
+      removeTimeoutRef.current = window.setTimeout(() => {
         setShowOnboarding(false);
       }, 260);
     }, 7950);
-
-    return () => {
-      if (showTimeout) window.clearTimeout(showTimeout);
-      if (hideTimeout) window.clearTimeout(hideTimeout);
-      if (removeTimeout) window.clearTimeout(removeTimeout);
-    };
   }, [activePage]);
 
   const dismissOnboarding = () => {
+    clearOnboardingTimers();
     setOnboardingVisible(false);
-    window.setTimeout(() => setShowOnboarding(false), 260);
+    removeTimeoutRef.current = window.setTimeout(() => setShowOnboarding(false), 260);
   };
 
   return (
