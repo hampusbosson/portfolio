@@ -9,7 +9,6 @@ import TextBox from "./TextBox";
 const FRAME_BORDER = 0.03;
 const FRAME_DEPTH = 0.01;
 const BASE_OPEN_W = 2.48;
-const PROJECT_VIDEO_URLS = [...new Set(projects.map((project) => project.video).filter(Boolean))];
 const videoPreloadCache = new Map<string, HTMLVideoElement>();
 const videoTextureCache = new Map<string, VideoTexture>();
 
@@ -17,6 +16,7 @@ interface ProjectScreenProps {
   activeIndex: number;
   onOpenProjectInfo: () => void;
   isMobile?: boolean;
+  isActive?: boolean;
 }
 
 type TextureSourceData = {
@@ -117,26 +117,36 @@ function ImageInsetPlane({
 const PROJECT_IMAGE_URLS = projects.map((project) => project.image);
 PROJECT_IMAGE_URLS.forEach((url) => useTexture.preload(url));
 
-function preloadProjectVideos() {
+function preloadVideo(src: string) {
   if (typeof document === "undefined") return;
+  if (!src) return;
 
-  for (const src of PROJECT_VIDEO_URLS) {
-    const video = getOrCreateVideoElement(src ? src : "");
-    getOrCreateVideoTexture(src ? src : "");
-    video.addEventListener(
-      "canplaythrough",
-      () => {
-        void video.play().catch(() => {});
-      },
-      { once: true },
-    );
-  }
+  const video = getOrCreateVideoElement(src);
+  getOrCreateVideoTexture(src);
+  video.addEventListener(
+    "canplaythrough",
+    () => {
+      void video.play().catch(() => {});
+    },
+    { once: true },
+  );
+}
+
+function getNearbyProjectVideos(index: number) {
+  const candidates = [
+    projects[index]?.video,
+    projects[index - 1]?.video,
+    projects[index + 1]?.video,
+  ].filter((src): src is string => Boolean(src));
+
+  return [...new Set(candidates)];
 }
 
 export default function ProjectScreen({
   activeIndex,
   onOpenProjectInfo,
   isMobile = false,
+  isActive = false,
 }: ProjectScreenProps) {
   const safeIndex = Math.min(Math.max(activeIndex, 0), projects.length - 1);
   const activeProject = projects[safeIndex];
@@ -154,8 +164,12 @@ export default function ProjectScreen({
   }, [imageTextures]);
 
   useEffect(() => {
-    preloadProjectVideos();
-  }, []);
+    if (!isActive) return;
+
+    for (const src of getNearbyProjectVideos(safeIndex)) {
+      preloadVideo(src);
+    }
+  }, [isActive, safeIndex]);
 
   const { width: sourceWidth, height: sourceHeight } = getTextureDimensions(
     activeTexture?.source?.data,

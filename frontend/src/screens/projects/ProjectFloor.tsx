@@ -11,8 +11,8 @@ const TILE_Y = 5;
 
 export default function ProjectFloor({ isPaused }: ProjectFloorProps) {
   const [baseColorMap, normalMap] = useTexture([
-    "/textures/slate_floor_1k/slate_floor_diff_1k.jpg",
-    "/textures/slate_floor_1k/slate_floor_nor_gl_1k.jpg",
+    "/textures/slate_floor_1k/slate_floor_diff_512.jpg",
+    "/textures/slate_floor_1k/slate_floor_nor_gl_512.jpg",
   ]);
 
   useEffect(() => {

@@ -96,7 +96,7 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
                   <img
                     src="/images/location-image.webp"
                     alt="Map background"
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover object-[center_72%]"
                   />
                   <div className="absolute inset-0 bg-black/35" />
                 </div>

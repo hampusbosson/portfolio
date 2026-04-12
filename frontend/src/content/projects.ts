@@ -47,7 +47,8 @@ export const projects: Project[] = [
   },
   {
     id: "interactive-portfolio",
-    image: "/images/sneaker-store.jpg",
+    image: "/images/portfolio-screenshots/jpg/start.jpg",
+    video: "/videos/portfolio-demo.mp4",
     title: "Interactive Portfolio",
     shortTitle: "Portfolio",
     description:

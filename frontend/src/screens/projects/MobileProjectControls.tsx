@@ -24,7 +24,7 @@ export default function MobileProjectControls({
   }, []);
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-55 z-50 px-5">
+    <div className="pointer-events-none fixed inset-x-0 bottom-50 z-50 px-5">
       <div
         className={`mx-auto max-w-xs transition-all duration-500 ease-out ${
           isVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"

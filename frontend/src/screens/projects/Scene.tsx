@@ -9,6 +9,7 @@ interface SceneProps {
   onOpenProjectInfo: () => void;
   isPaused: boolean;
   isMobile: boolean;
+  isActive: boolean;
 }
 
 export default function Scene({
@@ -16,6 +17,7 @@ export default function Scene({
   onOpenProjectInfo,
   isPaused,
   isMobile,
+  isActive,
 }: SceneProps) {
   const screenRef = useRef<THREE.Group>(null!);
   //const { pointer } = useThree();
@@ -63,6 +65,7 @@ export default function Scene({
             activeIndex={currentIndex}
             onOpenProjectInfo={onOpenProjectInfo}
             isMobile={isMobile}
+            isActive={isActive}
           />
         </group>
         {/* floor */}

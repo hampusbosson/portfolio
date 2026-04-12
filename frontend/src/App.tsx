@@ -13,6 +13,7 @@ import ChatOverlay from "./overlay/chat/ChatOverlay.tsx";
 import MobileProjectControls from "./screens/projects/MobileProjectControls.tsx";
 import { projects } from "./content/projects.ts";
 import { useIsMobile } from "./utils/useIsMobile.ts";
+import LoadingOverlay from "./overlay/LoadingOverlay.tsx";
 
 export default function App() {
   const isMobile = useIsMobile();
@@ -20,6 +21,7 @@ export default function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isProjectInfoOpen, setIsProjectInfoOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [bubblePopCount, setBubblePopCount] = useState(0);
 
   /** INIT SOUND */
   useEffect(() => {
@@ -60,10 +62,23 @@ export default function App() {
           onOpenProjectInfo={() => setIsProjectInfoOpen(true)}
           isProjectInfoOpen={isProjectInfoOpen}
           isChatOpen={isChatOpen}
+          onBubblePopped={() => setBubblePopCount((prev) => prev + 1)}
         />
         {/* <Perf position="hidden" /> */}
       </Canvas>
+      <LoadingOverlay />
       <SceneOverlay activePage={activePage} setActivePage={setActivePage} />
+      {activePage === "start" && bubblePopCount > 0 ? (
+        <div
+          className={`pointer-events-none fixed z-[55] ${
+            isMobile ? "bottom-6 left-6" : "top-6 right-6"
+          }`}
+        >
+          <p className="text-sm font-medium tracking-wide text-white/82">
+            Bubbles popped: {bubblePopCount}
+          </p>
+        </div>
+      ) : null}
       <AssistantOrbOverlay
         activePage={activePage}
         onOpenChat={() => setIsChatOpen(true)}

@@ -8,3 +8,15 @@ createRoot(document.getElementById("root")!).render(
     <App />
   </StrictMode>,
 );
+
+const bootLoader = document.getElementById("boot-loader");
+
+if (bootLoader) {
+  window.requestAnimationFrame(() => {
+    bootLoader.classList.add("is-hidden");
+
+    window.setTimeout(() => {
+      bootLoader.remove();
+    }, 260);
+  });
+}

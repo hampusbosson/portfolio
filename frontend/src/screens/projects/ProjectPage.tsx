@@ -91,6 +91,7 @@ export default function ProjectPage({
             onOpenProjectInfo={onOpenProjectInfo}
             isPaused={isProjectInfoOpen}
             isMobile={isMobile}
+            isActive={isActive}
           />
         </KeyboardControls>
       </group>

@@ -14,6 +14,7 @@ interface ExperienceProps {
   onOpenProjectInfo: () => void;
   isProjectInfoOpen: boolean;
   isChatOpen: boolean;
+  onBubblePopped: () => void;
 }
 
 export default function Experience({
@@ -23,16 +24,20 @@ export default function Experience({
   onOpenProjectInfo,
   isProjectInfoOpen,
   isChatOpen,
+  onBubblePopped,
 }: ExperienceProps) {
   return (
     <>
       <EffectComposer>
-        <Vignette offset={0.32} darkness={0.5} eskil={false} />
+        <Vignette offset={0.32} darkness={0.6} eskil={false} />
       </EffectComposer>
       <color attach="background" args={["#191920"]} />
       <fog attach="fog" args={["#191920", 7, 15]} />
       <SetCamera activeScreen={activePage} />
-      <StartPage isActive={activePage === "start"} />
+      <StartPage
+        isActive={activePage === "start"}
+        onBubblePopped={onBubblePopped}
+      />
       <AboutMePage isActive={activePage === "about"} />
       <ProjectPage
         currentIndex={currentIndex}

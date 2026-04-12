@@ -261,10 +261,34 @@ export const PROJECT_DETAILS: Record<string, ProjectDetails> = {
     ],
     media: [
       {
-        src: "/images/sneaker-store.jpg",
-        alt: "Interactive Portfolio preview",
+        src: "/images/portfolio-screenshots/jpg/start.jpg",
+        alt: "Interactive Portfolio start screen",
         caption:
-          "Current placeholder image. Replace this with a screenshot of the 3D project screen or the about/chat overlays.",
+          "Start screen with the interactive 3D presentation, bubble interactions, and the initial portfolio introduction.",
+      },
+      {
+        src: "/images/portfolio-screenshots/jpg/projects.jpg",
+        alt: "Interactive Portfolio projects screen",
+        caption:
+          "Projects screen where the showcase is navigated through a 3D display system with project switching and embedded media.",
+      },
+      {
+        src: "/images/portfolio-screenshots/jpg/project-details.jpg",
+        alt: "Interactive Portfolio project details overlay",
+        caption:
+          "Project detail overlay used for deeper case-study style content, screenshots, stack breakdowns, and implementation notes.",
+      },
+      {
+        src: "/images/portfolio-screenshots/jpg/about-me.jpg",
+        alt: "Interactive Portfolio about page",
+        caption:
+          "About page with the sticky map header, layered profile content, and a more editorial presentation of background and skills.",
+      },
+      {
+        src: "/images/portfolio-screenshots/jpg/chat-interface.jpg",
+        alt: "Interactive Portfolio AI chat interface",
+        caption:
+          "Grounded AI assistant overlay connected to a backend knowledge base, designed to answer recruiter and visitor questions about the portfolio.",
       },
     ],
     stack: [
