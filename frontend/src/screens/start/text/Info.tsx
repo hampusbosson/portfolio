@@ -48,8 +48,8 @@ function createScaledTextLayout(
 }
 
 const BUTTONS_LAYOUT_DESKTOP = {
-  position: [-2.55, -0.45, 1] as Vec3,
-  scale: 1,
+  position: [-2.68, -0.45, 1] as Vec3,
+  scale: 0.8,
 };
 
 const BUTTONS_LAYOUT_MOBILE = {

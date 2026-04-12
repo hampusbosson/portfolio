@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from "react";
 
 interface StartPageProps {
   isActive: boolean;
+  onBubblePopped: () => void;
 }
 
-export default function StartPage({ isActive }: StartPageProps) {
+export default function StartPage({ isActive, onBubblePopped }: StartPageProps) {
   const [showBubbles, setShowBubbles] = useState(isActive);
   const hideTimeout = useRef<number | null>(null);
 
@@ -39,7 +40,7 @@ export default function StartPage({ isActive }: StartPageProps) {
     <>
       <group position={[0, 2.5, 0]}>
         <Info />
-        {showBubbles && <Bubbles />}
+        {showBubbles && <Bubbles onBubblePopped={onBubblePopped} />}
       </group>
     </>
   );

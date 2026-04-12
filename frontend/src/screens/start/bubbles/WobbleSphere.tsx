@@ -16,7 +16,7 @@ interface WobbleSphereProps {
   variant: BubbleVariant;
   shouldPop?: () => boolean;
   onPopped: () => void;
-  setPoppedCounter: React.Dispatch<React.SetStateAction<number>>;
+  onBubblePopped: () => void;
 }
 
 export function WobbleSphere({
@@ -26,7 +26,7 @@ export function WobbleSphere({
   variant,
   shouldPop,
   onPopped,
-  setPoppedCounter,
+  onBubblePopped,
 }: WobbleSphereProps) {
   const meshRef = useRef<THREE.Mesh>(null!);
   const [hovered, setHovered] = useState(false);
@@ -157,7 +157,7 @@ export function WobbleSphere({
         notified.current = true;
         setPopped(true);
         onPopped?.();
-        setPoppedCounter((prev) => prev + 1);
+        onBubblePopped();
       }
     }
   });

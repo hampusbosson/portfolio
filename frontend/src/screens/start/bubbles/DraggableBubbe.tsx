@@ -5,7 +5,7 @@ import * as THREE from "three";
 import type { BubbleVariant } from "../../../types/types";
 
 interface DraggableBubbeProps {
-  setPoppedCounter: React.Dispatch<React.SetStateAction<number>>;
+  onBubblePopped: () => void;
   id: string;
   onPopped: (id: string) => void;
   radius?: number;
@@ -32,7 +32,7 @@ export default function DraggableBubble(props: DraggableBubbeProps) {
         {...props}
         onPopped={() => props.onPopped(props.id)}
         shouldPop={() => !dragged.current} // gate pop
-        setPoppedCounter={props.setPoppedCounter}
+        onBubblePopped={props.onBubblePopped}
       />
     </DragControls>
   );

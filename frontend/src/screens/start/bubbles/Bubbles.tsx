@@ -5,7 +5,11 @@ import { useState } from "react";
 import DraggableBubble from "./DraggableBubbe";
 import { useIsMobile } from "../../../utils/useIsMobile";
 
-function Bubbles() {
+interface BubblesProps {
+  onBubblePopped: () => void;
+}
+
+function Bubbles({ onBubblePopped }: BubblesProps) {
   const isMobile = useIsMobile();
   const [bubbles, setBubbles] = useState<Bubble[]>(() => {
     const initial: Bubble[] = [];
@@ -17,10 +21,6 @@ function Bubbles() {
 
     return initial;
   });
-
-  const [poppedCounter, setPoppedCounter] = useState<number>(0);
-
-  console.log(poppedCounter); //implement real counter later
 
   // spawn new bubble when one is popped
   const handlePopped = (id: string) => {
@@ -34,7 +34,7 @@ function Bubbles() {
       <group>
         {bubbles.map((b) => (
           <DraggableBubble
-            setPoppedCounter={setPoppedCounter}
+            onBubblePopped={onBubblePopped}
             key={b.id}
             id={b.id}
             radius={b.radius}
