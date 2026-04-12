@@ -49,7 +49,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative h-screen w-screen">
+    <div className="relative h-[100dvh] w-full overflow-hidden">
       <Canvas
         frameloop="always"
         dpr={[1, 1.25]}

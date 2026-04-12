@@ -212,12 +212,20 @@ export default function ProjectScreen({
     };
   }, [activeProject.video]);
 
+  const activeVideoElement = activeProject.video
+    ? getOrCreateVideoElement(activeProject.video)
+    : null;
+  const videoWidth =
+    isVideoReadyForDisplay && activeVideoElement ? activeVideoElement.videoWidth : 0;
+  const videoHeight =
+    isVideoReadyForDisplay && activeVideoElement ? activeVideoElement.videoHeight : 0;
+
   const { width: sourceWidth, height: sourceHeight } = getTextureDimensions(
     activeTexture?.source?.data,
   );
   const { width: imageWidth, height: imageHeight } = getImageDimensions(activeTexture);
-  const imgW = sourceWidth || imageWidth || 1;
-  const imgH = sourceHeight || imageHeight || 1;
+  const imgW = videoWidth || sourceWidth || imageWidth || 1;
+  const imgH = videoHeight || sourceHeight || imageHeight || 1;
   
   // memoize layout dimensions (prevent unnecessary re-renders)
   const { openW, openH, frameW, frameH } = useMemo(() => {
