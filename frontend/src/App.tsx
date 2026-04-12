@@ -11,11 +11,9 @@ import MobileProjectControls from "./screens/projects/MobileProjectControls.tsx"
 import { projects } from "./content/projects.ts";
 import { useIsMobile } from "./utils/useIsMobile.ts";
 import LoadingOverlay from "./overlay/LoadingOverlay.tsx";
+import ProjectInfoOverlay from "./screens/projects/ProjectInfoOverlay.tsx";
 
 const ChatOverlay = lazy(() => import("./overlay/chat/ChatOverlay.tsx"));
-const ProjectInfoOverlay = lazy(
-  () => import("./screens/projects/ProjectInfoOverlay.tsx"),
-);
 
 function OverlayFallback() {
   return (
@@ -116,13 +114,11 @@ export default function App() {
             </>
           )}
           {isProjectInfoOpen && (
-            <Suspense fallback={<OverlayFallback />}>
-              <ProjectInfoOverlay
-                currentIndex={currentIndex}
-                onClose={() => setIsProjectInfoOpen(false)}
-                isEscapeEnabled={!isChatOpen}
-              />
-            </Suspense>
+            <ProjectInfoOverlay
+              currentIndex={currentIndex}
+              onClose={() => setIsProjectInfoOpen(false)}
+              isEscapeEnabled={!isChatOpen}
+            />
           )}
         </>
       )}

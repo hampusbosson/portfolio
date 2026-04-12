@@ -1,5 +1,5 @@
 import { useTexture } from "@react-three/drei";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { MeshStandardMaterial, SRGBColorSpace, VideoTexture } from "three";
 import type * as THREE from "three";
 import { projects } from "../../../content/projects";
@@ -73,6 +73,10 @@ function getOrCreateVideoTexture(src: string) {
   }
 
   return texture;
+}
+
+function isVideoReady(video: HTMLVideoElement) {
+  return video.readyState >= 2 && video.videoWidth > 0 && video.videoHeight > 0;
 }
 
 function VideoInsetPlane({
@@ -153,6 +157,7 @@ export default function ProjectScreen({
   const safeIndex = Math.min(Math.max(activeIndex, 0), projects.length - 1);
   const activeProject = projects[safeIndex];
   const title = activeProject.title;
+  const [isVideoReadyForDisplay, setIsVideoReadyForDisplay] = useState(false);
 
   const imageTextures = useTexture(PROJECT_IMAGE_URLS);
   const activeTexture = imageTextures[safeIndex];
@@ -172,6 +177,40 @@ export default function ProjectScreen({
       preloadVideo(src);
     }
   }, [isActive, safeIndex]);
+
+  useEffect(() => {
+    const src = activeProject.video;
+
+    if (!src) {
+      setIsVideoReadyForDisplay(false);
+      return;
+    }
+
+    const video = getOrCreateVideoElement(src);
+
+    if (isVideoReady(video)) {
+      setIsVideoReadyForDisplay(true);
+      void video.play().catch(() => {});
+      return;
+    }
+
+    setIsVideoReadyForDisplay(false);
+
+    const markReady = () => {
+      window.requestAnimationFrame(() => {
+        setIsVideoReadyForDisplay(true);
+      });
+      void video.play().catch(() => {});
+    };
+
+    video.addEventListener("loadeddata", markReady, { once: true });
+    video.addEventListener("canplay", markReady, { once: true });
+
+    return () => {
+      video.removeEventListener("loadeddata", markReady);
+      video.removeEventListener("canplay", markReady);
+    };
+  }, [activeProject.video]);
 
   const { width: sourceWidth, height: sourceHeight } = getTextureDimensions(
     activeTexture?.source?.data,
@@ -221,8 +260,8 @@ export default function ProjectScreen({
         }}
       />
 
-      {/* Inset image */}
-      {activeProject.video ? (
+      {/* Hold on to the project image until the active video has a real frame ready. */}
+      {activeProject.video && isVideoReadyForDisplay ? (
         <VideoInsetPlane src={activeProject.video} width={openW} height={openH} />
       ) : (
         <ImageInsetPlane texture={activeTexture} width={openW} height={openH} />
