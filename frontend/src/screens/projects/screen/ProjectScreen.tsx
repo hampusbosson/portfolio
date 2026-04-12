@@ -15,7 +15,6 @@ const videoTextureCache = new Map<string, VideoTexture>();
 interface ProjectScreenProps {
   activeIndex: number;
   onOpenProjectInfo: () => void;
-  isMobile?: boolean;
   isActive?: boolean;
 }
 
@@ -39,6 +38,10 @@ function getTextureDimensions(source: unknown) {
     width: data.videoWidth ?? data.naturalWidth ?? data.width ?? 0,
     height: data.videoHeight ?? data.naturalHeight ?? data.height ?? 0,
   };
+}
+
+function getImageDimensions(texture: THREE.Texture | undefined) {
+  return getTextureDimensions(texture?.image);
 }
 
 function getOrCreateVideoElement(src: string) {
@@ -145,7 +148,6 @@ function getNearbyProjectVideos(index: number) {
 export default function ProjectScreen({
   activeIndex,
   onOpenProjectInfo,
-  isMobile = false,
   isActive = false,
 }: ProjectScreenProps) {
   const safeIndex = Math.min(Math.max(activeIndex, 0), projects.length - 1);
@@ -174,8 +176,9 @@ export default function ProjectScreen({
   const { width: sourceWidth, height: sourceHeight } = getTextureDimensions(
     activeTexture?.source?.data,
   );
-  const imgW = sourceWidth || activeTexture?.image?.width || activeTexture?.width || 1;
-  const imgH = sourceHeight || activeTexture?.image?.height || activeTexture?.height || 1;
+  const { width: imageWidth, height: imageHeight } = getImageDimensions(activeTexture);
+  const imgW = sourceWidth || imageWidth || 1;
+  const imgH = sourceHeight || imageHeight || 1;
   
   // memoize layout dimensions (prevent unnecessary re-renders)
   const { openW, openH, frameW, frameH } = useMemo(() => {
@@ -206,7 +209,7 @@ export default function ProjectScreen({
   }, [frameMaterial]);
 
   return (
-    <group position={isMobile ? [0, 0.75, 0] : [0, 0.75, 0]}>
+    <group position={[0, 0.75, 0]}>
       <TextBox
         key={activeProject.id}
         title={title}

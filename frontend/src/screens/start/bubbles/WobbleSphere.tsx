@@ -54,10 +54,11 @@ export function WobbleSphere({
 
   // Geometry
   const geometry = useMemo(() => {
-    let g = new THREE.IcosahedronGeometry(radius, detail);
-    g = mergeVertices(g);
-    g.computeTangents();
-    return g;
+    const baseGeometry = new THREE.IcosahedronGeometry(radius, detail);
+    const mergedGeometry = mergeVertices(baseGeometry);
+    mergedGeometry.computeTangents();
+    baseGeometry.dispose();
+    return mergedGeometry;
   }, [radius, detail]);
 
   // Material
@@ -177,7 +178,7 @@ export function WobbleSphere({
         setHovered(false);
         document.body.style.cursor = "default";
       }}
-      onClick={(e) => {
+      onClick={() => {
         // do not stopPropagation; let DragControls work
         if (shouldPop && !shouldPop()) return;
         if (!popping) {

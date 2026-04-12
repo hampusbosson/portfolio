@@ -155,7 +155,7 @@ const iconClassName =
           </a>
 
           <a
-            href="https://www.linkedin.com/in/"
+            href="https://www.linkedin.com/in/hampus-bosson-897815270/"
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn"

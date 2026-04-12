@@ -1,19 +1,27 @@
 import { Canvas } from "@react-three/fiber";
 import Experience from "./Experience.tsx";
 import SceneOverlay from "./overlay/sceneOverlay.tsx";
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import type { Page } from "./types/types.ts";
 import MinimapOverlay from "./screens/projects/Minimap.tsx";
 import ControlsOverlay from "./screens/projects/ControlsOverlay.tsx";
-import { Perf } from "r3f-perf";
-import ProjectInfoOverlay from "./screens/projects/ProjectInfoOverlay.tsx";
 import { sfx } from "./audio/sfx.ts";
 import AssistantOrbOverlay from "./overlay/chat/AssistantOrbOverlay.tsx";
-import ChatOverlay from "./overlay/chat/ChatOverlay.tsx";
 import MobileProjectControls from "./screens/projects/MobileProjectControls.tsx";
 import { projects } from "./content/projects.ts";
 import { useIsMobile } from "./utils/useIsMobile.ts";
 import LoadingOverlay from "./overlay/LoadingOverlay.tsx";
+
+const ChatOverlay = lazy(() => import("./overlay/chat/ChatOverlay.tsx"));
+const ProjectInfoOverlay = lazy(
+  () => import("./screens/projects/ProjectInfoOverlay.tsx"),
+);
+
+function OverlayFallback() {
+  return (
+    <div className="fixed inset-0 z-[135] bg-black/72 backdrop-blur-md" />
+  );
+}
 
 export default function App() {
   const isMobile = useIsMobile();
@@ -64,7 +72,6 @@ export default function App() {
           isChatOpen={isChatOpen}
           onBubblePopped={() => setBubblePopCount((prev) => prev + 1)}
         />
-        {/* <Perf position="hidden" /> */}
       </Canvas>
       <LoadingOverlay />
       <SceneOverlay activePage={activePage} setActivePage={setActivePage} />
@@ -83,7 +90,9 @@ export default function App() {
         activePage={activePage}
         onOpenChat={() => setIsChatOpen(true)}
       />
-      <ChatOverlay isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+      <Suspense fallback={isChatOpen ? <OverlayFallback /> : null}>
+        <ChatOverlay isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+      </Suspense>
       {activePage === "projects" && (
         <>
           {isMobile ? (
@@ -107,11 +116,13 @@ export default function App() {
             </>
           )}
           {isProjectInfoOpen && (
-            <ProjectInfoOverlay
-              currentIndex={currentIndex}
-              onClose={() => setIsProjectInfoOpen(false)}
-              isEscapeEnabled={!isChatOpen}
-            />
+            <Suspense fallback={<OverlayFallback />}>
+              <ProjectInfoOverlay
+                currentIndex={currentIndex}
+                onClose={() => setIsProjectInfoOpen(false)}
+                isEscapeEnabled={!isChatOpen}
+              />
+            </Suspense>
           )}
         </>
       )}

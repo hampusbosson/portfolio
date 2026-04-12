@@ -28,8 +28,8 @@ export default function ProjectFloor({ isPaused }: ProjectFloorProps) {
   return (
     <group>
       {/* Rocky base */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-        <planeGeometry args={[42, 20]} />
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[5, 0, 0]}>
+        <planeGeometry args={[25, 15]} />
         <meshStandardMaterial
           map={baseColorMap}
           normalMap={normalMap}
@@ -43,10 +43,10 @@ export default function ProjectFloor({ isPaused }: ProjectFloorProps) {
       {/* Planar reflective film (reflects scene) */}
       <mesh
         rotation={[-Math.PI / 2, 0, 0]}
-        position={[0, 0.02, 0]}
+        position={[0, 0.02, 5]}
         renderOrder={2}
       >
-        <planeGeometry args={[15, 15]} />
+        <planeGeometry args={[3, 5]} />
         <MeshReflectorMaterial
           mirror={1}
           envMapIntensity={0}

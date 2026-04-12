@@ -1,5 +1,5 @@
 import { DragControls } from "@react-three/drei";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { WobbleSphere } from "./WobbleSphere";
 import * as THREE from "three";
 import type { BubbleVariant } from "../../../types/types";
