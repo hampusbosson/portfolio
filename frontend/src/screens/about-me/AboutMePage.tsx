@@ -39,7 +39,7 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
     if (isMobile) {
       return {
         position: [9, -1.65, 6.5] as [number, number, number],
-        scale: 0.28,
+        scale: 0.26,
         distanceFactor: 2.28,
         htmlWidth: 700,
         htmlHeight: 1105,

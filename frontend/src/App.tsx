@@ -49,7 +49,14 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative h-[100lvh] w-full overflow-hidden bg-black">
+    <div
+      className="relative w-full overflow-hidden bg-black"
+      style={{
+        height: isMobile
+          ? "var(--mobile-scene-height, 100dvh)"
+          : "100dvh",
+      }}
+    >
       <Canvas
         frameloop="always"
         dpr={[1.25, 1.5]}
