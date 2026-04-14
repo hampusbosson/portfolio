@@ -49,7 +49,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="fixed inset-0 overflow-hidden bg-black">
+    <div className="relative h-[100lvh] w-full overflow-hidden bg-black">
       <Canvas
         frameloop="always"
         dpr={[1.25, 1.5]}

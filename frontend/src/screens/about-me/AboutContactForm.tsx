@@ -55,10 +55,10 @@ export default function AboutContactForm() {
   return (
     <section className="mt-8 border-t border-white/10 pt-7">
       <div className="mb-4">
-        <h2 className="text-[16px] font-medium text-brand-primary">
+        <h2 className="text-[19px] font-medium text-brand-primary md:text-[16px]">
           Get In Touch
         </h2>
-        <p className="mt-2 text-[15px] text-brand-muted">
+        <p className="mt-2 text-[18px] leading-9 text-brand-muted md:text-[15px] md:leading-7">
           If you are recruiting for a developer role, feel free to reach out. I am happy to talk about opportunities, projects, and how I work.
         </p>
       </div>
@@ -71,7 +71,7 @@ export default function AboutContactForm() {
               setForm((prev) => ({ ...prev, name: event.target.value }))
             }
             placeholder="Name"
-            className="h-11 appearance-none overflow-hidden rounded-xl border border-white/16 bg-[#0f1622]/80 bg-clip-padding px-3 text-[15px] text-brand-secondary outline-none transition-colors placeholder:text-brand-muted/55 focus:border-brand-muted/45"
+            className="h-12 appearance-none overflow-hidden rounded-xl border border-white/16 bg-[#0f1622]/80 bg-clip-padding px-3 text-[17px] text-brand-secondary outline-none transition-colors placeholder:text-brand-muted/55 focus:border-brand-muted/45 md:h-11 md:text-[15px]"
           />
           <input
             value={form.email}
@@ -79,7 +79,7 @@ export default function AboutContactForm() {
               setForm((prev) => ({ ...prev, email: event.target.value }))
             }
             placeholder="Email"
-            className="h-11 appearance-none overflow-hidden rounded-xl border border-white/16 bg-[#0f1622]/80 bg-clip-padding px-3 text-[15px] text-brand-secondary outline-none transition-colors placeholder:text-brand-muted/55 focus:border-brand-muted/45"
+            className="h-12 appearance-none overflow-hidden rounded-xl border border-white/16 bg-[#0f1622]/80 bg-clip-padding px-3 text-[17px] text-brand-secondary outline-none transition-colors placeholder:text-brand-muted/55 focus:border-brand-muted/45 md:h-11 md:text-[15px]"
           />
         </div>
 
@@ -90,22 +90,22 @@ export default function AboutContactForm() {
           }
           placeholder="Message"
           rows={5}
-          className="w-full appearance-none overflow-hidden resize-y rounded-xl border border-white/16 bg-[#0f1622]/80 bg-clip-padding px-3 py-2.5 text-[15px] text-brand-secondary outline-none transition-colors placeholder:text-brand-muted/55 focus:border-brand-muted/45"
+          className="w-full appearance-none overflow-hidden resize-y rounded-xl border border-white/16 bg-[#0f1622]/80 bg-clip-padding px-3 py-3 text-[17px] text-brand-secondary outline-none transition-colors placeholder:text-brand-muted/55 focus:border-brand-muted/45 md:py-2.5 md:text-[15px]"
         />
 
         <div className="flex items-center justify-between gap-3">
-          <p className="text-sm text-red-300/90">{error}</p>
+          <p className="text-[15px] text-red-300/90 md:text-sm">{error}</p>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="appearance-none overflow-hidden rounded-lg border border-brand-primary/45 bg-brand-primary/16 bg-clip-padding px-4 py-2 text-sm font-medium text-brand-secondary transition-colors hover:bg-brand-primary/24 disabled:cursor-not-allowed disabled:opacity-70"
+            className="appearance-none overflow-hidden rounded-lg border border-brand-primary/45 bg-brand-primary/16 bg-clip-padding px-4 py-2.5 text-[16px] font-medium text-brand-secondary transition-colors hover:bg-brand-primary/24 disabled:cursor-not-allowed disabled:opacity-70 md:py-2 md:text-sm"
           >
             {isSubmitting ? "Sending..." : "Send message"}
           </button>
         </div>
 
         {sent && (
-          <p className="text-sm text-emerald-200/90">
+          <p className="text-[15px] text-emerald-200/90 md:text-sm">
             Message sent successfully.
           </p>
         )}

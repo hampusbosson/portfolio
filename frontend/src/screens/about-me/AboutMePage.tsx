@@ -38,8 +38,8 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
   const layout = useMemo(() => {
     if (isMobile) {
       return {
-        position: [9, -1.62, 6.5] as [number, number, number],
-        scale: 0.23,
+        position: [9, -1.65, 6.5] as [number, number, number],
+        scale: 0.28,
         distanceFactor: 2.28,
         htmlWidth: 700,
         htmlHeight: 1105,
@@ -244,7 +244,7 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
                 <div className="relative z-10">
                   <header className="relative z-20 -mt-[320px] h-[320px] md:-mt-[360px] md:h-[360px]">
                     <div className="absolute bottom-0 left-6 max-w-[55%] translate-y-1/2 md:left-9">
-                      <p className="text-[44px] leading-[0.96] font-light tracking-tight md:text-[62px]">
+                      <p className="text-[50px] leading-[0.96] font-light tracking-tight md:text-[62px]">
                         <span className="text-brand-primary">Hello,</span>
                         <br />
                         <span className="text-brand-secondary">
@@ -261,11 +261,11 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
                   <div className="relative z-10 -mx-6 -mt-px bg-[#111722] px-6 pt-28 md:-mx-10 md:px-10 md:pt-40">
                     <div className="mx-auto w-full max-w-[980px]">
                       <section className="mt-0 border-b border-white/10 pb-8">
-                        <p className="text-[34px] leading-tight font-light tracking-tight text-brand-secondary md:text-[54px]">
+                        <p className="text-[42px] leading-tight font-light tracking-tight text-brand-secondary md:text-[54px]">
                           Full-stack developer building ambitious web products
                           with strong backend depth.
                         </p>
-                        <p className="mt-5 text-[19px] leading-9 text-brand-muted md:max-w-[90%]">
+                        <p className="mt-5 text-[23px] leading-10 text-brand-muted md:max-w-[90%]">
                           I build full-stack applications with a particular
                           interest in backend architecture, real-time systems,
                           and interactive frontend experiences. The work I enjoy
@@ -276,10 +276,10 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
 
                       <section className="mt-8 grid gap-8 md:grid-cols-[1.35fr_1fr]">
                         <div>
-                          <h2 className="text-[16px] font-medium text-brand-primary">
+                          <h2 className="text-[19px] font-medium text-brand-primary md:text-[16px]">
                             Profile
                           </h2>
-                          <p className="mt-3 text-[16px] leading-8 text-brand-muted">
+                          <p className="mt-3 text-[20px] leading-10 text-brand-muted md:text-[16px] md:leading-8">
                             I have built projects spanning real-time
                             collaboration, 3D editing, security scanning
                             workflows, AI-assisted study tools, and this
@@ -288,7 +288,7 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
                             APIs, data modeling, integration work, and the
                             overall product direction.
                           </p>
-                          <p className="mt-3 text-[16px] leading-8 text-brand-muted">
+                          <p className="mt-3 text-[20px] leading-10 text-brand-muted md:text-[16px] md:leading-8">
                             I am especially motivated by products that have real
                             engineering complexity behind them. That includes
                             synchronization, queue-driven workflows,
@@ -300,19 +300,19 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
 
                         <div className="space-y-6">
                           <div>
-                            <h2 className="text-[16px] font-medium text-brand-primary">
+                            <h2 className="text-[19px] font-medium text-brand-primary md:text-[16px]">
                               Core Stack
                             </h2>
-                            <p className="mt-3 text-[15px] leading-7 text-brand-muted">
+                            <p className="mt-3 text-[19px] leading-9 text-brand-muted md:text-[15px] md:leading-7">
                               TypeScript, JavaScript, Java, C#, React, Node.js,
                               Express, PostgreSQL
                             </p>
                           </div>
                           <div>
-                            <h2 className="text-[16px] font-medium text-brand-primary">
+                            <h2 className="text-[19px] font-medium text-brand-primary md:text-[16px]">
                               Principles
                             </h2>
-                            <p className="mt-3 text-[15px] leading-7 text-brand-muted">
+                            <p className="mt-3 text-[19px] leading-9 text-brand-muted md:text-[15px] md:leading-7">
                               Clear architecture, strong product ownership,
                               performance-aware implementation, and thoughtful
                               UX.
@@ -322,10 +322,10 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
                       </section>
 
                       <section className="mt-8 border-t border-white/10 pt-7">
-                        <h2 className="text-[16px] font-medium text-brand-primary">
+                        <h2 className="text-[19px] font-medium text-brand-primary md:text-[16px]">
                           Current Focus
                         </h2>
-                        <p className="mt-3 text-[16px] leading-8 text-brand-muted">
+                        <p className="mt-3 text-[20px] leading-10 text-brand-muted md:text-[16px] md:leading-8">
                           Looking for a full-stack role where I can keep growing
                           in backend architecture while building polished,
                           technically ambitious products with a strong team.

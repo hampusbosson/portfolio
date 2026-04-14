@@ -143,10 +143,21 @@
   body,
   #root {
     @apply h-full w-full overflow-hidden bg-black;
+    height: 100vh;
+    min-height: 100vh;
   }
 
   body {
     @apply m-0 min-h-screen min-w-[320px] overscroll-none;
+  }
+
+  @supports (height: 100lvh) {
+    html,
+    body,
+    #root {
+      height: 100lvh;
+      min-height: 100lvh;
+    }
   }
 }
 

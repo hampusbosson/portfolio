@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { sfx } from "../../audio/sfx";
 import type { Page } from "../../types/types";
+import { useIsMobile } from "../../utils/useIsMobile";
 
 interface AssistantOrbOverlayProps {
   onOpenChat: () => void;
@@ -11,6 +12,7 @@ export default function AssistantOrbOverlay({
   onOpenChat,
   activePage,
 }: AssistantOrbOverlayProps) {
+  const isMobile = useIsMobile();
   const [startup, setStartup] = useState(true);
   const [hovered, setHovered] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -70,6 +72,8 @@ export default function AssistantOrbOverlay({
     removeTimeoutRef.current = window.setTimeout(() => setShowOnboarding(false), 260);
   };
 
+  const shouldShowLabel = !(isMobile && activePage === "about");
+
   return (
     <div className="pointer-events-none fixed inset-0 z-[130]">
       <div className="pointer-events-auto fixed bottom-3 right-3 md:bottom-5 md:right-5">
@@ -86,11 +90,13 @@ export default function AssistantOrbOverlay({
           </div>
         )}
 
-        <div
-          className={`assistant-chat-label ${hovered ? "assistant-chat-label-hovered" : ""}`}
-        >
-          <span className="assistant-chat-label-title">AI ASSISTANT</span>
-        </div>
+        {shouldShowLabel && (
+          <div
+            className={`assistant-chat-label ${hovered ? "assistant-chat-label-hovered" : ""}`}
+          >
+            <span className="assistant-chat-label-title">AI ASSISTANT</span>
+          </div>
+        )}
 
         <button
           type="button"

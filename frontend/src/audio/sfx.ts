@@ -15,8 +15,14 @@ class Sfx {
   private pools = new Map<SfxName, HTMLAudioElement[]>();
   private indices = new Map<SfxName, number>();
   private unlocked = false;
+  private hoverEnabled = true;
 
   init() {
+    this.hoverEnabled =
+      typeof window === "undefined"
+        ? true
+        : !window.matchMedia("(hover: none), (pointer: coarse)").matches;
+
     // Create pools once
     (Object.keys(CONFIG) as SfxName[]).forEach((name) => {
       const { url, poolSize, volume } = CONFIG[name];
@@ -45,6 +51,7 @@ class Sfx {
     opts?: { volume?: number; playbackRate?: number; reset?: boolean },
   ) {
     if (!this.unlocked) return;
+    if (name === "hover" && !this.hoverEnabled) return;
 
     const pool = this.pools.get(name);
     if (!pool || pool.length === 0) return;
