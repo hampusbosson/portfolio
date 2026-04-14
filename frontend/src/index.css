@@ -276,7 +276,12 @@
     transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     overflow: hidden;
+    isolation: isolate;
+    clip-path: circle(50% at 50% 50%);
+    -webkit-clip-path: circle(50% at 50% 50%);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
     box-shadow:
       0 0 50px 5px rgba(0, 0, 0, 0.5),
       inset 0 0 40px rgba(255, 255, 255, 0.5),
@@ -321,10 +326,15 @@
     top: 50%;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    width: 102px;
-    height: 102px;
+    width: 106px;
+    height: 106px;
     z-index: 10;
     opacity: 1;
+    overflow: hidden;
+    isolation: isolate;
+    clip-path: circle(50% at 50% 50%);
+    -webkit-clip-path: circle(50% at 50% 50%);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
     mix-blend-mode: screen;
     filter: blur(25px);
     animation: assistant-codepen-color-shift 20s infinite linear;
@@ -333,8 +343,8 @@
   .assistant-codepen-lava::before {
     content: "";
     position: absolute;
-    width: 120%;
-    height: 120%;
+    width: 126%;
+    height: 126%;
     background:
       radial-gradient(circle at 30% 30%, #0066ff 0%, transparent 45%),
       radial-gradient(circle at 70% 30%, #ff00cc 0%, transparent 45%),
@@ -348,8 +358,8 @@
   .assistant-codepen-lava::after {
     content: "";
     position: absolute;
-    width: 120%;
-    height: 120%;
+    width: 126%;
+    height: 126%;
     background:
       radial-gradient(circle at 40% 40%, #0066ff 0%, transparent 35%),
       radial-gradient(circle at 60% 40%, #ff00cc 0%, transparent 35%),

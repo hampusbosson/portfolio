@@ -49,10 +49,10 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative h-[100dvh] w-full overflow-hidden">
+    <div className="fixed inset-0 overflow-hidden bg-black">
       <Canvas
         frameloop="always"
-        dpr={[1, 1.25]}
+        dpr={[1.25, 1.5]}
         gl={{ powerPreference: "high-performance" }}
         camera={{
           fov: 30,

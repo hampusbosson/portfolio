@@ -344,7 +344,7 @@ export default function ChatOverlay({ isOpen, onClose }: ChatOverlayProps) {
               value={input}
               onChange={(event) => setInput(event.target.value)}
               placeholder="Ask me anything about projects, stack, or process..."
-              className={`min-w-0 flex-1 bg-transparent text-white placeholder:text-white/36 outline-none ${
+              className={`min-w-0 flex-1 appearance-none bg-transparent bg-clip-padding text-white placeholder:text-white/36 outline-none ${
                 isMobile ? "h-9 text-[15px]" : "h-10 text-base"
               }`}
             />

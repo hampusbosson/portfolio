@@ -5,9 +5,14 @@ import { useEffect, useRef, useState } from "react";
 interface StartPageProps {
   isActive: boolean;
   onBubblePopped: () => void;
+  isChatOpen: boolean;
 }
 
-export default function StartPage({ isActive, onBubblePopped }: StartPageProps) {
+export default function StartPage({
+  isActive,
+  onBubblePopped,
+  isChatOpen,
+}: StartPageProps) {
   const [showBubbles, setShowBubbles] = useState(isActive);
   const hideTimeout = useRef<number | null>(null);
 
@@ -39,7 +44,7 @@ export default function StartPage({ isActive, onBubblePopped }: StartPageProps) 
   return (
     <>
       <group position={[0, 2.5, 0]}>
-        <Info />
+        <Info isChatOpen={isChatOpen} />
         {showBubbles && <Bubbles onBubblePopped={onBubblePopped} />}
       </group>
     </>

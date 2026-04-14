@@ -67,6 +67,7 @@ export default function Experience({
       <StartPage
         isActive={activePage === "start"}
         onBubblePopped={onBubblePopped}
+        isChatOpen={isChatOpen}
       />
       <Suspense fallback={null}>
         <AboutMePage isActive={activePage === "about"} />
