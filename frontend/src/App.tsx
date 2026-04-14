@@ -51,14 +51,16 @@ export default function App() {
   return (
     <div className="relative h-[100dvh] w-full overflow-hidden bg-black">
       <div
-        className="absolute left-0 top-0 w-full"
+        className="fixed left-0 right-0"
         style={{
-          height: isMobile
-            ? "var(--mobile-scene-height, 100dvh)"
-            : "100dvh",
+          top: isMobile ? "calc(env(safe-area-inset-top, 0px) * -1)" : "0px",
+          bottom: isMobile
+            ? "calc(env(safe-area-inset-bottom, 0px) * -1)"
+            : "0px",
         }}
       >
         <Canvas
+          className="h-full w-full"
           frameloop="always"
           dpr={[1.25, 1.5]}
           gl={{ powerPreference: "high-performance" }}
