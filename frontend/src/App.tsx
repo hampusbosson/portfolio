@@ -49,35 +49,37 @@ export default function App() {
   }, []);
 
   return (
-    <div
-      className="relative w-full overflow-hidden bg-black"
-      style={{
-        height: isMobile
-          ? "var(--mobile-scene-height, 100dvh)"
-          : "100dvh",
-      }}
-    >
-      <Canvas
-        frameloop="always"
-        dpr={[1.25, 1.5]}
-        gl={{ powerPreference: "high-performance" }}
-        camera={{
-          fov: 30,
-          near: 0.1,
-          far: 200,
-          position: [0, 0, 0],
+    <div className="relative h-[100dvh] w-full overflow-hidden bg-black">
+      <div
+        className="absolute left-0 top-0 w-full"
+        style={{
+          height: isMobile
+            ? "var(--mobile-scene-height, 100dvh)"
+            : "100dvh",
         }}
       >
-        <Experience
-          activePage={activePage}
-          currentIndex={currentIndex}
-          setCurrentIndex={setCurrentIndex}
-          onOpenProjectInfo={() => setIsProjectInfoOpen(true)}
-          isProjectInfoOpen={isProjectInfoOpen}
-          isChatOpen={isChatOpen}
-          onBubblePopped={() => setBubblePopCount((prev) => prev + 1)}
-        />
-      </Canvas>
+        <Canvas
+          frameloop="always"
+          dpr={[1.25, 1.5]}
+          gl={{ powerPreference: "high-performance" }}
+          camera={{
+            fov: 30,
+            near: 0.1,
+            far: 200,
+            position: [0, 0, 0],
+          }}
+        >
+          <Experience
+            activePage={activePage}
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+            onOpenProjectInfo={() => setIsProjectInfoOpen(true)}
+            isProjectInfoOpen={isProjectInfoOpen}
+            isChatOpen={isChatOpen}
+            onBubblePopped={() => setBubblePopCount((prev) => prev + 1)}
+          />
+        </Canvas>
+      </div>
       <LoadingOverlay />
       <SceneOverlay activePage={activePage} setActivePage={setActivePage} />
       {activePage === "start" && bubblePopCount > 0 ? (
