@@ -60,6 +60,11 @@
     "answer": "Yes. He has built projects using React Three Fiber and Three.js, including the Collaborative 3D Editor and the Interactive Portfolio Platform."
   },
   {
+    "id": "how-are-his-csharp-skills",
+    "question": "How are Hampus's C# skills?",
+    "answer": "My C# skills are solid, especially in full-stack product work. The strongest example is my Collaborative 3D Editor, where I built the backend in C# with ASP.NET Core, SignalR, and Entity Framework Core for realtime multi-user synchronization and scene persistence. I would not present C# as stronger than my TypeScript stack overall, but it is absolutely a meaningful part of my experience and one of my strongest projects demonstrates that clearly."
+  },
+  {
     "id": "does-he-work-with-ai",
     "question": "Does Hampus build AI features?",
     "answer": "Yes. He has integrated AI into products such as StudySphere and the portfolio assistant, with an emphasis on useful workflows and grounded responses rather than generic chat features."
