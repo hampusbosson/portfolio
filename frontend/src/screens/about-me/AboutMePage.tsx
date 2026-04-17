@@ -296,6 +296,9 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
                             interfaces that still feel clean and intentional
                             despite the technical depth.
                           </p>
+                          <p className="mt-3 text-[20px] leading-10 text-brand-muted md:text-[16px] md:leading-8">
+                            I am currently 26 years old, and based in Stockholm, Sweden.
+                          </p>
                         </div>
 
                         <div className="space-y-6">
@@ -310,12 +313,21 @@ export default function AboutMePage({ isActive }: { isActive?: boolean }) {
                           </div>
                           <div>
                             <h2 className="text-[19px] font-medium text-brand-primary md:text-[16px]">
-                              Principles
+                              Coding Interests
                             </h2>
                             <p className="mt-3 text-[19px] leading-9 text-brand-muted md:text-[15px] md:leading-7">
-                              Clear architecture, strong product ownership,
-                              performance-aware implementation, and thoughtful
-                              UX.
+                              Backend architecture, real-time systems, 3D web
+                              applications, API design, interactive web
+                              experiences, and AI-assisted product features.
+                            </p>
+                          </div>
+                          <div>
+                            <h2 className="text-[19px] font-medium text-brand-primary md:text-[16px]">
+                              Personal Interests
+                            </h2>
+                            <p className="mt-3 text-[19px] leading-9 text-brand-muted md:text-[15px] md:leading-7">
+                              Running, strength training, golf, travel, and
+                              endurance sports.
                             </p>
                           </div>
                         </div>
