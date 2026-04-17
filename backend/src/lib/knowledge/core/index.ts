@@ -82,7 +82,16 @@ export function getKnowledgeChunks(): KnowledgeChunk[] {
       profile.headline,
       profile.summary,
       profile.location ? `Location: ${profile.location}` : "",
+      profile.birthYear ? `Birth year: ${profile.birthYear}` : "",
+      profile.birthDate ? `Birth date: ${profile.birthDate}` : "",
+      profile.currentAge ? `Current age: ${profile.currentAge}` : "",
       profile.interests?.length ? `Interests: ${profile.interests.join(", ")}` : "",
+      profile.codingInterests?.length
+        ? `Coding interests: ${profile.codingInterests.join(", ")}`
+        : "",
+      profile.personalInterests?.length
+        ? `Personal interests: ${profile.personalInterests.join(", ")}`
+        : "",
       profile.education?.length
         ? `Education: ${profile.education
             .map((e) => `${e.degree} at ${e.institution}${e.status ? ` (${e.status})` : ""}`)
@@ -91,7 +100,13 @@ export function getKnowledgeChunks(): KnowledgeChunk[] {
     ]
       .filter(Boolean)
       .join(". "),
-    tags: ["profile", "background", ...(profile.allowedTopics ?? [])],
+    tags: [
+      "profile",
+      "background",
+      "age",
+      "birth",
+      ...(profile.allowedTopics ?? [])
+    ],
     sourceRef: "profile.json"
   });
 

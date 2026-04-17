@@ -2,6 +2,9 @@ export type Profile = {
   name: string;
   headline: string;
   location?: string;
+  birthYear?: number;
+  birthDate?: string;
+  currentAge?: number;
   summary: string;
   education?: {
     institution: string;
@@ -9,6 +12,8 @@ export type Profile = {
     status?: string;
   }[];
   interests?: string[];
+  codingInterests?: string[];
+  personalInterests?: string[];
   allowedTopics: string[];
   contact?: {
     email?: string;

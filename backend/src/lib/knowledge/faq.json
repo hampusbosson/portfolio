@@ -10,6 +10,11 @@
     "answer": "He is especially interested in backend architecture, real-time systems, 3D web experiences, API design, and technically ambitious full-stack products."
   },
   {
+    "id": "how-old-is-he",
+    "question": "How old is Hampus?",
+    "answer": "Hampus was born on October 16, 1999, and is currently 26 years old."
+  },
+  {
     "id": "which-project-stands-out-most",
     "question": "Which project stands out the most?",
     "answer": "The Collaborative 3D Editor stands out strongly because it combines real-time multi-user synchronization, 3D interaction, backend architecture, and persistent data handling in one product."
