@@ -1,2 +1,3 @@
-export const INFO_FONT_URL =
-  "https://cdn.jsdelivr.net/npm/@fontsource/sora@5.1.1/files/sora-latin-600-normal.woff";
+import soraSemiboldUrl from "@fontsource/sora/files/sora-latin-600-normal.woff";
+
+export const INFO_FONT_URL = soraSemiboldUrl;
