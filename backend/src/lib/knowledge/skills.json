@@ -173,10 +173,23 @@
     "id": "java",
     "name": "Java",
     "category": "language",
-    "level": "intermediate",
+    "level": "advanced",
     "evidence": [
+      "built SpringViz, a Spring Boot backend that statically analyzes uploaded Java/Spring projects with JavaParser",
+      "implemented parsing and architecture extraction around Spring annotations, REST mappings, constructor dependencies, bean candidates, method calls, and source ranges",
       "built the backend for Proxy Inspector in Java",
       "worked with lower-level networking, request parsing, and concurrent processing"
+    ]
+  },
+  {
+    "id": "spring-boot",
+    "name": "Spring Boot",
+    "category": "backend",
+    "level": "advanced",
+    "evidence": [
+      "built SpringViz as a Spring Boot application with upload orchestration, static project analysis, graph construction, request-flow resolution, Spring context analysis, source-code retrieval, and analysis APIs",
+      "used Spring concepts deeply enough to analyze other Spring Boot projects, including controllers, services, repositories, entities, configurations, @Bean methods, mapping annotations, constructor injection, and bean dependency resolution",
+      "structured the backend into focused services such as AnalysisService, ZipExtractionService, JavaFileScanner, JavaParserService, GraphBuilderService, RequestFlowResolver, and SpringContextResolver"
     ]
   },
   {

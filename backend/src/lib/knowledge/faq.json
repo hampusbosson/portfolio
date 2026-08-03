@@ -22,7 +22,7 @@
   {
     "id": "what-projects-has-he-built",
     "question": "What projects has Hampus built?",
-    "answer": "His projects include a Collaborative 3D Editor, Proxy Inspector, GitHub Security Scanner, StudySphere, and an Interactive Portfolio Platform with a grounded AI assistant."
+    "answer": "His projects include SpringViz, a Java/Spring Boot architecture visualizer for uploaded Spring projects; a Collaborative 3D Editor; Proxy Inspector; GitHub Security Scanner; StudySphere; and an Interactive Portfolio Platform with a grounded AI assistant."
   },
   {
     "id": "what-is-the-collab-editor",

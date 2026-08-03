@@ -134,6 +134,75 @@
     }
   },
   {
+    "id": "springviz",
+    "name": "SpringViz",
+    "oneLiner": "A developer tool that statically analyzes uploaded Spring Boot projects and turns their architecture, REST endpoints, request flows, Spring beans, and source code into an interactive workspace.",
+    "description": "A full-stack developer tool built to help developers understand Java and Spring Boot codebases without running them. Users upload a zip file containing a Spring Boot project, the backend analyzes the Java source statically with JavaParser, and the frontend presents the result through complementary views for architecture, endpoints, request flow, Spring beans, and source code. The project demonstrates strong Java and Spring Boot knowledge because it required understanding Spring annotations, controller/service/repository layering, bean registration patterns, REST mapping annotations, constructor dependency injection, and how Spring applications are typically structured.",
+    "tech": [
+      "Java",
+      "Spring Boot",
+      "JavaParser",
+      "REST API",
+      "Maven",
+      "TypeScript",
+      "React",
+      "Vite",
+      "Three.js",
+      "Monaco Editor"
+    ],
+    "tags": [
+      "java",
+      "spring",
+      "spring-boot",
+      "static-analysis",
+      "developer-tools",
+      "architecture-visualization",
+      "rest-api",
+      "fullstack",
+      "react",
+      "portfolio"
+    ],
+    "features": [
+      "zip upload flow for Java/Spring Boot projects",
+      "static source analysis without compiling or running the uploaded project",
+      "JavaParser-based extraction of packages, classes, annotations, methods, dependencies, endpoints, source ranges, and source code",
+      "3D architecture view that groups packages as districts and classes as buildings",
+      "endpoint browser with search and HTTP method filtering",
+      "request-flow view that follows a selected endpoint through controller, service, and repository layers",
+      "Spring bean explorer that identifies likely beans and dependency resolution states",
+      "read-only code browser backed by Monaco Editor",
+      "feature-based React frontend architecture with reusable code-browsing functionality"
+    ],
+    "problemsSolved": [
+      "turning an unfamiliar Spring Boot codebase into navigable architecture and code views",
+      "extracting meaningful Spring structure from source code without relying on runtime tracing",
+      "mapping Spring annotations such as controllers, services, repositories, configurations, entities, request mappings, and bean methods into useful analysis data",
+      "deriving dependency relationships from constructor parameters and matching them to analyzed classes",
+      "building a request-flow resolver that approximates how an endpoint moves through application layers",
+      "separating upload orchestration, zip extraction, file scanning, parsing, graph building, snapshots, source code lookup, request-flow resolution, and Spring context analysis into maintainable backend services",
+      "connecting backend analysis results to interactive frontend views for architecture, endpoints, beans, request flow, and source code"
+    ],
+    "architecture": {
+      "frontend": "React + TypeScript application built with Vite, organized by feature areas for graph visualization, endpoints, request flow, Spring context, code browser, search, and project sidebar",
+      "backend": "Spring Boot application with an AnalysisController and AnalysisService orchestrating zip validation, extraction, project-root resolution, Java file scanning, JavaParser analysis, graph building, snapshot storage, and API exposure",
+      "analysis": "JavaParserService extracts class metadata, Spring annotations, constructor dependencies, endpoint mappings, method calls, source ranges, and source code; GraphBuilderService converts analyzed classes into frontend-ready nodes and edges",
+      "runtimeModel": "AnalysisSnapshot is stored in memory and reused by source-code, endpoint, request-flow, and Spring-context services so detailed data can be fetched lazily after upload",
+      "deployment": "Current MVP is designed for local development and portfolio demonstration, with a Spring Boot backend and separate React/Vite frontend"
+    },
+    "recruiterTalkingPoints": [
+      "Demonstrates strong practical Java and Spring Boot understanding through a tool built specifically to analyze Spring Boot projects",
+      "Shows backend architecture depth by separating parsing, graph construction, request-flow resolution, Spring context analysis, source-code retrieval, and upload orchestration",
+      "Uses JavaParser to build real static-analysis behavior instead of only presenting manually written project metadata",
+      "Connects Spring concepts such as REST controllers, services, repositories, constructor injection, bean methods, and dependency resolution to a usable developer-facing UI",
+      "Combines Java/Spring Boot backend engineering with a polished React workspace for architecture visualization and code navigation"
+    ],
+    "status": "mvp",
+    "links": {
+      "repo": "",
+      "demo": ""
+    }
+  },
+  {
     "id": "github-security-scanner",
     "name": "GitHub Security Scanner",
     "oneLiner": "A full-stack GitHub repository security scanning workspace with queued execution, findings storage, and report review.",
